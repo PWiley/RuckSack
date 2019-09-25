@@ -22,6 +22,7 @@
 		DADE8D01232E7F850057B0BB /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CFE232E7F850057B0BB /* Exchange.swift */; };
 		DADE8D02232E7F850057B0BB /* Translate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CFF232E7F850057B0BB /* Translate.swift */; };
 		DADE8D04232E9F150057B0BB /* ExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8D03232E9F150057B0BB /* ExchangeViewController.swift */; };
+		DAE21C49233C1096009F7001 /* buttonToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE21C48233C1096009F7001 /* buttonToolBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		DADE8CFE232E7F850057B0BB /* Exchange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
 		DADE8CFF232E7F850057B0BB /* Translate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translate.swift; sourceTree = "<group>"; };
 		DADE8D03232E9F150057B0BB /* ExchangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewController.swift; sourceTree = "<group>"; };
+		DAE21C48233C1096009F7001 /* buttonToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttonToolBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				DADE8CFB232E7DCD0057B0BB /* ExtensionUIView.swift */,
+				DAE21C48233C1096009F7001 /* buttonToolBar.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DADE8CF8232E7D1D0057B0BB /* ExchangeCell.swift in Sources */,
+				DAE21C49233C1096009F7001 /* buttonToolBar.swift in Sources */,
 				DADE8CFA232E7D1D0057B0BB /* TranslatorViewController.swift in Sources */,
 				DADE8CF5232E7D1D0057B0BB /* WeatherViewController.swift in Sources */,
 				DADE8D00232E7F850057B0BB /* Weather.swift in Sources */,
