@@ -63,8 +63,11 @@ class WeatherViewController: UITableViewController {
         // Do any additional setup after loading the view.
     
     }
-    
-
+    override func viewDidAppear(_ animated: Bool) {
+        let indexPath: IndexPath = IndexPath(row: 1, section: 0)
+        tableViewWeather.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
+   
     /*
     // MARK: - Navigation
 b
