@@ -46,14 +46,14 @@ class ExchangeViewController: UIViewController {
         backgroundImage.image = UIImage(named: "Background_Exchange")
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         exchangeViewController.insertSubview(backgroundImage, at: 0)
-        navigationController?.hidesBarsWhenKeyboardAppears = true
+        //navigationController?.hidesBarsWhenKeyboardAppears = true
         
-        let bar = UIToolbar()
-        let done = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(resetTapped))
-        bar.items = [done]
-        bar.sizeToFit()
-        amountDestination.inputAccessoryView = bar
-        amountOrigin.inputAccessoryView = bar
+//        let bar = UIToolbar()
+//        let done = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(resetTapped))
+//        bar.items = [done]
+//        bar.sizeToFit()
+        //amountDestination.inputAccessoryView = bar
+        //amountOrigin.inputAccessoryView = bar
         
         
         setCurrency(currency: exchange.currencies[0])
@@ -64,14 +64,14 @@ class ExchangeViewController: UIViewController {
         amountDestination.text = exchange.currencies[1].amount
         
     }
-    @objc func resetTapped() {
-        if amountOrigin.isEditing == true {
-            print("YES it s amountOrigin")
-        }
-        if amountDestination.isEditing == true {
-            print("YES it s amountDestination")
-        }
-    }
+//    @objc func resetTapped() {
+////        if amountOrigin.isEditing == true {
+////            print("YES it s amountOrigin")
+////        }
+////        if amountDestination.isEditing == true {
+////            print("YES it s amountDestination")
+////        }
+//    }
     func setCurrency(currency: Currency) {
         
         flagCurrencyDestination.image = exchange.currencies[1].image

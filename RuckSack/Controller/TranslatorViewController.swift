@@ -37,26 +37,26 @@ class TranslatorViewController: UIViewController {
         backgroundImage.image = UIImage(named: "Background_Translator")
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         translatorViewController.insertSubview(backgroundImage, at: 0)
-        navigationController?.hidesBarsWhenKeyboardAppears = true
+//navigationController?.hidesBarsWhenKeyboardAppears = true
         
-        let bar = UIToolbar()
-        let done = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(resetTapped))
-        bar.items = [done]
-        bar.sizeToFit()
-        textLanguageOrigin.inputAccessoryView = bar
-        textLanguageDestination.inputAccessoryView = bar
+//        let bar = UIToolbar()
+//        let done = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(resetTapped))
+//        bar.items = [done]
+//        bar.sizeToFit()
+//        textLanguageOrigin.inputAccessoryView = bar
+//        textLanguageDestination.inputAccessoryView = bar
         
         
     }
-    @objc func resetTapped() {
-        if textLanguageOrigin.isEditable == true {
-            print("YES it s amountOrigin")
-            textLanguageOrigin.isEditable = false
-        } else if textLanguageDestination.isEditable == true{
-            print("YES it s amountDestination")
-            textLanguageDestination.isEditable = false
-        }
-    }
+//    @objc func resetTapped() {
+//        if textLanguageOrigin.isEditable == true {
+//            print("YES it s translateOrigin")
+//            textLanguageOrigin.isEditable = true
+//        } else if textLanguageDestination.isEditable == true{
+//            print("YES it s translateDestination")
+//            textLanguageDestination.isEditable = true
+//        }
+//    }
     
     
 }

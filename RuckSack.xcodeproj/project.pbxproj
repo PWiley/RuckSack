@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA0241FA233D1888004EE3BC /* ExtensionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0241F9233D1888004EE3BC /* ExtensionTextView.swift */; };
 		DADE8CC6232E77720057B0BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CC5232E77720057B0BB /* AppDelegate.swift */; };
 		DADE8CCD232E77730057B0BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DADE8CCC232E77730057B0BB /* Assets.xcassets */; };
 		DADE8CDB232E77730057B0BB /* RuckSackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CDA232E77730057B0BB /* RuckSackTests.swift */; };
@@ -22,7 +23,7 @@
 		DADE8D01232E7F850057B0BB /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CFE232E7F850057B0BB /* Exchange.swift */; };
 		DADE8D02232E7F850057B0BB /* Translate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CFF232E7F850057B0BB /* Translate.swift */; };
 		DADE8D04232E9F150057B0BB /* ExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8D03232E9F150057B0BB /* ExchangeViewController.swift */; };
-		DAE21C49233C1096009F7001 /* buttonToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE21C48233C1096009F7001 /* buttonToolBar.swift */; };
+		DAE21C49233C1096009F7001 /* ExtensionUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE21C48233C1096009F7001 /* ExtensionUITextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA0241F9233D1888004EE3BC /* ExtensionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionTextView.swift; sourceTree = "<group>"; };
 		DADE8CC2232E77720057B0BB /* RuckSack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RuckSack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADE8CC5232E77720057B0BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DADE8CCC232E77730057B0BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,7 +57,7 @@
 		DADE8CFE232E7F850057B0BB /* Exchange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
 		DADE8CFF232E7F850057B0BB /* Translate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translate.swift; sourceTree = "<group>"; };
 		DADE8D03232E9F150057B0BB /* ExchangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewController.swift; sourceTree = "<group>"; };
-		DAE21C48233C1096009F7001 /* buttonToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttonToolBar.swift; sourceTree = "<group>"; };
+		DAE21C48233C1096009F7001 /* ExtensionUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUITextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				DADE8CFB232E7DCD0057B0BB /* ExtensionUIView.swift */,
-				DAE21C48233C1096009F7001 /* buttonToolBar.swift */,
+				DAE21C48233C1096009F7001 /* ExtensionUITextField.swift */,
+				DA0241F9233D1888004EE3BC /* ExtensionTextView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -260,7 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DADE8CF8232E7D1D0057B0BB /* ExchangeCell.swift in Sources */,
-				DAE21C49233C1096009F7001 /* buttonToolBar.swift in Sources */,
+				DAE21C49233C1096009F7001 /* ExtensionUITextField.swift in Sources */,
 				DADE8CFA232E7D1D0057B0BB /* TranslatorViewController.swift in Sources */,
 				DADE8CF5232E7D1D0057B0BB /* WeatherViewController.swift in Sources */,
 				DADE8D00232E7F850057B0BB /* Weather.swift in Sources */,
@@ -271,6 +274,7 @@
 				DADE8D01232E7F850057B0BB /* Exchange.swift in Sources */,
 				DADE8CC6232E77720057B0BB /* AppDelegate.swift in Sources */,
 				DADE8D04232E9F150057B0BB /* ExchangeViewController.swift in Sources */,
+				DA0241FA233D1888004EE3BC /* ExtensionTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,7 +427,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.deutschekapital.RuckSack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -441,7 +445,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.deutschekapital.RuckSack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
