@@ -110,7 +110,7 @@
                             <view verifyAmbiguity="ignoreSizes" opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rae-yL-d4c" userLabel="Designable View Destination" customClass="DesignableView" customModule="RuckSack" customModuleProvider="target">
                                 <rect key="frame" x="8" y="343" width="398" height="225"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Français" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q06-Ea-MHA">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q06-Ea-MHA">
                                         <rect key="frame" x="147" y="17" width="65" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Q06-Ea-MHA" secondAttribute="height" multiplier="65:46" id="GTN-cq-z8S"/>
@@ -130,7 +130,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="France" translatesAutoresizingMaskIntoConstraints="NO" id="0nt-yS-zVo">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="USA" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0nt-yS-zVo">
                                         <rect key="frame" x="26.999999999999996" y="16.999999999999996" width="46.666666666666657" height="46.666666666666657"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="46.5" id="MOQ-ut-3uy"/>
@@ -725,7 +725,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="krD-pD-Vnw">
                                         <rect key="frame" x="113" y="31.333333333333336" width="72" height="101.33333333333331"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFS-1z-nP3">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EUR" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFS-1z-nP3">
                                                 <rect key="frame" x="0.0" y="0.0" width="72" height="34.666666666666664"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -736,7 +736,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="US Dollar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ih-Jw-4E9">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Euro" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ih-Jw-4E9">
                                                 <rect key="frame" x="0.0" y="61.666666666666671" width="72" height="39.666666666666671"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -791,7 +791,7 @@
                             <view opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o31-Re-jEe" userLabel="Designable View Origin" customClass="DesignableView" customModule="RuckSack" customModuleProvider="target">
                                 <rect key="frame" x="8" y="268" width="398" height="164"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="euro" translatesAutoresizingMaskIntoConstraints="NO" id="izp-0Q-hHh">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="us-dollar" translatesAutoresizingMaskIntoConstraints="NO" id="izp-0Q-hHh">
                                         <rect key="frame" x="8" y="32" width="93" height="100"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="3m2-8v-yYA">
@@ -894,10 +894,12 @@
     <resources>
         <image name="France" width="512" height="512"/>
         <image name="Icon_Weather" width="33.333332061767578" height="33.333332061767578"/>
+        <image name="USA" width="512" height="512"/>
         <image name="dry" width="72" height="84"/>
         <image name="euro" width="84" height="84"/>
         <image name="icon_Exchange" width="33.333332061767578" height="33.333332061767578"/>
         <image name="icon_Translator" width="33.333332061767578" height="33.333332061767578"/>
+        <image name="us-dollar" width="84" height="84"/>
         <image name="wet" width="72" height="76"/>
     </resources>
 </document>
