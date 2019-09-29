@@ -9,20 +9,19 @@
 import Foundation
 import UIKit
 
-class Exchange {
+class CurrencyModel {
     
-    var exchangeView = ExchangeViewController()
-    var currencies: [Currency] = []
-    
-    func createCurrency() -> [Currency] {
-        let euro = Currency(shortLabel: "EUR", name: "Euro", image: #imageLiteral(resourceName: "british-pound"), amount: "1000")
-        let dollar = Currency(shortLabel: "USD", name: "US-Dollar", image: #imageLiteral(resourceName: "us-dollar"), amount: "1000")
-         return [euro, dollar]
-    }
-    func askCurrencyRate() -> JSONSerialization {
+//    var currencies: [Currency] = []
+//
+//    func createCurrency() -> [Currency] {
+//        let euro = Currency(shortLabel: "EUR", name: "Euro", image: #imageLiteral(resourceName: "british-pound"), amount: "1000")
+//        let dollar = Currency(shortLabel: "USD", name: "US-Dollar", image: #imageLiteral(resourceName: "us-dollar"), amount: "1000")
+//         return [euro, dollar]
+//    }
+    func askCurrencyRate() {
         
-        var json: JSONSerialization?
-        let fixerURL = URL(string: "http://data.fixer.io/api/latest?access_key=512b6a9fdea5eb6241c0cda88a1079eb")!
+        let fixerString = "https://data.fixer.io/api/latest?access_key=512b6a9fdea5eb6241c0cda88a1079eb"
+        guard let fixerURL = URL(string: fixerString) else { return }
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: fixerURL) { data, response, error in
             if error != nil {
@@ -43,30 +42,37 @@ class Exchange {
                 return
             }
             do {
-                json = try (JSONSerialization.jsonObject(with: data, options: []) as? JSONSerialization)
-                print(json)
+                let currency = try JSONDecoder().decode(Currency.self, from: data)
+                print(currency.rates)
             } catch {
-                print("JSON error: \(error.localizedDescription)")
+                print("JSON error")
             }
-        }
-        return json!
+        }.resume()
+       
     }
     
     
 }
 
-class Currency {
-    
-    var shortLabel: String
-    var name: String
-    var image: UIImage
-    var amount: String
-    
-    init(shortLabel: String, name: String, image: UIImage, amount: String) {
-        self.shortLabel = shortLabel
-        self.name = name
-        self.image = image
-        self.amount = amount
-    }
-}
+//class Currency {
+//
+//    var shortLabel: String
+//    var name: String
+//    var image: UIImage
+//    var amount: String
+//
+//    init(shortLabel: String, name: String, image: UIImage, amount: String) {
+//        self.shortLabel = shortLabel
+//        self.name = name
+//        self.image = image
+//        self.amount = amount
+//    }
+//}
 
+
+struct Currency: Codable {
+    let success: Bool
+    let timestamp: Int
+    let base, date: String
+    let rates: [String: Double]
+}
