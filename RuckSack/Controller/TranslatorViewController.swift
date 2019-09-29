@@ -10,7 +10,7 @@ import UIKit
 
 class TranslatorViewController: UIViewController {
     
-    var translate = Translate()
+    //var translate = Translate()
     
     @IBOutlet var translatorViewController: UIView!
     @IBOutlet weak var flagLanguageOrigin: UIImageView!
@@ -24,7 +24,7 @@ class TranslatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //tableViewTranslator.estimatedRowHeight = 200
-        translate.languages = translate.createLanguage()
+        //translate.languages = translate.createLanguage()
         
         
         // Do any additional setup after loading the view.
