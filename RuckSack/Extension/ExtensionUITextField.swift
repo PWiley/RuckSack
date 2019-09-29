@@ -41,5 +41,7 @@ extension UITextField{
     @objc func doneButtonAction()
     {
         self.resignFirstResponder()
+        let currencyState = CurrencyModel()
+        currencyState.askCurrencyRate()
     }
 }
