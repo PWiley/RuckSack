@@ -9,7 +9,7 @@
 import UIKit
 
 class ExchangeViewController: UIViewController {
-    var exchange = Exchange()
+    //var exchange = Exchange()
     
     @IBOutlet var exchangeViewController: UIView!
     
@@ -25,19 +25,19 @@ class ExchangeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        exchange.currencies = exchange.createCurrency()
+       // exchange.currencies = exchange.createCurrency()
         
         // Do any additional setup after loading the view.
     }
-    fileprivate func extractedFunc() {
-        // MARK: set the informations for the two views
-        
-        flagCurrencyOrigin.image = exchange.currencies[0].image
-        shortLabelOrigin.text = exchange.currencies[0].shortLabel
-        labelOrigin.text = exchange.currencies[0].name
-        amountOrigin.text = exchange.currencies[0].amount
-    }
-    
+//    fileprivate func extractedFunc() {
+//        // MARK: set the informations for the two views
+//
+//        flagCurrencyOrigin.image = exchange.currencies[0].image
+//        shortLabelOrigin.text = exchange.currencies[0].shortLabel
+//        labelOrigin.text = exchange.currencies[0].name
+//        amountOrigin.text = exchange.currencies[0].amount
+//    }
+//
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -56,12 +56,12 @@ class ExchangeViewController: UIViewController {
         //amountOrigin.inputAccessoryView = bar
         
         
-        setCurrency(currency: exchange.currencies[0])
-        
-        flagCurrencyDestination.image = exchange.currencies[1].image
-        shortLabelDestination.text = exchange.currencies[1].shortLabel
-        labelDestination.text = exchange.currencies[1].name
-        amountDestination.text = exchange.currencies[1].amount
+//        setCurrency(currency: exchange.currencies[0])
+//
+//        flagCurrencyDestination.image = exchange.currencies[1].image
+//        shortLabelDestination.text = exchange.currencies[1].shortLabel
+//        labelDestination.text = exchange.currencies[1].name
+//        amountDestination.text = exchange.currencies[1].amount
         
     }
 //    @objc func resetTapped() {
@@ -72,11 +72,11 @@ class ExchangeViewController: UIViewController {
 ////            print("YES it s amountDestination")
 ////        }
 //    }
-    func setCurrency(currency: Currency) {
-        
-        flagCurrencyDestination.image = exchange.currencies[1].image
-        shortLabelDestination.text = exchange.currencies[1].shortLabel
-        labelDestination.text = exchange.currencies[1].name
-        amountDestination.text = exchange.currencies[1].amount
-    }
+//    func setCurrency(currency: Currency) {
+//        
+//        flagCurrencyDestination.image = exchange.currencies[1].image
+//        shortLabelDestination.text = exchange.currencies[1].shortLabel
+//        labelDestination.text = exchange.currencies[1].name
+//        amountDestination.text = exchange.currencies[1].amount
+//    }
 }
