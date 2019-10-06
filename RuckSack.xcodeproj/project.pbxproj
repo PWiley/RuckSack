@@ -8,14 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		DA0241FA233D1888004EE3BC /* ExtensionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0241F9233D1888004EE3BC /* ExtensionTextView.swift */; };
+		DA1FEFDB234A6787007E9E23 /* ExchangeStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FEFDA234A6787007E9E23 /* ExchangeStructure.swift */; };
+		DA1FEFDD234A67A0007E9E23 /* TranslateStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FEFDC234A67A0007E9E23 /* TranslateStructure.swift */; };
+		DA1FEFDF234A67AF007E9E23 /* WeatherStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FEFDE234A67AF007E9E23 /* WeatherStructure.swift */; };
+		DA1FEFE1234A6BED007E9E23 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DA1FEFE0234A6BED007E9E23 /* .gitignore */; };
 		DADE8CC6232E77720057B0BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CC5232E77720057B0BB /* AppDelegate.swift */; };
 		DADE8CCD232E77730057B0BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DADE8CCC232E77730057B0BB /* Assets.xcassets */; };
 		DADE8CDB232E77730057B0BB /* RuckSackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CDA232E77730057B0BB /* RuckSackTests.swift */; };
 		DADE8CEB232E7C940057B0BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DADE8CE9232E7C940057B0BB /* Main.storyboard */; };
 		DADE8CEC232E7C940057B0BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DADE8CEA232E7C940057B0BB /* LaunchScreen.storyboard */; };
 		DADE8CF5232E7D1D0057B0BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CEE232E7D1D0057B0BB /* WeatherViewController.swift */; };
-		DADE8CF7232E7D1D0057B0BB /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CF0232E7D1D0057B0BB /* LanguageCell.swift */; };
-		DADE8CF8232E7D1D0057B0BB /* ExchangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CF1232E7D1D0057B0BB /* ExchangeCell.swift */; };
 		DADE8CF9232E7D1D0057B0BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CF2232E7D1D0057B0BB /* ViewController.swift */; };
 		DADE8CFA232E7D1D0057B0BB /* TranslatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CF3232E7D1D0057B0BB /* TranslatorViewController.swift */; };
 		DADE8CFC232E7DCD0057B0BB /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CFB232E7DCD0057B0BB /* ExtensionUIView.swift */; };
@@ -38,6 +40,10 @@
 
 /* Begin PBXFileReference section */
 		DA0241F9233D1888004EE3BC /* ExtensionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionTextView.swift; sourceTree = "<group>"; };
+		DA1FEFDA234A6787007E9E23 /* ExchangeStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeStructure.swift; sourceTree = "<group>"; };
+		DA1FEFDC234A67A0007E9E23 /* TranslateStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateStructure.swift; sourceTree = "<group>"; };
+		DA1FEFDE234A67AF007E9E23 /* WeatherStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStructure.swift; sourceTree = "<group>"; };
+		DA1FEFE0234A6BED007E9E23 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DADE8CC2232E77720057B0BB /* RuckSack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RuckSack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADE8CC5232E77720057B0BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DADE8CCC232E77730057B0BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -48,8 +54,6 @@
 		DADE8CE9232E7C940057B0BB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DADE8CEA232E7C940057B0BB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DADE8CEE232E7D1D0057B0BB /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
-		DADE8CF0232E7D1D0057B0BB /* LanguageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
-		DADE8CF1232E7D1D0057B0BB /* ExchangeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeCell.swift; sourceTree = "<group>"; };
 		DADE8CF2232E7D1D0057B0BB /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DADE8CF3232E7D1D0057B0BB /* TranslatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslatorViewController.swift; sourceTree = "<group>"; };
 		DADE8CFB232E7DCD0057B0BB /* ExtensionUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 		DADE8CB9232E77720057B0BB = {
 			isa = PBXGroup;
 			children = (
+				DA1FEFE0234A6BED007E9E23 /* .gitignore */,
 				DADE8CC4232E77720057B0BB /* RuckSack */,
 				DADE8CD9232E77730057B0BB /* RuckSackTests */,
 				DADE8CC3232E77720057B0BB /* Products */,
@@ -132,8 +137,6 @@
 		DADE8CE6232E7C250057B0BB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				DADE8CF1232E7D1D0057B0BB /* ExchangeCell.swift */,
-				DADE8CF0232E7D1D0057B0BB /* LanguageCell.swift */,
 				DADE8CF3232E7D1D0057B0BB /* TranslatorViewController.swift */,
 				DADE8CF2232E7D1D0057B0BB /* ViewController.swift */,
 				DADE8CEE232E7D1D0057B0BB /* WeatherViewController.swift */,
@@ -157,6 +160,9 @@
 				DADE8CFE232E7F850057B0BB /* Exchange.swift */,
 				DADE8CFF232E7F850057B0BB /* Translate.swift */,
 				DADE8CFD232E7F850057B0BB /* Weather.swift */,
+				DA1FEFDE234A67AF007E9E23 /* WeatherStructure.swift */,
+				DA1FEFDA234A6787007E9E23 /* ExchangeStructure.swift */,
+				DA1FEFDC234A67A0007E9E23 /* TranslateStructure.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA1FEFE1234A6BED007E9E23 /* .gitignore in Resources */,
 				DADE8CCD232E77730057B0BB /* Assets.xcassets in Resources */,
 				DADE8CEC232E7C940057B0BB /* LaunchScreen.storyboard in Resources */,
 				DADE8CEB232E7C940057B0BB /* Main.storyboard in Resources */,
@@ -262,14 +269,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DADE8CF8232E7D1D0057B0BB /* ExchangeCell.swift in Sources */,
 				DAE21C49233C1096009F7001 /* ExtensionUITextField.swift in Sources */,
 				DADE8CFA232E7D1D0057B0BB /* TranslatorViewController.swift in Sources */,
+				DA1FEFDB234A6787007E9E23 /* ExchangeStructure.swift in Sources */,
+				DA1FEFDD234A67A0007E9E23 /* TranslateStructure.swift in Sources */,
 				DADE8CF5232E7D1D0057B0BB /* WeatherViewController.swift in Sources */,
 				DADE8D00232E7F850057B0BB /* Weather.swift in Sources */,
 				DADE8D02232E7F850057B0BB /* Translate.swift in Sources */,
 				DADE8CF9232E7D1D0057B0BB /* ViewController.swift in Sources */,
-				DADE8CF7232E7D1D0057B0BB /* LanguageCell.swift in Sources */,
+				DA1FEFDF234A67AF007E9E23 /* WeatherStructure.swift in Sources */,
 				DADE8CFC232E7DCD0057B0BB /* ExtensionUIView.swift in Sources */,
 				DADE8D01232E7F850057B0BB /* Exchange.swift in Sources */,
 				DADE8CC6232E77720057B0BB /* AppDelegate.swift in Sources */,
