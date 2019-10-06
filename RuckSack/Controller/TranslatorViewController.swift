@@ -23,10 +23,7 @@ class TranslatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //tableViewTranslator.estimatedRowHeight = 200
-        //translate.languages = translate.createLanguage()
-        
-        
+       
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -37,26 +34,7 @@ class TranslatorViewController: UIViewController {
         backgroundImage.image = UIImage(named: "Background_Translator")
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         translatorViewController.insertSubview(backgroundImage, at: 0)
-//navigationController?.hidesBarsWhenKeyboardAppears = true
-        
-//        let bar = UIToolbar()
-//        let done = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(resetTapped))
-//        bar.items = [done]
-//        bar.sizeToFit()
-//        textLanguageOrigin.inputAccessoryView = bar
-//        textLanguageDestination.inputAccessoryView = bar
-        
-        
-    }
-//    @objc func resetTapped() {
-//        if textLanguageOrigin.isEditable == true {
-//            print("YES it s translateOrigin")
-//            textLanguageOrigin.isEditable = true
-//        } else if textLanguageDestination.isEditable == true{
-//            print("YES it s translateDestination")
-//            textLanguageDestination.isEditable = true
-//        }
-//    }
-    
+      
+    }  
     
 }
