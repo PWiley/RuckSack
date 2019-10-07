@@ -85,7 +85,6 @@
 		DADE8CB9232E77720057B0BB = {
 			isa = PBXGroup;
 			children = (
-				DA1FEFE0234A6BED007E9E23 /* .gitignore */,
 				DADE8CC4232E77720057B0BB /* RuckSack */,
 				DADE8CD9232E77730057B0BB /* RuckSackTests */,
 				DADE8CC3232E77720057B0BB /* Products */,
@@ -104,6 +103,7 @@
 		DADE8CC4232E77720057B0BB /* RuckSack */ = {
 			isa = PBXGroup;
 			children = (
+				DA1FEFE0234A6BED007E9E23 /* .gitignore */,
 				DADE8CD1232E77730057B0BB /* Info.plist */,
 				DADE8CCC232E77730057B0BB /* Assets.xcassets */,
 				DADE8CC5232E77720057B0BB /* AppDelegate.swift */,
@@ -435,7 +435,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.deutschekapital.RuckSack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -453,7 +453,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.deutschekapital.RuckSack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
