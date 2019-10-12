@@ -47,17 +47,17 @@ class WeatherModel {
                     return
                 }
                 print(jsonData)
-                do {
-                    
-                    self.exchange = try? JSONDecoder().decode(Exchange.self, from: jsonData)
-                    self.list = try? JSONDecoder().decode(List.self, from: jsonData)
-                    self.main = try? JSONDecoder().decode(MainClass.self, from: jsonData)
-                    print("Ouhra")
-                
-                } catch {
-                    
-                    print("JSON error")
-                }
+//                do {
+//                    
+//                    self.exchange = try? JSONDecoder().decode(Exchange.self, from: jsonData)
+//                    self.list = try? JSONDecoder().decode(List.self, from: jsonData)
+//                    self.main = try? JSONDecoder().decode(MainClass.self, from: jsonData)
+//                    print("Ouhra")
+//                
+//                } catch {
+//                    
+//                    print("JSON error")
+//                }
                
             }
             task?.resume()

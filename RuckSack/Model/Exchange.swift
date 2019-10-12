@@ -11,7 +11,9 @@ import UIKit
 
 class CurrencyModel {
     
-    private static let currencyURL = URL(string: "http://data.fixer.io/api/latest?")!
+    weak var delegate: CurrencyModelDelegate?
+    
+    private static let currencyURL = URL(string: "https://data.fixer.io/api/latest?")!
     private var task: URLSessionDataTask?
     var currency: Currency?
     
@@ -19,11 +21,14 @@ class CurrencyModel {
     func createRequest() -> URLRequest {
 
         
-        let body = "access_key=512b6a9fdea5eb6241c0cda88a1079eb&base=EUR&symbols=USD"
+        //let body = "access_key=512b6a9fdea5eb6241c0cda88a1079eb&base=EUR&symbols=USD"
         
-        var request = URLRequest(url: CurrencyModel.currencyURL)
-        request.httpMethod = "POST"
-        request.httpBody = body.data(using: .utf8)
+        let query = ["access_key": "512b6a9fdea5eb6241c0cda88a1079eb", "base": "EUR", "symbols": "USD"]
+        
+        var request = URLRequest(url: CurrencyModel.currencyURL.withQueries(query)!)
+        request.httpMethod = "GET"
+        
+        //request.httpBody = body.data(using: .utf8)
 //        print(request.httpBody as Any)
 //        print(request)
         return request
@@ -36,14 +41,11 @@ class CurrencyModel {
         let request = createRequest()
         let session = URLSession(configuration: .default)
         task = session.dataTask(with: request) { data, response, error in
-            if error != nil {
-                print("Client error!")
+            guard let jsonData = data, error == nil else {
+                print("Client error!", error)
                 return
             }
-            guard let jsonData = data else {
-                print("Error data!")
-                return
-            }
+            
             guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
                 print("Server error!")
                 return
@@ -54,10 +56,14 @@ class CurrencyModel {
                 return
             }
             print(jsonData)
+            
+//            self.currency = try? JSONDecoder().decode(Currency.self, from: jsonData)
+//            print("Ouhra")
+//            self.requestData(currency: self.currency!)
             do {
                 self.currency = try? JSONDecoder().decode(Currency.self, from: jsonData)
                 print("Ouhra")
-//                self.requestData(currency: self.currency!)
+                self.requestData(currency: self.currency!)
 
             } catch {
                 print("JSON error")
@@ -66,8 +72,8 @@ class CurrencyModel {
         }
         task?.resume()
     }
+   
     
-    var delegate: CurrencyModelDelegate?
     func requestData(currency: Currency) {
         // the data was received and parsed to String
         
@@ -77,6 +83,6 @@ class CurrencyModel {
 }
 
 
-protocol CurrencyModelDelegate {
+protocol CurrencyModelDelegate: class {
 func didRecieveDataUpdate(data: Currency)
 }

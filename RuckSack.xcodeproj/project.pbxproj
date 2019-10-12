@@ -12,6 +12,7 @@
 		DA1FEFDD234A67A0007E9E23 /* TranslateStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FEFDC234A67A0007E9E23 /* TranslateStructure.swift */; };
 		DA1FEFDF234A67AF007E9E23 /* WeatherStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FEFDE234A67AF007E9E23 /* WeatherStructure.swift */; };
 		DA1FEFE1234A6BED007E9E23 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DA1FEFE0234A6BED007E9E23 /* .gitignore */; };
+		DA299867234B2B63000C7C98 /* ExtensionURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA299866234B2B63000C7C98 /* ExtensionURL.swift */; };
 		DADE8CC6232E77720057B0BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CC5232E77720057B0BB /* AppDelegate.swift */; };
 		DADE8CCD232E77730057B0BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DADE8CCC232E77730057B0BB /* Assets.xcassets */; };
 		DADE8CDB232E77730057B0BB /* RuckSackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CDA232E77730057B0BB /* RuckSackTests.swift */; };
@@ -44,6 +45,7 @@
 		DA1FEFDC234A67A0007E9E23 /* TranslateStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateStructure.swift; sourceTree = "<group>"; };
 		DA1FEFDE234A67AF007E9E23 /* WeatherStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStructure.swift; sourceTree = "<group>"; };
 		DA1FEFE0234A6BED007E9E23 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		DA299866234B2B63000C7C98 /* ExtensionURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionURL.swift; sourceTree = "<group>"; };
 		DADE8CC2232E77720057B0BB /* RuckSack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RuckSack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADE8CC5232E77720057B0BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DADE8CCC232E77730057B0BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				DADE8CFB232E7DCD0057B0BB /* ExtensionUIView.swift */,
 				DAE21C48233C1096009F7001 /* ExtensionUITextField.swift */,
 				DA0241F9233D1888004EE3BC /* ExtensionTextView.swift */,
+				DA299866234B2B63000C7C98 /* ExtensionURL.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				DADE8CFA232E7D1D0057B0BB /* TranslatorViewController.swift in Sources */,
 				DA1FEFDB234A6787007E9E23 /* ExchangeStructure.swift in Sources */,
 				DA1FEFDD234A67A0007E9E23 /* TranslateStructure.swift in Sources */,
+				DA299867234B2B63000C7C98 /* ExtensionURL.swift in Sources */,
 				DADE8CF5232E7D1D0057B0BB /* WeatherViewController.swift in Sources */,
 				DADE8D00232E7F850057B0BB /* Weather.swift in Sources */,
 				DADE8D02232E7F850057B0BB /* Translate.swift in Sources */,

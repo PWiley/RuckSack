@@ -10,6 +10,7 @@ import UIKit
 
 class ExchangeViewController: UIViewController {
     
+    
     private let currencyModel = CurrencyModel()
     
     @IBOutlet var exchangeViewController: UIView!
@@ -25,7 +26,7 @@ class ExchangeViewController: UIViewController {
     @IBOutlet weak var amountDestination: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        currencyModel.delegate = self
        // exchange.currencies = exchange.createCurrency()
         
         // Do any additional setup after loading the view.

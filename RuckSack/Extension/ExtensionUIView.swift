@@ -46,7 +46,7 @@ extension UIView {
 //            layer.borderWidth = newValue
 //        }
 //    }
-    
+//    
 //    @IBInspectable
 //    var borderColor: UIColor? {
 //        get {
@@ -63,7 +63,7 @@ extension UIView {
 //            }
 //        }
 //    }
-    
+//    
     @IBInspectable
     var shadowRadius: CGFloat {
         get {
