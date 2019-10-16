@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ExchangeViewController: UIViewController {
-    
+class ExchangeViewController: UIViewController, CurrencyModelDelegate {
     
     private let currencyModel = CurrencyModel()
     
@@ -27,11 +26,12 @@ class ExchangeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         currencyModel.delegate = self
-       // exchange.currencies = exchange.createCurrency()
+        currencyModel.askCurrencyRate()
+        // exchange.currencies = exchange.createCurrency()
         
         // Do any additional setup after loading the view.
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -43,11 +43,12 @@ class ExchangeViewController: UIViewController {
         
         
     }
-
-}
-extension ExchangeViewController: CurrencyModelDelegate {
-
-    func didRecieveDataUpdate(data: Currency) {
-        print(data.rates)
+    func didUpdateCurrencyData(data: Currency) {
+        //           print(currencyModel.currency?.rates)
+        //                  print("Houra")
+        guard let amountSource = currencyModel.currency?.rates else {return}
+        amountOrigin.text = String(describing: amountSource)
+        
     }
+    
 }
