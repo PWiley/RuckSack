@@ -12,9 +12,9 @@ import Foundation
 // MARK: - Currency
 struct Currency: Decodable {
     let success: Bool
-    let timestamp: Int
-    let base, date: String
-    let rates: Rates
+    let timestamp: Int?
+    let base, date: String?
+    let rates: Rates?
 }
 
 // MARK: - Rates
