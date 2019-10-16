@@ -8,7 +8,15 @@
 
 import UIKit
 
-class WeatherViewController: UITableViewController {
+class WeatherViewController: UITableViewController, WeatherModelDelegate {
+    
+    
+    var whichTown = "Berlin"
+    let weather = WeatherModel()
+    func didUpdateWeatherData() {
+        print("Houra")
+    }
+    
 
     @IBOutlet var tableViewWeather: UITableView!
     
@@ -60,14 +68,16 @@ class WeatherViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather"))
+        //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(changeTown))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Town?", style: .plain, target: self, action: #selector(changeTown))
         // Do any additional setup after loading the view.
     
     }
     override func viewDidAppear(_ animated: Bool) {
         let indexPath: IndexPath = IndexPath(row: 1, section: 0)
         tableViewWeather.scrollToRow(at: indexPath, at: .bottom, animated: true)
-        let weather = WeatherModel()
-        weather.askWeatherState()
+        //let weather = WeatherModel()
+        weather.askWeatherState(town: WeatherModel.berlin)
     }
    
     /*
@@ -79,5 +89,17 @@ b
         // Pass the selected object to the new view controller.
     }
     */
-    
+    @objc func changeTown() {
+        print("Changed town")
+        //navigationItem.rightBarButtonItem?.title = "Berlin"
+        //navigationItem.title = "Berlin"
+        let changeTownAlert = UIAlertController(title: "Change Town?", message: "Do You want to change the town?", preferredStyle: .alert)
+        changeTownAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            print("I want to change to another town")
+            self.weather.askWeatherState(town: WeatherModel.berlin)
+        }))
+        changeTownAlert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+        
+        self.present(changeTownAlert, animated: true, completion: nil)
+    }
 }
