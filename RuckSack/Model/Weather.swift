@@ -11,19 +11,40 @@ import Foundation
 
 class WeatherModel {
     
-    static let baseURL = "https://api.openweathermap.org/data/2.5/forecast?"
-    static let apiKey = "q=Paris,us&mode=json&appid=d2fc02766020f446cb8063c244166041"
+    private static let baseURL = URL(string: "https://api.openweathermap.org/data/2.5/forecast?")!
+    static let apiKey = "q=Berlin,us&mode=json&appid=d2fc02766020f446cb8063c244166041"
+    //static let apiKey = "q=Newyorck,us&mode=json&appid=d2fc02766020f446cb8063c244166041"
     
-    private static let weatherURL = URL(string: baseURL + apiKey)!
+    //private static let weatherURL = URL(string: baseURL + apiKey)!
     private var task: URLSessionDataTask?
     var exchange: Exchange?
     var list: List?
     var main: MainClass?
     
     
-        func askWeatherState() {
+    static var berlin: [String: String] = [
+        "q": "Berlin,de",
+        "mode": "json",
+        "appid": "d2fc02766020f446cb8063c244166041"
+    ]
+    static var newYork: [String: String] = [
+        "q": "new York,us",
+        "mode": "json",
+        "appid": "d2fc02766020f446cb8063c244166041"
+    ]
+    
+    func createRequest(query: [String: String]) -> URLRequest {
+        
+        var request = URLRequest(url: (WeatherModel.baseURL.withQueries(query)!))
+        request.httpMethod = "POST"
+        return request
+    }
+    
+    func askWeatherState(town: [String: String]) {
             
-            let request = URLRequest(url: WeatherModel.weatherURL)
+            //let request = URLRequest(url: WeatherModel.weatherURL)
+            let request = createRequest(query: town)
+        print(town.values)
             let session = URLSession(configuration: .default)
             task = session.dataTask(with: request) { data, response, error in
             //print(response)
@@ -71,4 +92,14 @@ enum NetworkError: Error {
     case clientError
     case serverError
     case jsonError
+}
+//
+//enum WichTown {
+//    case berlin
+//    case newYork
+//}
+
+
+protocol WeatherModelDelegate {
+    func didUpdateWeatherData()
 }
