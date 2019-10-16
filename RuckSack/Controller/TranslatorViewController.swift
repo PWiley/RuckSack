@@ -8,7 +8,11 @@
 
 import UIKit
 
-class TranslatorViewController: UIViewController {
+class TranslatorViewController: UIViewController, TranslateModelDelegate {
+    func didUpdateTranslateData() {
+        print("Hourra translate")
+    }
+    
     
     //var translate = Translate()
     
