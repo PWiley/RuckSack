@@ -11,7 +11,7 @@ import UIKit
 class WeatherViewController: UITableViewController, WeatherModelDelegate {
     
     
-    var whichTown = "Berlin"
+    static var whichTown: Bool = true
     let weather = WeatherModel()
     func didUpdateWeatherData() {
         print("Houra")
@@ -67,17 +67,30 @@ class WeatherViewController: UITableViewController, WeatherModelDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather"))
+        tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
+//        let blur = UIBlurEffect(style: UIBlurEffect.Style.light)
+//        let blurView = UIVisualEffectView(effect: blur)
+//        blurView.frame = self.view.bounds
+//        //view.insertSubView(blurView, atIndex: 0)
+//        self.tableView.backgroundView!.addSubview(blurView)
+        //tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
         //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(changeTown))
+        weather.askWeatherState(town: WeatherModel.berlin)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Town?", style: .plain, target: self, action: #selector(changeTown))
         // Do any additional setup after loading the view.
     
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        weather.askWeatherState(town: WeatherModel.berlin)
     }
     override func viewDidAppear(_ animated: Bool) {
         let indexPath: IndexPath = IndexPath(row: 1, section: 0)
         tableViewWeather.scrollToRow(at: indexPath, at: .bottom, animated: true)
         //let weather = WeatherModel()
+        tableViewWeather.backgroundView?.fadeOut()
         weather.askWeatherState(town: WeatherModel.berlin)
+        tableViewWeather.backgroundView?.fadeIn()
+        
     }
    
     /*
@@ -93,10 +106,21 @@ b
         print("Changed town")
         //navigationItem.rightBarButtonItem?.title = "Berlin"
         //navigationItem.title = "Berlin"
+        WeatherViewController.whichTown = !WeatherViewController.whichTown
         let changeTownAlert = UIAlertController(title: "Change Town?", message: "Do You want to change the town?", preferredStyle: .alert)
         changeTownAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             print("I want to change to another town")
+            if WeatherViewController.self.whichTown == true {
+                self.tableViewWeather.backgroundView?.fadeOut()
             self.weather.askWeatherState(town: WeatherModel.berlin)
+            self.tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
+                self.tableViewWeather.backgroundView?.fadeIn()
+            } else {
+                self.tableViewWeather.backgroundView?.fadeOut()
+            self.weather.askWeatherState(town: WeatherModel.newYork)
+            self.tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
+                self.tableViewWeather.backgroundView?.fadeIn()
+            }
         }))
         changeTownAlert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
         
