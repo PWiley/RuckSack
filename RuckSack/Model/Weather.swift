@@ -17,10 +17,17 @@ class WeatherModel {
     
     //private static let weatherURL = URL(string: baseURL + apiKey)!
     private var task: URLSessionDataTask?
-    var exchange: Exchange?
+    //var delegate: WeatherModelDelegate?
+    
+    var forecast: Forecast?
+    var city: City?
+    var clouds: Clouds?
+    var coord: Coord?
     var list: List?
     var main: MainClass?
-    
+    var sys: Sys?
+    var weather: Weather?
+    var wind: Wind?
     
     static var berlin: [String: String] = [
         "q": "Berlin,de",
@@ -33,58 +40,71 @@ class WeatherModel {
         "appid": "d2fc02766020f446cb8063c244166041"
     ]
     
-    func createRequest(query: [String: String]) -> URLRequest {
+    func createRequest() -> URLRequest {
         
-        var request = URLRequest(url: (WeatherModel.baseURL.withQueries(query)!))
+        var request = URLRequest(url: (WeatherModel.baseURL.withQueries(WeatherModel.berlin)!))
         request.httpMethod = "POST"
         return request
     }
     
     func askWeatherState(town: [String: String]) {
-            
-            //let request = URLRequest(url: WeatherModel.weatherURL)
-            let request = createRequest(query: town)
-        print(town.values)
-            let session = URLSession(configuration: .default)
-            task = session.dataTask(with: request) { data, response, error in
+        
+        //let request = URLRequest(url: WeatherModel.weatherURL)
+        let request = createRequest()
+        print(request)
+        //print(town.values)
+        let session = URLSession(configuration: .default)
+        task = session.dataTask(with: request) { data, response, error in
             //print(response)
-                if error != nil {
-                    print("Client error!")
-                    print("something went wrong ", error!)
-                    return
-                }
-                guard let jsonData = data else {
-                    print("Error data!")
-                    
-                    return
-                }
-                guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                    print("Server error!")
-                    return
-                }
-                
-                guard let mime = response.mimeType, mime == "application/json" else {
-                    print("Wrong MIME type!")
-                    return
-                }
-                print(jsonData)
-//                do {
-//                    
-//                    self.exchange = try? JSONDecoder().decode(Exchange.self, from: jsonData)
-//                    self.list = try? JSONDecoder().decode(List.self, from: jsonData)
-//                    self.main = try? JSONDecoder().decode(MainClass.self, from: jsonData)
-//                    print("Ouhra")
-//                
-//                } catch {
-//                    
-//                    print("JSON error")
-//                }
-               
+            if error != nil {
+                print("Client error!")
+                print("something went wrong ", error!)
+                return
             }
-            task?.resume()
+            guard let jsonData = data else {
+                print("Error data!")
+                
+                return
+            }
+            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                print("Server error!")
+                return
+            }
+            
+            guard let mime = response.mimeType, mime == "application/json" else {
+                print("Wrong MIME type!")
+                return
+            }
+            DispatchQueue.main.async {
+                print(jsonData)
+               
+                self.forecast = try? JSONDecoder().decode(Forecast.self, from: jsonData)
+                self.city = try? JSONDecoder().decode(City.self, from: jsonData)
+                self.clouds = try? JSONDecoder().decode(Clouds.self, from: jsonData)
+                self.coord = try? JSONDecoder().decode(Coord.self, from: jsonData)
+                self.list = try? JSONDecoder().decode(List.self, from: jsonData)
+                self.main = try? JSONDecoder().decode(MainClass.self, from: jsonData)
+                self.sys = try? JSONDecoder().decode(Sys.self, from: jsonData)
+                self.weather = try? JSONDecoder().decode(Weather.self, from: jsonData)
+                self.wind = try? JSONDecoder().decode(Wind.self, from: jsonData)
+                
+            }
+            //
+            
         }
+        print("hep: \(forecast?.city.name as Any)")
+        print(forecast?.city.country as Any)
+        print(list?.main.temp as Any)
+        print(main?.temp as Any)
+        print(main?.tempMax as Any)
+        print(main?.tempMin as Any)
+        
+        //print(exchange?.cod as Any)
+        task?.resume()
+        
+    }
     
-
+    
 }
 
 

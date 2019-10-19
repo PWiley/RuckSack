@@ -8,32 +8,62 @@
 
 import Foundation
 
-// MARK: Structures JSON Data
-// MARK: - Exchange
-struct Exchange: Decodable {
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let weatherForecast = try? newJSONDecoder().decode(WeatherForecast.self, from: jsonData)
+
+import Foundation
+
+// MARK: - Forecast
+class Forecast: Codable {
     let cod: String
     let message: Double
     let cnt: Int
     let list: [List]
     let city: City
+
+    init(cod: String, message: Double, cnt: Int, list: [List], city: City) {
+        self.cod = cod
+        self.message = message
+        self.cnt = cnt
+        self.list = list
+        self.city = city
+    }
 }
 
 // MARK: - City
-struct City: Codable {
+class City: Codable {
     let id: Int
     let name: String
     let coord: Coord
     let country: String
     let population, timezone, sunrise, sunset: Int
+
+    init(id: Int, name: String, coord: Coord, country: String, population: Int, timezone: Int, sunrise: Int, sunset: Int) {
+        self.id = id
+        self.name = name
+        self.coord = coord
+        self.country = country
+        self.population = population
+        self.timezone = timezone
+        self.sunrise = sunrise
+        self.sunset = sunset
+    }
 }
 
 // MARK: - Coord
-struct Coord: Codable {
+class Coord: Codable {
     let lat, lon: Double
+
+    init(lat: Double, lon: Double) {
+        self.lat = lat
+        self.lon = lon
+    }
 }
 
 // MARK: - List
-struct List: Codable {
+class List: Codable {
     let dt: Int
     let main: MainClass
     let weather: [Weather]
@@ -41,22 +71,34 @@ struct List: Codable {
     let wind: Wind
     let sys: Sys
     let dtTxt: String
-    let rain: Rain?
 
     enum CodingKeys: String, CodingKey {
         case dt, main, weather, clouds, wind, sys
-        case dtTxt
-        case rain
+        case dtTxt = "dt_txt"
+    }
+
+    init(dt: Int, main: MainClass, weather: [Weather], clouds: Clouds, wind: Wind, sys: Sys, dtTxt: String) {
+        self.dt = dt
+        self.main = main
+        self.weather = weather
+        self.clouds = clouds
+        self.wind = wind
+        self.sys = sys
+        self.dtTxt = dtTxt
     }
 }
 
 // MARK: - Clouds
-struct Clouds: Codable {
+class Clouds: Codable {
     let all: Int
+
+    init(all: Int) {
+        self.all = all
+    }
 }
 
 // MARK: - MainClass
-struct MainClass: Codable {
+class MainClass: Codable {
     let temp, tempMin, tempMax, pressure: Double
     let seaLevel, grndLevel: Double
     let humidity: Int
@@ -64,28 +106,34 @@ struct MainClass: Codable {
 
     enum CodingKeys: String, CodingKey {
         case temp
-        case tempMin
-        case tempMax
+        case tempMin = "temp_min"
+        case tempMax = "temp_max"
         case pressure
-        case seaLevel
-        case grndLevel
+        case seaLevel = "sea_level"
+        case grndLevel = "grnd_level"
         case humidity
-        case tempKf
+        case tempKf = "temp_kf"
     }
-}
 
-// MARK: - Rain
-struct Rain: Codable {
-    let the3H: Double
-
-    enum CodingKeys: String, CodingKey {
-        case the3H
+    init(temp: Double, tempMin: Double, tempMax: Double, pressure: Double, seaLevel: Double, grndLevel: Double, humidity: Int, tempKf: Double) {
+        self.temp = temp
+        self.tempMin = tempMin
+        self.tempMax = tempMax
+        self.pressure = pressure
+        self.seaLevel = seaLevel
+        self.grndLevel = grndLevel
+        self.humidity = humidity
+        self.tempKf = tempKf
     }
 }
 
 // MARK: - Sys
-struct Sys: Codable {
+class Sys: Codable {
     let pod: Pod
+
+    init(pod: Pod) {
+        self.pod = pod
+    }
 }
 
 enum Pod: String, Codable {
@@ -94,7 +142,7 @@ enum Pod: String, Codable {
 }
 
 // MARK: - Weather
-struct Weather: Codable {
+class Weather: Codable {
     let id: Int
     let main: MainEnum
     let weatherDescription: Description
@@ -102,26 +150,37 @@ struct Weather: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id, main
-        case weatherDescription
+        case weatherDescription = "description"
         case icon
+    }
+
+    init(id: Int, main: MainEnum, weatherDescription: Description, icon: String) {
+        self.id = id
+        self.main = main
+        self.weatherDescription = weatherDescription
+        self.icon = icon
     }
 }
 
 enum MainEnum: String, Codable {
     case clear = "Clear"
     case clouds = "Clouds"
-    case rain = "Rain"
 }
 
 enum Description: String, Codable {
     case brokenClouds = "broken clouds"
     case clearSky = "clear sky"
     case fewClouds = "few clouds"
-    case lightRain = "light rain"
+    case overcastClouds = "overcast clouds"
     case scatteredClouds = "scattered clouds"
 }
 
 // MARK: - Wind
-struct Wind: Codable {
+class Wind: Codable {
     let speed, deg: Double
+
+    init(speed: Double, deg: Double) {
+        self.speed = speed
+        self.deg = deg
+    }
 }
