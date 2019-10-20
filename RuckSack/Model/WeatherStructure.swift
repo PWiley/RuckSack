@@ -6,12 +6,6 @@
 //  Copyright © 2019 Patrick Wiley. All rights reserved.
 //
 
-import Foundation
-
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let weatherForecast = try? newJSONDecoder().decode(WeatherForecast.self, from: jsonData)
 
 import Foundation
 
