@@ -11,8 +11,9 @@ import Foundation
 
 class TranslateModel {
     // Get the file
+    private var task: URLSessionDataTask?
     var delegate: TranslateModelDelegate?
-    private let translateURL = URL(string: "https://translation.googleapis.com/language/translate/v2/&key=AIzaSyDd_8AuTs9gGs_jA233qUPv2_P69qtnW7c")!
+    private static let translateURL = URL(string: "https://translation.googleapis.com/language/translate/v2/")!
     
     func createJson() -> Data {
         let translation = TranslationToSend(q: ["Hello world, it's time to go far away"], target: "de")
@@ -20,31 +21,35 @@ class TranslateModel {
         let json = try? JSONEncoder().encode(translation)
         let jsonString = String(data: json!, encoding: .utf8)
         
-        print(jsonString)
-        print(json)
+        print(jsonString as Any)
+        print(json as Any)
         return json!
+    }
+    
+    func createRequest() -> URLRequest {
+        
+        let query: [String: String] = [
+            "key": "AIzaSyDd_8AuTs9gGs_jA233qUPv2_P69qtnW7c"
+        ]
+        
+        var request = URLRequest(url: TranslateModel.translateURL.withQueries(query)!)
+        request.httpMethod = "POST"
+        print(request)
+        return request
     }
     func createCall(jsonData: Data ) {
         
-        var request = URLRequest(url: translateURL)
-        request.httpMethod = "POST"
-        request.httpBody = createJson()
+        let request = createRequest()
         
-        
-        //let session = URLSession(configuration: .default)
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             print("Hourra")
             guard let data = data, error == nil else { return}
             let jsonAnswerTranslation = try? JSONDecoder().decode(Translation.self , from: data)
             let jsonAnswerDataClass = try? JSONDecoder().decode(DataClass.self , from: data)
             let jsonAnswerTranslationElement = try? JSONDecoder().decode(TranslationElement.self , from: data)
-        }.resume()
+        }
+        task?.resume()
     }
-    
-    
-    
-    
-    
     
 }
 protocol TranslateModelDelegate{
