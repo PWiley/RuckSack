@@ -75,13 +75,13 @@ class WeatherViewController: UITableViewController, WeatherModelDelegate {
 //        self.tableView.backgroundView!.addSubview(blurView)
         //tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
         //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(changeTown))
-        weather.askWeatherState(town: WeatherModel.berlin)
+        //weather.askWeatherState(town: WeatherModel.berlin)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Town?", style: .plain, target: self, action: #selector(changeTown))
         // Do any additional setup after loading the view.
     
     }
     override func viewWillAppear(_ animated: Bool) {
-        weather.askWeatherState(town: WeatherModel.berlin)
+        //weather.askWeatherState(town: WeatherModel.berlin)
     }
     override func viewDidAppear(_ animated: Bool) {
         let indexPath: IndexPath = IndexPath(row: 1, section: 0)
@@ -112,7 +112,7 @@ b
             print("I want to change to another town")
             if WeatherViewController.self.whichTown == true {
                 self.tableViewWeather.backgroundView?.fadeOut()
-            self.weather.askWeatherState(town: WeatherModel.berlin)
+            //self.weather.askWeatherState(town: WeatherModel.berlin)
             self.tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
                 self.tableViewWeather.backgroundView?.fadeIn()
             } else {
