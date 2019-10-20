@@ -16,6 +16,9 @@ class CurrencyModel {
     var currency: Currency?
     var delegate: CurrencyModelDelegate?
     
+    var amountOrigin: String?
+    var amountDestination: String?
+    
     var exchangeView: ExchangeViewController?
     
     func createRequest() -> URLRequest {
@@ -55,7 +58,7 @@ class CurrencyModel {
                     
                     self.currency = try JSONDecoder().decode(Currency.self, from: jsonData)
                     //print("Ouhra: currency = \(self.currency?.rates?.usd)")
-                    self.requestData(currency: self.currency!)
+                    //self.requestData(currency: self.currency!)
                     
                 } catch {
                     print("JSON error: \(error)")
@@ -66,24 +69,20 @@ class CurrencyModel {
     }
     
     
-    func requestData(currency: Currency) {
-        // the data was received and parsed to String
-        
-        self.delegate?.didUpdateCurrencyData(data: currency)
-        //calculateConversion(rates: (describing: currency.rates))
-    }
+//    func requestData(currency: Currency) {
+//        // the data was received and parsed to String
+//        self.delegate?.didUpdateCurrencyData(data: currency)
+//        
+//    }
     
-    func calculateConversion(rates: Double) {
-        if exchangeView?.amountOrigin.text == "" {
-            print("AmountOrigin is empty")
-        } else {
-            print("'AmountDestination is empty")
-        }
-
-    }
-    
+    func calculateConversion(amount: Double){
+//            print("le montant : \(amount)")
+//            print(currency?.rates?.usd)
+            guard let rates = currency?.rates?.usd else {return}
+            let result = amount * rates
+            print("Le result est : \(result)")
+        }    
 }
-
 
 protocol CurrencyModelDelegate {
     func didUpdateCurrencyData(data: Currency)
