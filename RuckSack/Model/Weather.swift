@@ -51,8 +51,8 @@ class WeatherModel {
         
         //let request = URLRequest(url: WeatherModel.weatherURL)
         let request = createRequest()
-        print(request)
-        //print(town.values)
+        //print(request)
+        print(town.values)
         let session = URLSession(configuration: .default)
         task = session.dataTask(with: request) { data, response, error in
             //print(response)
@@ -76,34 +76,68 @@ class WeatherModel {
                 return
             }
             DispatchQueue.main.async {
-                print(jsonData)
+                //print(jsonData)
                
                 self.forecast = try? JSONDecoder().decode(Forecast.self, from: jsonData)
-                self.city = try? JSONDecoder().decode(City.self, from: jsonData)
-                self.clouds = try? JSONDecoder().decode(Clouds.self, from: jsonData)
-                self.coord = try? JSONDecoder().decode(Coord.self, from: jsonData)
-                self.list = try? JSONDecoder().decode(List.self, from: jsonData)
-                self.main = try? JSONDecoder().decode(MainClass.self, from: jsonData)
-                self.sys = try? JSONDecoder().decode(Sys.self, from: jsonData)
-                self.weather = try? JSONDecoder().decode(Weather.self, from: jsonData)
-                self.wind = try? JSONDecoder().decode(Wind.self, from: jsonData)
-                
+                print(self.forecast)
+//                self.city = try? JSONDecoder().decode(City.self, from: jsonData)
+//                print(self.city)
+//                self.clouds = try? JSONDecoder().decode(Clouds.self, from: jsonData)
+//                print(self.clouds)
+//                self.coord = try? JSONDecoder().decode(Coord.self, from: jsonData)
+//                print(self.coord)
+//                self.list = try? JSONDecoder().decode(List.self, from: jsonData)
+//                print(self.list)
+//                self.main = try? JSONDecoder().decode(MainClass.self, from: jsonData)
+//                print(self.main)
+//                self.sys = try? JSONDecoder().decode(Sys.self, from: jsonData)
+//                print(self.sys)
+//                self.weather = try? JSONDecoder().decode(Weather.self, from: jsonData)
+//                print(self.weather)
+//                self.wind = try? JSONDecoder().decode(Wind.self, from: jsonData)
+//                print(self.wind)
             }
             //
             
         }
-        print("hep: \(forecast?.city.name as Any)")
-        print(forecast?.city.country as Any)
-        print(list?.main.temp as Any)
-        print(main?.temp as Any)
-        print(main?.tempMax as Any)
-        print(main?.tempMin as Any)
-        
+//        print("hep: \(forecast?.city.name as Any)")
+//        print(forecast?.city.country as Any)
+//        print(forecast?.list.count)
+//
+//        //guard let count = forecast?.list.capacity else {return}
+//        for number in 0..<40{
+//            print("time\(number): \(String(describing: forecast?.list[number].dtTxt))")
+//            print("temp\(number): \(String(describing: forecast?.list[number].main.temp))")
+//        }
+//
+        printResult()
         //print(exchange?.cod as Any)
         task?.resume()
         
     }
+    func printResult() {
+        if forecast?.list != nil {
+//            print("hep: \(forecast?.city.name as Any)")
+//            print(forecast?.city.country as Any)
+//            print(forecast?.list.count)
+//
+            //guard let count = forecast?.list.capacity else {return}
+            for number in 0..<40{
+                print("time\(number): \(String(describing: forecast?.list[number].dtTxt))")
+                //print("temp\(number): \(String(describing: forecast?.list[number].main.temp))")
+                print("temp\(number): \(String(describing: forecast?.list[number].main.tempMax))")
+            }
+        calculateTempMedium()
+        }
+    }
     
+    func calculateTempMedium() {
+        var temp = 0.0
+        for number in 0..<8{
+            temp += (forecast?.list[number].main.temp)!
+        }
+        print("La tmperature aujourd'hui sera de : \(temp/8)")
+    }
     
 }
 
