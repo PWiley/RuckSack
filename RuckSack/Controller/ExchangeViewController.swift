@@ -12,7 +12,6 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     
     let currencyService = CurrencyService()
     
-    
     @IBOutlet var exchangeViewController: UIView!
     
     @IBOutlet weak var viewOrigin: DesignableView!
@@ -20,13 +19,14 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     @IBOutlet weak var shortLabelOrigin: UILabel!
     @IBOutlet weak var labelOrigin: UILabel!
     @IBOutlet weak var amountOrigin: UITextField!
+    @IBOutlet weak var currencyOrigin: UILabel!
     
     @IBOutlet weak var viewDestination: DesignableView!
     @IBOutlet weak var flagCurrencyDestination: UIImageView!
     @IBOutlet weak var shortLabelDestination: UILabel!
     @IBOutlet weak var labelDestination: UILabel!
     @IBOutlet weak var amountDestination: UITextField!
-    
+    @IBOutlet weak var currencyDestination: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,8 +61,9 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         
         
     }
-    func didUpdateCurrencyData(data: Currency) {
-        print(currencyService.currency?.rates as Any)
+    func didUpdateCurrencyData(eurRate: Double, usdRate: Double) {
+        currencyOrigin.text = String(eurRate)
+        currencyDestination.text = String(usdRate)
     }
     
     func addDoneButtonOnKeyboard()
@@ -82,24 +83,16 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     }
     
     @IBAction func OriginChanged(_ sender: Any) {
-        print("Origin is chanf´ged")
-        amountDestination.text = ""}
+        amountDestination.text = ""
+    }
     @IBAction func destinationChanged(_ sender: Any) {
         amountOrigin.text = ""
-        
-        print("Destination is changed")
     }
     @objc func doneButtonAction()
     {
         self.amountOrigin.resignFirstResponder()
         self.amountDestination.resignFirstResponder()
-        //        let currency = CurrencyService()
-        
-        
-        if amountOrigin.isEditing {
-            print("amountOrigin")
-        }
-        
+        currencyService.askCurrencyRate()
         if amountOrigin.text != "" {
             guard let amountDouble = Double(amountOrigin.text!) else {return}
             amountDestination.text = String(currencyService.calculateConversion(amount: amountDouble, base: "EUR"))
@@ -108,8 +101,6 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
             amountOrigin.text = String(currencyService.calculateConversion(amount: amountDouble, base: "USD"))
         }
         
-        
-        currencyService.askCurrencyRate()
         
     }
 }
