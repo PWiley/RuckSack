@@ -766,6 +766,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="NO"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="OriginChanged:" destination="NKn-mr-qRJ" eventType="editingChanged" id="Qxo-IL-5Yq"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -844,6 +847,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="NO"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="destinationChanged:" destination="NKn-mr-qRJ" eventType="editingChanged" id="SSO-cu-vAH"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
