@@ -4,20 +4,18 @@
 //
 //  Created by Patrick Wiley on 06.10.19.
 //  Copyright © 2019 Patrick Wiley. All rights reserved.
-//
 
 
 import Foundation
 
-// MARK: - Forecast
-class Forecast: Codable {
+// MARK: - YahooWeather
+class YahooWeather: Codable {
     let cod: String
-    let message: Double
-    let cnt: Int
+    let message, cnt: Int
     let list: [List]
     let city: City
 
-    init(cod: String, message: Double, cnt: Int, list: [List], city: City) {
+    init(cod: String, message: Int, cnt: Int, list: [List], city: City) {
         self.cod = cod
         self.message = message
         self.cnt = cnt
@@ -65,13 +63,15 @@ class List: Codable {
     let wind: Wind
     let sys: Sys
     let dtTxt: String
+    let rain: Rain?
 
     enum CodingKeys: String, CodingKey {
         case dt, main, weather, clouds, wind, sys
         case dtTxt = "dt_txt"
+        case rain
     }
 
-    init(dt: Int, main: MainClass, weather: [Weather], clouds: Clouds, wind: Wind, sys: Sys, dtTxt: String) {
+    init(dt: Int, main: MainClass, weather: [Weather], clouds: Clouds, wind: Wind, sys: Sys, dtTxt: String, rain: Rain?) {
         self.dt = dt
         self.main = main
         self.weather = weather
@@ -79,6 +79,7 @@ class List: Codable {
         self.wind = wind
         self.sys = sys
         self.dtTxt = dtTxt
+        self.rain = rain
     }
 }
 
@@ -93,9 +94,8 @@ class Clouds: Codable {
 
 // MARK: - MainClass
 class MainClass: Codable {
-    let temp, tempMin, tempMax, pressure: Double
-    let seaLevel, grndLevel: Double
-    let humidity: Int
+    let temp, tempMin, tempMax: Double
+    let pressure, seaLevel, grndLevel, humidity: Int
     let tempKf: Double
 
     enum CodingKeys: String, CodingKey {
@@ -109,7 +109,7 @@ class MainClass: Codable {
         case tempKf = "temp_kf"
     }
 
-    init(temp: Double, tempMin: Double, tempMax: Double, pressure: Double, seaLevel: Double, grndLevel: Double, humidity: Int, tempKf: Double) {
+    init(temp: Double, tempMin: Double, tempMax: Double, pressure: Int, seaLevel: Int, grndLevel: Int, humidity: Int, tempKf: Double) {
         self.temp = temp
         self.tempMin = tempMin
         self.tempMax = tempMax
@@ -118,6 +118,19 @@ class MainClass: Codable {
         self.grndLevel = grndLevel
         self.humidity = humidity
         self.tempKf = tempKf
+    }
+}
+
+// MARK: - Rain
+class Rain: Codable {
+    let the3H: Double
+
+    enum CodingKeys: String, CodingKey {
+        case the3H = "3h"
+    }
+
+    init(the3H: Double) {
+        self.the3H = the3H
     }
 }
 
@@ -159,21 +172,24 @@ class Weather: Codable {
 enum MainEnum: String, Codable {
     case clear = "Clear"
     case clouds = "Clouds"
+    case rain = "Rain"
 }
 
 enum Description: String, Codable {
     case brokenClouds = "broken clouds"
     case clearSky = "clear sky"
     case fewClouds = "few clouds"
+    case lightRain = "light rain"
     case overcastClouds = "overcast clouds"
     case scatteredClouds = "scattered clouds"
 }
 
 // MARK: - Wind
 class Wind: Codable {
-    let speed, deg: Double
+    let speed: Double
+    let deg: Int
 
-    init(speed: Double, deg: Double) {
+    init(speed: Double, deg: Int) {
         self.speed = speed
         self.deg = deg
     }
