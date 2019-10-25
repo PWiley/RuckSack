@@ -1,5 +1,5 @@
 //
-//  WeatherModel.swift
+//  WeatherService.swift
 //  Bundle
 //
 //  Created by Patrick Wiley on 27.08.19.
@@ -9,7 +9,7 @@
 import Foundation
 
 
-class WeatherModel {
+class WeatherService {
     
     private static let baseURL = URL(string: "https://api.openweathermap.org/data/2.5/forecast?")!
     static let apiKey = "q=Berlin,us&mode=json&appid=d2fc02766020f446cb8063c244166041"
@@ -17,17 +17,17 @@ class WeatherModel {
     
     //private static let weatherURL = URL(string: baseURL + apiKey)!
     private var task: URLSessionDataTask?
-    //var delegate: WeatherModelDelegate?
+    //var delegate: WeatherServiceDelegate?
     
-    var forecast: Forecast?
-    var city: City?
-    var clouds: Clouds?
-    var coord: Coord?
-    var list: List?
-    var main: MainClass?
-    var sys: Sys?
-    var weather: Weather?
-    var wind: Wind?
+    var forecast: YahooWeather?
+//    var city: City?
+//    var clouds: Clouds?
+//    var coord: Coord?
+//    var list: List?
+//    var main: MainClass?
+//    var sys: Sys?
+//    var weather: Weather?
+//    var wind: Wind?
     
     static var berlin: [String: String] = [
         "q": "Berlin,de",
@@ -42,14 +42,14 @@ class WeatherModel {
     
     func createRequest() -> URLRequest {
         
-        var request = URLRequest(url: (WeatherModel.baseURL.withQueries(WeatherModel.berlin)!))
+        var request = URLRequest(url: (WeatherService.baseURL.withQueries(WeatherService.berlin)!))
         request.httpMethod = "POST"
         return request
     }
     
     func askWeatherState(town: [String: String]) {
         
-        //let request = URLRequest(url: WeatherModel.weatherURL)
+        //let request = URLRequest(url: WeatherService.weatherURL)
         let request = createRequest()
         //print(request)
         print(town.values)
@@ -76,26 +76,15 @@ class WeatherModel {
                 return
             }
             DispatchQueue.main.async {
-                //print(jsonData)
+                print(jsonData)
                
-                self.forecast = try? JSONDecoder().decode(Forecast.self, from: jsonData)
+//                self.weather = try? JSONDecoder().decode(WeatherStructure.self, from: jsonData)
+                self.forecast = try? JSONDecoder().decode(YahooWeather.self, from: jsonData)
+
+                //self.weatherForecast = try? JSONDecoder().decode(WeatherForecast.self, from: jsonData)
+                //print(self.weatherForecast
                 print(self.forecast)
-//                self.city = try? JSONDecoder().decode(City.self, from: jsonData)
-//                print(self.city)
-//                self.clouds = try? JSONDecoder().decode(Clouds.self, from: jsonData)
-//                print(self.clouds)
-//                self.coord = try? JSONDecoder().decode(Coord.self, from: jsonData)
-//                print(self.coord)
-//                self.list = try? JSONDecoder().decode(List.self, from: jsonData)
-//                print(self.list)
-//                self.main = try? JSONDecoder().decode(MainClass.self, from: jsonData)
-//                print(self.main)
-//                self.sys = try? JSONDecoder().decode(Sys.self, from: jsonData)
-//                print(self.sys)
-//                self.weather = try? JSONDecoder().decode(Weather.self, from: jsonData)
-//                print(self.weather)
-//                self.wind = try? JSONDecoder().decode(Wind.self, from: jsonData)
-//                print(self.wind)
+
             }
             //
             
@@ -106,8 +95,8 @@ class WeatherModel {
 //
 //        //guard let count = forecast?.list.capacity else {return}
 //        for number in 0..<40{
-//            print("time\(number): \(String(describing: forecast?.list[number].dtTxt))")
-//            print("temp\(number): \(String(describing: forecast?.list[number].main.temp))")
+//            print("time\(number): \(String(describing: weather?.list[number].dtTxt))")
+//            print("temp\(number): \(String(describing: weather?.list[number].main.temp))")
 //        }
 //
         printResult()
@@ -125,7 +114,7 @@ class WeatherModel {
             for number in 0..<40{
                 print("time\(number): \(String(describing: forecast?.list[number].dtTxt))")
                 //print("temp\(number): \(String(describing: forecast?.list[number].main.temp))")
-                print("temp\(number): \(String(describing: forecast?.list[number].main.tempMax))")
+                print("temp\(number): \(String(describing: forecast?.list[number].main.temp))")
             }
         calculateTempMedium()
         }
@@ -154,6 +143,6 @@ enum NetworkError: Error {
 //}
 
 
-protocol WeatherModelDelegate {
+protocol WeatherServiceDelegate {
     func didUpdateWeatherData()
 }
