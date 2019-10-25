@@ -1,5 +1,5 @@
 //
-//  TranslateModel.swift
+//  TranslateService.swift
 //  Bundle
 //
 //  Created by Patrick Wiley on 27.08.19.
@@ -9,10 +9,10 @@
 import UIKit
 import Foundation
 
-class TranslateModel {
+class TranslateService {
     // Get the file
     private var task: URLSessionDataTask?
-    var delegate: TranslateModelDelegate?
+    var delegate: TranslateServiceDelegate?
     private static let translateURL = URL(string: "https://translation.googleapis.com/language/translate/v2/")!
     
     func createJson() -> Data {
@@ -32,7 +32,7 @@ class TranslateModel {
             "key": "AIzaSyDd_8AuTs9gGs_jA233qUPv2_P69qtnW7c"
         ]
         
-        var request = URLRequest(url: TranslateModel.translateURL.withQueries(query)!)
+        var request = URLRequest(url: TranslateService.translateURL.withQueries(query)!)
         request.httpMethod = "POST"
         print(request)
         return request
@@ -52,6 +52,6 @@ class TranslateModel {
     }
     
 }
-protocol TranslateModelDelegate{
+protocol TranslateServiceDelegate{
     func didUpdateTranslateData()
 }
