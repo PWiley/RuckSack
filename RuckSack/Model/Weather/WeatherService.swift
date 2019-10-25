@@ -14,7 +14,7 @@ class WeatherService {
     private static let baseURL = URL(string: "https://api.openweathermap.org/data/2.5/forecast?")!
     static let apiKey = "q=Berlin,us&mode=json&appid=d2fc02766020f446cb8063c244166041"
     //static let apiKey = "q=Newyorck,us&mode=json&appid=d2fc02766020f446cb8063c244166041"
-    
+    var delegate: WeatherServiceDelegate?
     //private static let weatherURL = URL(string: baseURL + apiKey)!
     private var task: URLSessionDataTask?
     //var delegate: WeatherServiceDelegate?
@@ -83,7 +83,8 @@ class WeatherService {
 
                 //self.weatherForecast = try? JSONDecoder().decode(WeatherForecast.self, from: jsonData)
                 //print(self.weatherForecast
-                print(self.forecast)
+                self.delegate?.didUpdateWeatherData(forecast: self.forecast!)
+                //print(self.forecast)
 
             }
             //
@@ -144,5 +145,5 @@ enum NetworkError: Error {
 
 
 protocol WeatherServiceDelegate {
-    func didUpdateWeatherData()
+    func didUpdateWeatherData(forecast: YahooWeather)
 }
