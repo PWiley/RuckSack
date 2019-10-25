@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ExchangeViewController: UIViewController {
+class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     
-    let currencyModel = CurrencyModel()
+    let currencyService = CurrencyService()
     
     
     @IBOutlet var exchangeViewController: UIView!
@@ -30,12 +30,9 @@ class ExchangeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //currencyModel.delegate = self
-        currencyModel.askCurrencyRate()
+        currencyService.delegate = self
+        currencyService.askCurrencyRate()
         setBackGroundTown()
-        
-        
-        
         // Do any additional setup after loading the view.
     }
     
@@ -49,24 +46,25 @@ class ExchangeViewController: UIViewController {
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         exchangeViewController.insertSubview(backgroundImage, at: 0)
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         
         setBackGroundTown()
-addDoneButtonOnKeyboard()
-                
+        addDoneButtonOnKeyboard()
+        
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setBackGroundTown()
         addDoneButtonOnKeyboard()
+        
+        
     }
-//    func didUpdateCurrencyData(data: Currency) {
-//        print(currencyModel.currency?.rates as Any)
-//    }
+    func didUpdateCurrencyData(data: Currency) {
+        print(currencyService.currency?.rates as Any)
+    }
+    
     func addDoneButtonOnKeyboard()
     {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
@@ -83,22 +81,35 @@ addDoneButtonOnKeyboard()
         self.amountDestination.inputAccessoryView = doneToolbar
     }
     
+    @IBAction func OriginChanged(_ sender: Any) {
+        print("Origin is chanf´ged")
+        amountDestination.text = ""}
+    @IBAction func destinationChanged(_ sender: Any) {
+        amountOrigin.text = ""
+        
+        print("Destination is changed")
+    }
     @objc func doneButtonAction()
     {
         self.amountOrigin.resignFirstResponder()
         self.amountDestination.resignFirstResponder()
-        let currency = CurrencyModel()
+        //        let currency = CurrencyService()
         
-        if amountOrigin.text != nil {
+        
+        if amountOrigin.isEditing {
+            print("amountOrigin")
+        }
+        
+        if amountOrigin.text != "" {
             guard let amountDouble = Double(amountOrigin.text!) else {return}
-            currencyModel.calculateConversion(amount: amountDouble)
+            amountDestination.text = String(currencyService.calculateConversion(amount: amountDouble, base: "EUR"))
         } else {
             guard let amountDouble = Double(amountDestination.text!) else {return}
-            currencyModel.calculateConversion(amount: amountDouble)
+            amountOrigin.text = String(currencyService.calculateConversion(amount: amountDouble, base: "USD"))
         }
         
         
-        currency.askCurrencyRate()
+        currencyService.askCurrencyRate()
         
     }
 }
