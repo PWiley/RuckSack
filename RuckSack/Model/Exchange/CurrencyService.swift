@@ -19,7 +19,8 @@ class CurrencyService {
 //    var amountOrigin: String?
 //    var amountDestination: String?
     
-    var exchangeView: ExchangeViewController?
+    
+    //var exchangeView: ExchangeViewController?
     
     func createRequest() -> URLRequest {
         
@@ -71,7 +72,9 @@ class CurrencyService {
     
     func requestData(currency: Currency) {
         // the data was received and parsed to String
-        self.delegate?.didUpdateCurrencyData(data: currency)
+        guard let euroRate = currency.rates?.usd else {return}
+        let usdRate = 1/euroRate
+        self.delegate?.didUpdateCurrencyData(eurRate: euroRate, usdRate: usdRate)
         
     }
     
@@ -81,15 +84,14 @@ class CurrencyService {
         guard let rates = currency?.rates?.usd else{return 0.0}
         if base == "EUR" {
         result = amount * rates
-            
         } else {
         result = amount / rates
         }
         print("Le result est : \(result)")
         return result!
-        }    
+        }
 }
 
 protocol CurrencyServiceDelegate {
-    func didUpdateCurrencyData(data: Currency)
+    func didUpdateCurrencyData(eurRate: Double, usdRate: Double)
 }
