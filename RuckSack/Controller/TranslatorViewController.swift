@@ -25,18 +25,21 @@ class TranslatorViewController: UIViewController, TranslateModelDelegate {
     @IBOutlet weak var titleLanguageDestination: UILabel!
     @IBOutlet weak var textLanguageDestination: UITextView!
     
+    let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+    
     fileprivate func setBackGroundTown() {
         // Do any additional setup after loading the view.
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+//        'let backgroundImage = UIImageView(frame: UIScreen.main.bounds)'
         
-        //print(WeatherViewController.whichTown)
+        print(WeatherViewController.whichTown)
         if WeatherViewController.whichTown == true {
             backgroundImage.image = UIImage(named: "Background_Translator_Berlin")
         } else {
             backgroundImage.image = UIImage(named: "Background_Translator_NewYork")
         }
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
-        translatorViewController.insertSubview(backgroundImage, at: 0)
+        
+//        translatorViewController.insertSubview(backgroundImage, at: 0)
     }
     
     override func viewDidLoad() {
@@ -45,6 +48,8 @@ class TranslatorViewController: UIViewController, TranslateModelDelegate {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         setBackGroundTown()
+        translatorViewController.insertSubview(backgroundImage, at: 0)
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         
