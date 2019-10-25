@@ -1,5 +1,5 @@
 //
-//  ExchangeModel.swift
+//  CurrencyService.swift
 //  Bundle
 //
 //  Created by Patrick Wiley on 27.08.19.
@@ -9,15 +9,15 @@
 import Foundation
 //import UIKit
 
-class CurrencyModel {
+class CurrencyService {
     
     private static let currencyURL = URL(string: "http://data.fixer.io/api/latest?")!
     private var task: URLSessionDataTask?
     var currency: Currency?
-    var delegate: CurrencyModelDelegate?
-    
-    var amountOrigin: String?
-    var amountDestination: String?
+    var delegate: CurrencyServiceDelegate?
+    var result: Double?
+//    var amountOrigin: String?
+//    var amountDestination: String?
     
     var exchangeView: ExchangeViewController?
     
@@ -29,7 +29,7 @@ class CurrencyModel {
             "base": "EUR"
         ]
         
-        var request = URLRequest(url: CurrencyModel.currencyURL.withQueries(query)!)
+        var request = URLRequest(url: CurrencyService.currencyURL.withQueries(query)!)
         request.httpMethod = "POST"
         print(request)
         return request
@@ -58,7 +58,7 @@ class CurrencyModel {
                     
                     self.currency = try JSONDecoder().decode(Currency.self, from: jsonData)
                     //print("Ouhra: currency = \(self.currency?.rates?.usd)")
-                    //self.requestData(currency: self.currency!)
+                    self.requestData(currency: self.currency!)
                     
                 } catch {
                     print("JSON error: \(error)")
@@ -69,21 +69,27 @@ class CurrencyModel {
     }
     
     
-//    func requestData(currency: Currency) {
-//        // the data was received and parsed to String
-//        self.delegate?.didUpdateCurrencyData(data: currency)
-//        
-//    }
+    func requestData(currency: Currency) {
+        // the data was received and parsed to String
+        self.delegate?.didUpdateCurrencyData(data: currency)
+        
+    }
     
-    func calculateConversion(amount: Double){
+    func calculateConversion(amount: Double, base: String) -> Double{
 //            print("le montant : \(amount)")
-//            print(currency?.rates?.usd)
-            guard let rates = currency?.rates?.usd else {return}
-            let result = amount * rates
-            print("Le result est : \(result)")
+//            print(currency?.rates?.usd
+        guard let rates = currency?.rates?.usd else{return 0.0}
+        if base == "EUR" {
+        result = amount * rates
+            
+        } else {
+        result = amount / rates
+        }
+        print("Le result est : \(result)")
+        return result!
         }    
 }
 
-protocol CurrencyModelDelegate {
+protocol CurrencyServiceDelegate {
     func didUpdateCurrencyData(data: Currency)
 }
