@@ -13,9 +13,25 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     let weatherService = WeatherService()
     
     func didUpdateWeatherData(forecast: YahooWeather) {
-        temperatureActual.text = String(forecast.list[0].main.temp)
-        temperatureMin.text = String(forecast.list[0].main.tempMin)
-        temperatureMax.text = String(forecast.list[0].main.tempMax)
+        temperatureActual.text = String(forecast.list[0].main.temp.celcius.roundTo)
+        //temperatureActual.text = String(format:"%.2f", String(forecast.list[0].main.temp.celcius.r))
+        temperatureMin.text = String(forecast.list[0].main.tempMin.celcius.roundTo)
+        temperatureMax.text = String(forecast.list[0].main.tempMax.celcius.roundTo)
+        
+        temperatureMinDayOne.text = String(forecast.list[1].main.tempMin.celcius.roundTo)
+        temperatureMaxDayOne.text = String(forecast.list[1].main.tempMax.celcius.roundTo)
+        
+        temperatureMinDayTwo.text = String(forecast.list[2].main.tempMin.celcius.roundTo)
+        temperatureMaxDayTwo.text = String(forecast.list[2].main.tempMax.celcius.roundTo)
+        
+        temperatureMinDayThree.text = String(forecast.list[3].main.tempMin.celcius.roundTo)
+        temperatureMaxDayThree.text = String(forecast.list[3].main.tempMax.celcius.roundTo)
+        
+        temperatureMinDayFour.text = String(forecast.list[4].main.tempMin.celcius.roundTo)
+        temperatureMaxDayFour.text = String(forecast.list[4].main.tempMax.celcius.roundTo)
+        
+        temperatureMinDayFive.text = String(forecast.list[5].main.tempMin.celcius.roundTo)
+        temperatureMaxDayFive.text = String(forecast.list[5].main.tempMax.celcius.roundTo)
     }
     
     static var whichTown: Bool = true
