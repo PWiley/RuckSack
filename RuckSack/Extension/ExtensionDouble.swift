@@ -13,8 +13,9 @@ extension Double {
     var celcius: Double {
         return self - 273.15
     }
-    var roundTo: Double {
-        let divisor = pow(10.0, Double(0))
-        return (self * divisor).rounded() / divisor
-    }
+//    var roundTo: Double {
+//        let divisor = pow(100.0, Double(0))
+//        (format:"%.f", weatherService.forecast!.list[number].main.tempMax.celcius)
+//        return (self * divisor).rounded() / divisor
+//    }
 }
