@@ -230,125 +230,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLD-3e-wBY">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLD-3e-wBY" customClass="ActualDayWeather" customModule="RuckSack" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
-                                                    <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wet" translatesAutoresizingMaskIntoConstraints="NO" id="4zR-cu-oBt">
-                                                            <rect key="frame" x="35" y="19.5" width="72" height="30"/>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="lpS-L1-h0L"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgi-7m-Uyh">
-                                                            <rect key="frame" x="130" y="26" width="182" height="17"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="182" id="Naa-dV-YwC"/>
-                                                            </constraints>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="pluvieux">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont" size="16" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RpZ-dh-nu6">
-                                                            <rect key="frame" x="8" y="112" width="193.5" height="107"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="107" id="lnE-ek-2sr"/>
-                                                            </constraints>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="14 C°">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont" size="77" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="MUG-Cq-heq">
-                                                            <rect key="frame" x="8" y="80.5" width="179" height="16.5"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSM-Lt-GJV">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="31" height="16.5"/>
-                                                                    <attributedString key="attributedText">
-                                                                        <fragment content="Max:">
-                                                                            <attributes>
-                                                                                <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                            </attributes>
-                                                                        </fragment>
-                                                                    </attributedString>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kg-dS-Qyk">
-                                                                    <rect key="frame" x="40" y="0.0" width="35.5" height="16.5"/>
-                                                                    <attributedString key="attributedText">
-                                                                        <fragment content="18 C°">
-                                                                            <attributes>
-                                                                                <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                            </attributes>
-                                                                        </fragment>
-                                                                    </attributedString>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KW7-jv-7Ex">
-                                                                    <rect key="frame" x="84.5" y="0.0" width="26.5" height="16.5"/>
-                                                                    <attributedString key="attributedText">
-                                                                        <fragment content="Min:">
-                                                                            <attributes>
-                                                                                <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                            </attributes>
-                                                                        </fragment>
-                                                                    </attributedString>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ows-XT-5re">
-                                                                    <rect key="frame" x="120" y="0.0" width="59" height="16.5"/>
-                                                                    <attributedString key="attributedText">
-                                                                        <fragment content="18 C°">
-                                                                            <attributes>
-                                                                                <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                            </attributes>
-                                                                        </fragment>
-                                                                    </attributedString>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="Ows-XT-5re" firstAttribute="leading" secondItem="MUG-Cq-heq" secondAttribute="leading" constant="120" id="z0k-rM-5dR"/>
-                                                            </constraints>
-                                                        </stackView>
-                                                    </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstItem="MUG-Cq-heq" firstAttribute="top" secondItem="4zR-cu-oBt" secondAttribute="bottom" constant="31" id="3SR-cb-gka"/>
-                                                        <constraint firstItem="pgi-7m-Uyh" firstAttribute="centerY" secondItem="4zR-cu-oBt" secondAttribute="centerY" id="KI2-mT-uhy"/>
-                                                        <constraint firstItem="RpZ-dh-nu6" firstAttribute="leading" secondItem="MUG-Cq-heq" secondAttribute="leading" id="MkC-BQ-02c"/>
-                                                        <constraint firstItem="RpZ-dh-nu6" firstAttribute="top" secondItem="MUG-Cq-heq" secondAttribute="bottom" constant="15" id="NAb-pj-TGK"/>
-                                                        <constraint firstItem="MUG-Cq-heq" firstAttribute="leading" secondItem="iLD-3e-wBY" secondAttribute="leadingMargin" id="Zjb-hz-Rpb"/>
-                                                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="pgi-7m-Uyh" secondAttribute="trailing" constant="89" id="bub-gJ-0cE"/>
-                                                        <constraint firstAttribute="bottom" secondItem="MUG-Cq-heq" secondAttribute="bottom" constant="123" id="eaR-BR-HoT"/>
-                                                        <constraint firstAttribute="bottom" secondItem="RpZ-dh-nu6" secondAttribute="bottom" constant="1" id="fMK-k4-iFI"/>
-                                                        <constraint firstItem="pgi-7m-Uyh" firstAttribute="leading" secondItem="4zR-cu-oBt" secondAttribute="trailing" constant="23" id="nxN-K1-OAO"/>
-                                                        <constraint firstItem="pgi-7m-Uyh" firstAttribute="top" secondItem="iLD-3e-wBY" secondAttribute="top" constant="26" id="rME-TB-8Ck"/>
-                                                        <constraint firstItem="4zR-cu-oBt" firstAttribute="leading" secondItem="iLD-3e-wBY" secondAttribute="leading" constant="35" id="uyN-W2-FtI"/>
-                                                        <constraint firstAttribute="trailing" secondItem="MUG-Cq-heq" secondAttribute="trailing" constant="188" id="xOz-x7-otg"/>
-                                                    </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="iLD-3e-wBY" firstAttribute="top" secondItem="Mhh-zg-AfK" secondAttribute="top" id="04e-j1-tuV"/>
-                                                <constraint firstItem="iLD-3e-wBY" firstAttribute="leading" secondItem="Mhh-zg-AfK" secondAttribute="leadingMargin" constant="-8" id="Mkh-0O-AaD"/>
-                                                <constraint firstItem="iLD-3e-wBY" firstAttribute="centerX" secondItem="Mhh-zg-AfK" secondAttribute="centerX" id="eh1-u3-Imj"/>
-                                                <constraint firstItem="iLD-3e-wBY" firstAttribute="centerY" secondItem="Mhh-zg-AfK" secondAttribute="centerY" id="jqZ-1G-TlU"/>
+                                                <constraint firstAttribute="bottom" secondItem="iLD-3e-wBY" secondAttribute="bottom" id="FLW-cX-49B"/>
+                                                <constraint firstAttribute="trailing" secondItem="iLD-3e-wBY" secondAttribute="trailing" id="JOZ-kU-Ofr"/>
+                                                <constraint firstItem="iLD-3e-wBY" firstAttribute="top" secondItem="Mhh-zg-AfK" secondAttribute="top" id="cAJ-pq-8an"/>
+                                                <constraint firstItem="iLD-3e-wBY" firstAttribute="leading" secondItem="Mhh-zg-AfK" secondAttribute="leading" id="tLc-mg-z7N"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -383,13 +274,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="aIY-Ls-tNa"/>
                     <connections>
-                        <outlet property="imageWeatherState" destination="4zR-cu-oBt" id="jAp-BB-7o4"/>
+                        <outlet property="actualDayWeather" destination="iLD-3e-wBY" id="UjQ-bc-0xn"/>
                         <outlet property="stackViewState" destination="6pN-r1-txa" id="QQk-08-rCw"/>
                         <outlet property="tableViewWeather" destination="GwZ-h1-Un7" id="QRh-sj-Tqd"/>
-                        <outlet property="temperatureActual" destination="RpZ-dh-nu6" id="oxJ-Fd-Hai"/>
-                        <outlet property="temperatureMax" destination="3kg-dS-Qyk" id="fzh-gF-RCo"/>
-                        <outlet property="temperatureMin" destination="Ows-XT-5re" id="CBO-pb-y75"/>
-                        <outlet property="weatherStateTitle" destination="pgi-7m-Uyh" id="VHt-0N-rXC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AfD-QX-BTp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -687,6 +574,5 @@
         <image name="icon_Exchange" width="33" height="33"/>
         <image name="icon_Translator" width="33" height="33"/>
         <image name="us-dollar" width="84" height="84"/>
-        <image name="wet" width="72" height="76"/>
     </resources>
 </document>

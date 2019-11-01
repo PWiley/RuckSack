@@ -15,7 +15,7 @@ class TranslateService {
     var delegate: TranslateServiceDelegate?
     private static let translateURL = URL(string: "https://translation.googleapis.com/language/translate/v2/")!
     
-    func createJson() -> Data {
+    func createJson() -> String {
         let translation = TranslationToSend(q: ["Hello world, it's time to go far away"], target: "de")
         
         let json = try? JSONEncoder().encode(translation)
@@ -23,13 +23,14 @@ class TranslateService {
         
         print(jsonString as Any)
         print(json as Any)
-        return json!
+        return jsonString!
     }
     
     func createRequest() -> URLRequest {
         
         let query: [String: String] = [
-            "key": "AIzaSyDd_8AuTs9gGs_jA233qUPv2_P69qtnW7c"
+            "key": "AIzaSyDd_8AuTs9gGs_jA233qUPv2_P69qtnW7c",
+            "json": createJson()
         ]
         
         var request = URLRequest(url: TranslateService.translateURL.withQueries(query)!)
@@ -47,6 +48,7 @@ class TranslateService {
             let jsonAnswerTranslation = try? JSONDecoder().decode(Translation.self , from: data)
             let jsonAnswerDataClass = try? JSONDecoder().decode(DataClass.self , from: data)
             let jsonAnswerTranslationElement = try? JSONDecoder().decode(TranslationElement.self , from: data)
+            
         }
         task?.resume()
     }

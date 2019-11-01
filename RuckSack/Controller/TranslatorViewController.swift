@@ -8,13 +8,13 @@
 
 import UIKit
 
-class TranslatorViewController: UIViewController, TranslateModelDelegate {
+class TranslatorViewController: UIViewController {
     func didUpdateTranslateData() {
         print("Hourra translate")
     }
     
     
-    //var translate = Translate()
+    var translate = TranslateService()
     
     @IBOutlet var translatorViewController: UIView!
     @IBOutlet weak var flagLanguageOrigin: UIImageView!
@@ -106,6 +106,7 @@ class TranslatorViewController: UIViewController, TranslateModelDelegate {
        {
            self.textLanguageOrigin.resignFirstResponder()
            self.textLanguageDestination.resignFirstResponder()
+        //translate.createCall(jsonData: translate.createJson())
            
        }
 }

@@ -11,7 +11,8 @@
 
 import Foundation
 
-// MARK: - YahooWeather
+
+// MARK: - OpenWeather
 struct OpenWeather: Codable {
     let cod: String
     let message, cnt: Int
@@ -107,8 +108,8 @@ struct Weather: Codable {
 }
 
 enum Icon: String, Codable {
-    case the02D = "02d"
-    case the03N = "03n"
+    case the01D = "01d"
+    case the03D = "03d"
     case the04D = "04d"
     case the04N = "04n"
     case the10D = "10d"
@@ -116,14 +117,14 @@ enum Icon: String, Codable {
 }
 
 enum MainEnum: String, Codable {
+    case clear = "Clear"
     case clouds = "Clouds"
     case rain = "Rain"
-    case clear = "Clear"
 }
 
 enum Description: String, Codable {
     case brokenClouds = "broken clouds"
-    case fewClouds = "few clouds"
+    case clearSky = "clear sky"
     case lightRain = "light rain"
     case moderateRain = "moderate rain"
     case overcastClouds = "overcast clouds"

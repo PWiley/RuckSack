@@ -41,7 +41,7 @@ class WeatherService {
         
         //let request = URLRequest(url: WeatherService.weatherURL)
         let request = createRequest()
-        //print(request)
+        
         print(town.values)
         let session = URLSession(configuration: .default)
         task = session.dataTask(with: request) { data, response, error in
@@ -70,10 +70,11 @@ class WeatherService {
                
 //                self.weather = try? JSONDecoder().decode(WeatherStructure.self, from: jsonData)
                 self.openWeather = try? JSONDecoder().decode(OpenWeather.self, from: jsonData)
-
                 //self.weatherOpenWeather = try? JSONDecoder().decode(WeatherOpenWeather.self, from: jsonData)
                 //print(self.openWeather!.list[0].dtTxt)
-                self.delegate?.didUpdateWeatherData(openWeather: self.openWeather!)
+                guard let openWeatherStruct = self.openWeather else {print("Erreur")
+                    return}
+                self.delegate?.didUpdateWeatherData(openWeather: openWeatherStruct)
                 //print(self.openWeather)
 
             }

@@ -24,6 +24,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
     // MARK: - WeekCell
     
+    @IBOutlet weak var actualDayWeather: ActualDayWeather!
     @IBOutlet weak var stackViewState: UIStackView!
 
    let weatherService = WeatherService()
@@ -79,6 +80,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
     func createDayState(number: Int) -> UIView{
         let dayWeatherState = DayWeatherState()
+        
         dayWeatherState.dayName.text = weatherService.setDayStateName(indexList: number)
         dayWeatherState.imageState.image = setStateImage(indexList: number)
         dayWeatherState.tempMax.text =
@@ -89,12 +91,12 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     }
     func createTodayState() {
         
-        weatherStateTitle.text = weatherService.openWeather!.list[0].weather[0].weatherDescription.rawValue
-        imageWeatherState.image = setStateImage(indexList: 0)
-        temperatureMax.text = String(format:"%.f", weatherService.openWeather!.list[0].main.tempMax.celcius) + " C°"
-        temperatureMin.text =
+        actualDayWeather.weatherDescription.text = weatherService.openWeather!.list[0].weather[0].weatherDescription.rawValue
+        actualDayWeather.imageActualWeather.image = setStateImage(indexList: 0)
+        actualDayWeather.tempMax.text = String(format:"%.f", weatherService.openWeather!.list[0].main.tempMax.celcius) + " C°"
+        actualDayWeather.tempMin.text =
             String(format:"%.f", weatherService.openWeather!.list[0].main.tempMin.celcius) + " C°"
-        temperatureActual.text = String(format:"%.f", weatherService.openWeather!.list[0].main.temp.celcius) + " C°"
+        actualDayWeather.tempActual.text = String(format:"%.f", weatherService.openWeather!.list[0].main.temp.celcius) + " C°"
     }
 
     func setStateImage(indexList: Int) -> UIImage{

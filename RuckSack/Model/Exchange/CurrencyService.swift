@@ -87,7 +87,7 @@ class CurrencyService {
         } else {
         result = amount / rates
         }
-        print("Le result est : \(result)")
+        //print("Le result est : \(result)")
         return result!
         }
 }
