@@ -12,22 +12,12 @@ import Foundation
 class WeatherService {
     
     private static let baseURL = URL(string: "https://api.openweathermap.org/data/2.5/forecast?")!
-    static let apiKey = "q=Berlin,us&mode=json&appid=d2fc02766020f446cb8063c244166041"
     //static let apiKey = "q=Newyorck,us&mode=json&appid=d2fc02766020f446cb8063c244166041"
-    var delegate: WeatherServiceDelegate?
+   
     //private static let weatherURL = URL(string: baseURL + apiKey)!
     private var task: URLSessionDataTask?
-    //var delegate: WeatherServiceDelegate?
-    
-    var forecast: YahooWeather?
-//    var city: City?
-//    var clouds: Clouds?
-//    var coord: Coord?
-//    var list: List?
-//    var main: MainClass?
-//    var sys: Sys?
-//    var weather: Weather?
-//    var wind: Wind?
+    var delegate: WeatherServiceDelegate?
+    var openWeather: OpenWeather?
     
     static var berlin: [String: String] = [
         "q": "Berlin,de",
@@ -55,7 +45,7 @@ class WeatherService {
         print(town.values)
         let session = URLSession(configuration: .default)
         task = session.dataTask(with: request) { data, response, error in
-            //print(response)
+            print(response as Any)
             if error != nil {
                 print("Client error!")
                 print("something went wrong ", error!)
@@ -76,61 +66,87 @@ class WeatherService {
                 return
             }
             DispatchQueue.main.async {
-                print(jsonData)
+               
                
 //                self.weather = try? JSONDecoder().decode(WeatherStructure.self, from: jsonData)
-                self.forecast = try? JSONDecoder().decode(YahooWeather.self, from: jsonData)
+                self.openWeather = try? JSONDecoder().decode(OpenWeather.self, from: jsonData)
 
-                //self.weatherForecast = try? JSONDecoder().decode(WeatherForecast.self, from: jsonData)
-                //print(self.weatherForecast
-                self.delegate?.didUpdateWeatherData(forecast: self.forecast!)
-                //print(self.forecast)
+                //self.weatherOpenWeather = try? JSONDecoder().decode(WeatherOpenWeather.self, from: jsonData)
+                //print(self.openWeather!.list[0].dtTxt)
+                self.delegate?.didUpdateWeatherData(openWeather: self.openWeather!)
+                //print(self.openWeather)
 
             }
-            //
-            
         }
-//        print("hep: \(forecast?.city.name as Any)")
-//        print(forecast?.city.country as Any)
-//        print(forecast?.list.count)
+//        print("hep: \(openWeather?.city.name as Any)")
+//        print(openWeather?.city.country as Any)
+//        print(openWeather?.list.count)
 //
-//        //guard let count = forecast?.list.capacity else {return}
+//        //guard let count = openWeather?.list.capacity else {return}
 //        for number in 0..<40{
 //            print("time\(number): \(String(describing: weather?.list[number].dtTxt))")
 //            print("temp\(number): \(String(describing: weather?.list[number].main.temp))")
 //        }
 //
         printResult()
+    
         //print(exchange?.cod as Any)
         task?.resume()
         
     }
     func printResult() {
-        if forecast?.list != nil {
-//            print("hep: \(forecast?.city.name as Any)")
-//            print(forecast?.city.country as Any)
-//            print(forecast?.list.count)
+        if openWeather?.list != nil {
+//            print("hep: \(openWeather?.city.name as Any)")
+//            print(openWeather?.city.country as Any)
+//            print(openWeather?.list.count)
 //
-            //guard let count = forecast?.list.capacity else {return}
+            print("count: \(openWeather!.list.count)")
+            //guard let count = openWeather?.list.capacity else {return}
             for number in 0..<40{
-                print("time\(number): \(String(describing: forecast?.list[number].dtTxt))")
-                //print("temp\(number): \(String(describing: forecast?.list[number].main.temp))")
-                print("temp\(number): \(String(describing: forecast?.list[number].main.temp))")
+                print("time\(number): \(String(describing: openWeather?.list[number].dt))")
+                print("time\(number): \(String(describing: openWeather?.list[number].dtTxt))")
+                //print("temp\(number): \(String(describing: openWeather?.list[number].main.temp))")
+                print("temp\(number): \(String(describing: openWeather?.list[number].main.temp))")
+                print("tempMax\(number): \(String(describing: openWeather?.list[number].main.tempMax))")
+                print("tempMin\(number): \(String(describing: openWeather?.list[number].main.tempMin))")
             }
-        calculateTempMedium()
+        //calculateTempMedium()
         }
     }
-    
-    func calculateTempMedium() {
-        var temp = 0.0
-        for number in 0..<8{
-            temp += (forecast?.list[number].main.temp)!
-        }
-        print("La tmperature aujourd'hui sera de : \(temp/8)")
+
+//    func calculateTempMedium() {
+//        var temp = 0.0
+//        for number in 0..<8{
+//            temp += (openWeather?.list[number].main.temp)!
+//        }
+//        print("La tmperature aujourd'hui sera de : \(temp/8)")
+//    }
+//    func setStateImage(stateWeather: String) {
+//        switch stateWeather {
+//          case "Clear":
+//            print("Type is abc")
+//          case "Clouds":
+//            print("Type is def")
+//          default:
+//            print("Type is something else")
+//        }
+//
+//    }
+    func setDayStateName(indexList: Int) -> String{
+        let time = openWeather!.list[indexList].dt
+        let date = Date(timeIntervalSince1970: TimeInterval(time))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = " dd/MM" //Specify your format that you want
+        let monthDay = dateFormatter.string(from: date)
+        let weekday = dateFormatter.weekdaySymbols[Calendar.current.component(.weekday, from: date)-1]
+        let dayName = weekday + monthDay
+        return dayName
     }
     
 }
-
+//enum WeatherState {
+//    case
+//}
 
 enum NetworkError: Error {
     case clientError
@@ -145,5 +161,5 @@ enum NetworkError: Error {
 
 
 protocol WeatherServiceDelegate {
-    func didUpdateWeatherData(forecast: YahooWeather)
+    func didUpdateWeatherData(openWeather: OpenWeather)
 }
