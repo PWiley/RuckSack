@@ -360,288 +360,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="143"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TYp-ip-UV9" userLabel="DayOne" customClass="DesignableView" customModule="RuckSack" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="0.0" width="350" height="22"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjH-t6-mO8">
-                                                            <rect key="frame" x="8" y="0.0" width="64" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="Dimanche">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dry" translatesAutoresizingMaskIntoConstraints="NO" id="EUT-uI-83D">
-                                                            <rect key="frame" x="121" y="0.0" width="21" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4y-eQ-uZu">
-                                                            <rect key="frame" x="175" y="0.0" width="36" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="18 C°">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPX-tI-DTM">
-                                                            <rect key="frame" x="261" y="1" width="32" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="14C°">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="4"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w6N-Z0-dJp" userLabel="DayTwo" customClass="DesignableView" customModule="RuckSack" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="25" width="350" height="22.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68Z-Sj-Aay">
-                                                            <rect key="frame" x="8" y="0.0" width="64" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="Dimanche">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dry" translatesAutoresizingMaskIntoConstraints="NO" id="Oq0-xs-fvN">
-                                                            <rect key="frame" x="121" y="0.0" width="21" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDG-Z3-Od7">
-                                                            <rect key="frame" x="175" y="0.0" width="36" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="18 C°">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U1F-mc-9FX">
-                                                            <rect key="frame" x="261" y="1" width="32" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="14C°">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="4"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QdS-dO-OXS" userLabel="DayThree" customClass="DesignableView" customModule="RuckSack" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="50.5" width="350" height="21.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzM-Fj-9Bk">
-                                                            <rect key="frame" x="8" y="0.0" width="64" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="Dimanche">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dry" translatesAutoresizingMaskIntoConstraints="NO" id="gmM-rd-g5w">
-                                                            <rect key="frame" x="121" y="0.0" width="21" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tx9-37-YNz">
-                                                            <rect key="frame" x="175" y="0.0" width="36" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="18 C°">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hU5-V2-9oe">
-                                                            <rect key="frame" x="261" y="0.0" width="32" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="14C°">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="4"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22G-h7-m0B" userLabel="DayFour" customClass="DesignableView" customModule="RuckSack" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="75" width="350" height="22"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WV7-Zw-Gaz">
-                                                            <rect key="frame" x="8" y="0.0" width="64" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="Dimanche">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dry" translatesAutoresizingMaskIntoConstraints="NO" id="B7e-DF-5BL">
-                                                            <rect key="frame" x="121" y="0.0" width="21" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lg-WE-g4l">
-                                                            <rect key="frame" x="175" y="0.0" width="36" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="18 C°">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pgg-lz-Qwb">
-                                                            <rect key="frame" x="261" y="0.0" width="32" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="14C°">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="4"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41g-fT-way" userLabel="DayFive" customClass="DesignableView" customModule="RuckSack" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="100" width="350" height="22"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rm-f9-wYX">
-                                                            <rect key="frame" x="8" y="0.0" width="64" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="Dimanche">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dry" translatesAutoresizingMaskIntoConstraints="NO" id="rAi-dv-T9a">
-                                                            <rect key="frame" x="121" y="0.0" width="21" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEi-cL-0b2">
-                                                            <rect key="frame" x="175" y="0.0" width="36" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="18 C°">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mEf-6z-Yke">
-                                                            <rect key="frame" x="261" y="1" width="32" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="14C°">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont" size="14" name="Helvetica-Light"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="4"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="6pN-r1-txa">
+                                                    <rect key="frame" x="8" y="0.0" width="359" height="143"/>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="22G-h7-m0B" firstAttribute="trailing" secondItem="mTO-bz-Ait" secondAttribute="trailingMargin" id="682-vE-Hfy"/>
-                                                <constraint firstItem="41g-fT-way" firstAttribute="top" secondItem="22G-h7-m0B" secondAttribute="bottom" constant="3" id="8OY-ie-Dqg"/>
-                                                <constraint firstItem="TYp-ip-UV9" firstAttribute="leading" secondItem="w6N-Z0-dJp" secondAttribute="leading" id="Ar7-vU-Rhj"/>
-                                                <constraint firstItem="22G-h7-m0B" firstAttribute="leading" secondItem="mTO-bz-Ait" secondAttribute="leadingMargin" constant="9" id="DYm-dY-pgL"/>
-                                                <constraint firstItem="TYp-ip-UV9" firstAttribute="top" secondItem="mTO-bz-Ait" secondAttribute="top" id="F1m-D4-2P3"/>
-                                                <constraint firstItem="22G-h7-m0B" firstAttribute="trailing" secondItem="QdS-dO-OXS" secondAttribute="trailing" id="Nss-eg-RhM"/>
-                                                <constraint firstItem="41g-fT-way" firstAttribute="top" secondItem="mTO-bz-Ait" secondAttribute="top" constant="100" id="Ou5-Js-cX6"/>
-                                                <constraint firstItem="41g-fT-way" firstAttribute="trailing" secondItem="22G-h7-m0B" secondAttribute="trailing" id="PXt-9Z-Nn2"/>
-                                                <constraint firstItem="22G-h7-m0B" firstAttribute="top" secondItem="QdS-dO-OXS" secondAttribute="bottom" constant="3" id="SHN-hz-hkI"/>
-                                                <constraint firstItem="w6N-Z0-dJp" firstAttribute="trailing" secondItem="QdS-dO-OXS" secondAttribute="trailing" id="Ufc-bc-f1a"/>
-                                                <constraint firstItem="22G-h7-m0B" firstAttribute="leading" secondItem="QdS-dO-OXS" secondAttribute="leading" id="Y5y-CC-eJG"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="41g-fT-way" secondAttribute="bottom" constant="10" id="eap-C9-dNt"/>
-                                                <constraint firstItem="41g-fT-way" firstAttribute="leading" secondItem="22G-h7-m0B" secondAttribute="leading" id="eql-78-rgd"/>
-                                                <constraint firstItem="w6N-Z0-dJp" firstAttribute="top" secondItem="TYp-ip-UV9" secondAttribute="bottom" constant="3" id="f6D-HC-Pfp"/>
-                                                <constraint firstItem="22G-h7-m0B" firstAttribute="top" secondItem="mTO-bz-Ait" secondAttribute="top" constant="75" id="gs2-oD-7pN"/>
-                                                <constraint firstAttribute="bottom" secondItem="w6N-Z0-dJp" secondAttribute="bottom" constant="95.5" id="hef-or-Co2"/>
-                                                <constraint firstItem="TYp-ip-UV9" firstAttribute="trailing" secondItem="w6N-Z0-dJp" secondAttribute="trailing" id="jgZ-c4-OnH"/>
-                                                <constraint firstItem="w6N-Z0-dJp" firstAttribute="top" secondItem="mTO-bz-Ait" secondAttribute="top" constant="25" id="lxP-Hc-eF1"/>
-                                                <constraint firstItem="QdS-dO-OXS" firstAttribute="top" secondItem="w6N-Z0-dJp" secondAttribute="bottom" constant="3" id="mlD-KY-V3D"/>
-                                                <constraint firstItem="TYp-ip-UV9" firstAttribute="leading" secondItem="QdS-dO-OXS" secondAttribute="leading" id="u0w-oT-WeG"/>
+                                                <constraint firstItem="6pN-r1-txa" firstAttribute="leading" secondItem="mTO-bz-Ait" secondAttribute="leading" constant="8" id="1qe-9V-cgN"/>
+                                                <constraint firstItem="6pN-r1-txa" firstAttribute="top" secondItem="mTO-bz-Ait" secondAttribute="top" id="3u7-fj-ynW"/>
+                                                <constraint firstAttribute="trailing" secondItem="6pN-r1-txa" secondAttribute="trailing" constant="8" id="8Fc-VG-Rga"/>
+                                                <constraint firstAttribute="bottom" secondItem="6pN-r1-txa" secondAttribute="bottom" id="MFb-sj-lP5"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -656,37 +383,18 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="aIY-Ls-tNa"/>
                     <connections>
-                        <outlet property="dayFiveName" destination="2Rm-f9-wYX" id="AK7-96-loG"/>
-                        <outlet property="dayFourName" destination="WV7-Zw-Gaz" id="QZL-Ld-TlX"/>
-                        <outlet property="dayOneName" destination="mjH-t6-mO8" id="sco-L2-03F"/>
-                        <outlet property="dayThreeName" destination="rzM-Fj-9Bk" id="1Wb-Fq-CAA"/>
-                        <outlet property="dayTwoName" destination="68Z-Sj-Aay" id="LfC-7c-GpD"/>
-                        <outlet property="imageStateDayFive" destination="rAi-dv-T9a" id="H8d-Yq-Z6l"/>
-                        <outlet property="imageStateDayFour" destination="B7e-DF-5BL" id="jtx-Ha-IVd"/>
-                        <outlet property="imageStateDayOne" destination="EUT-uI-83D" id="W4K-O2-FKJ"/>
-                        <outlet property="imageStateDayThree" destination="gmM-rd-g5w" id="nI7-Ue-NR3"/>
-                        <outlet property="imageStateDayTwo" destination="Oq0-xs-fvN" id="jSl-zd-WUC"/>
                         <outlet property="imageWeatherState" destination="4zR-cu-oBt" id="jAp-BB-7o4"/>
+                        <outlet property="stackViewState" destination="6pN-r1-txa" id="QQk-08-rCw"/>
                         <outlet property="tableViewWeather" destination="GwZ-h1-Un7" id="QRh-sj-Tqd"/>
                         <outlet property="temperatureActual" destination="RpZ-dh-nu6" id="oxJ-Fd-Hai"/>
                         <outlet property="temperatureMax" destination="3kg-dS-Qyk" id="fzh-gF-RCo"/>
-                        <outlet property="temperatureMaxDayFive" destination="dEi-cL-0b2" id="57B-2t-Kal"/>
-                        <outlet property="temperatureMaxDayFour" destination="7lg-WE-g4l" id="1Ag-tJ-Sdi"/>
-                        <outlet property="temperatureMaxDayOne" destination="V4y-eQ-uZu" id="Uqb-qZ-uC9"/>
-                        <outlet property="temperatureMaxDayThree" destination="tx9-37-YNz" id="AGN-Q6-56d"/>
-                        <outlet property="temperatureMaxDayTwo" destination="hDG-Z3-Od7" id="153-LM-t7o"/>
                         <outlet property="temperatureMin" destination="Ows-XT-5re" id="CBO-pb-y75"/>
-                        <outlet property="temperatureMinDayFive" destination="mEf-6z-Yke" id="laz-Ub-goU"/>
-                        <outlet property="temperatureMinDayFour" destination="Pgg-lz-Qwb" id="2uZ-hV-FKJ"/>
-                        <outlet property="temperatureMinDayOne" destination="dPX-tI-DTM" id="3aL-We-ROC"/>
-                        <outlet property="temperatureMinDayThree" destination="hU5-V2-9oe" id="MqS-zx-h7M"/>
-                        <outlet property="temperatureMinDayTwo" destination="U1F-mc-9FX" id="t6i-Zi-xUq"/>
                         <outlet property="weatherStateTitle" destination="pgi-7m-Uyh" id="VHt-0N-rXC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AfD-QX-BTp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="604.34782608695662" y="279.24107142857139"/>
+            <point key="canvasLocation" x="604" y="278.41079460269867"/>
         </scene>
         <!--Exchange-->
         <scene sceneID="IGS-iA-O43">
@@ -711,7 +419,7 @@
             <objects>
                 <viewController id="NKn-mr-qRJ" customClass="ExchangeViewController" customModule="RuckSack" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="smV-Zv-bBm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gza-lE-g64" userLabel="Designable View Origin" customClass="DesignableView" customModule="RuckSack" customModuleProvider="target">
@@ -975,7 +683,6 @@
         <image name="France" width="512" height="512"/>
         <image name="Icon_Weather" width="33" height="33"/>
         <image name="USA" width="512" height="512"/>
-        <image name="dry" width="72" height="84"/>
         <image name="euro" width="84" height="84"/>
         <image name="icon_Exchange" width="33" height="33"/>
         <image name="icon_Translator" width="33" height="33"/>
