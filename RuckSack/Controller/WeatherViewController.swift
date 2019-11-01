@@ -9,33 +9,9 @@
 import UIKit
 
 class WeatherViewController: UITableViewController, WeatherServiceDelegate {
+   
+    // MARK: - TableView
     
-    let weatherService = WeatherService()
-    
-    func didUpdateWeatherData(forecast: YahooWeather) {
-        temperatureActual.text = String(forecast.list[0].main.temp.celcius.roundTo)
-        //temperatureActual.text = String(format:"%.2f", String(forecast.list[0].main.temp.celcius.r))
-        temperatureMin.text = String(forecast.list[0].main.tempMin.celcius.roundTo)
-        temperatureMax.text = String(forecast.list[0].main.tempMax.celcius.roundTo)
-        
-        temperatureMinDayOne.text = String(forecast.list[1].main.tempMin.celcius.roundTo)
-        temperatureMaxDayOne.text = String(forecast.list[1].main.tempMax.celcius.roundTo)
-        
-        temperatureMinDayTwo.text = String(forecast.list[2].main.tempMin.celcius.roundTo)
-        temperatureMaxDayTwo.text = String(forecast.list[2].main.tempMax.celcius.roundTo)
-        
-        temperatureMinDayThree.text = String(forecast.list[3].main.tempMin.celcius.roundTo)
-        temperatureMaxDayThree.text = String(forecast.list[3].main.tempMax.celcius.roundTo)
-        
-        temperatureMinDayFour.text = String(forecast.list[4].main.tempMin.celcius.roundTo)
-        temperatureMaxDayFour.text = String(forecast.list[4].main.tempMax.celcius.roundTo)
-        
-        temperatureMinDayFive.text = String(forecast.list[5].main.tempMin.celcius.roundTo)
-        temperatureMaxDayFive.text = String(forecast.list[5].main.tempMax.celcius.roundTo)
-    }
-    
-    static var whichTown: Bool = true
-  
     @IBOutlet var tableViewWeather: UITableView!
     
     // MARK: - TemperatureCell
@@ -48,71 +24,36 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
     // MARK: - WeekCell
     
-    // Day One
+    @IBOutlet weak var stackViewState: UIStackView!
+
+   let weatherService = WeatherService()
     
-    @IBOutlet weak var imageStateDayOne: UIImageView!
-    @IBOutlet weak var dayOneName: UILabel!
-    @IBOutlet weak var temperatureMaxDayOne: UILabel!
-    @IBOutlet weak var temperatureMinDayOne: UILabel!
-    
-    // Day Two
-    
-    @IBOutlet weak var imageStateDayTwo: UIImageView!
-    @IBOutlet weak var dayTwoName: UILabel!
-    @IBOutlet weak var temperatureMaxDayTwo: UILabel!
-    @IBOutlet weak var temperatureMinDayTwo: UILabel!
-    
-    // Day Three
-    
-    @IBOutlet weak var imageStateDayThree: UIImageView!
-    @IBOutlet weak var dayThreeName: UILabel!
-    @IBOutlet weak var temperatureMaxDayThree: UILabel!
-    @IBOutlet weak var temperatureMinDayThree: UILabel!
-    
-    // Day Four
-    
-    @IBOutlet weak var imageStateDayFour: UIImageView!
-    @IBOutlet weak var dayFourName: UILabel!
-    @IBOutlet weak var temperatureMaxDayFour: UILabel!
-    @IBOutlet weak var temperatureMinDayFour: UILabel!
-    
-    // Day Five
-    
-    @IBOutlet weak var imageStateDayFive: UIImageView!
-    @IBOutlet weak var dayFiveName: UILabel!
-    @IBOutlet weak var temperatureMaxDayFive: UILabel!
-    @IBOutlet weak var temperatureMinDayFive: UILabel!
+   
+    func didUpdateWeatherData(openWeather: OpenWeather) {
+       setStackViewDaysState()
+        createTodayState()
+       
+   }
+   
+   static var whichTown: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
+      tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Town?", style: .plain, target: self, action: #selector(changeTown))
         weatherService.delegate = self
         weatherService.askWeatherState(town: WeatherService.berlin)
-        // Do any additional setup after loading the view.
-    
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        //weather.askWeatherState(town: WeatherService.berlin)
-    }
+
+   }
     override func viewDidAppear(_ animated: Bool) {
         let indexPath: IndexPath = IndexPath(row: 1, section: 0)
         tableViewWeather.scrollToRow(at: indexPath, at: .bottom, animated: true)
         tableViewWeather.backgroundView?.fadeOut()
         weatherService.askWeatherState(town: WeatherService.berlin)
         tableViewWeather.backgroundView?.fadeIn()
-        
+        //setupVisualEffectBlur()
     }
-   
-    /*
-    // MARK: - Navigation
-b
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+ 
     @objc func changeTown() {
         print("Changed town")
         WeatherViewController.whichTown = !WeatherViewController.whichTown
@@ -135,4 +76,67 @@ b
         
         self.present(changeTownAlert, animated: true, completion: nil)
     }
+    
+    func createDayState(number: Int) -> UIView{
+        let dayWeatherState = DayWeatherState()
+        dayWeatherState.dayName.text = weatherService.setDayStateName(indexList: number)
+        dayWeatherState.imageState.image = setStateImage(indexList: number)
+        dayWeatherState.tempMax.text =
+            String(format:"%.f", weatherService.openWeather!.list[number].main.tempMax.celcius) + " C°"
+        dayWeatherState.tempMin.text =
+            String(format:"%.f", weatherService.openWeather!.list[number].main.tempMin.celcius) + " C°"
+        return dayWeatherState
+    }
+    func createTodayState() {
+        
+        weatherStateTitle.text = weatherService.openWeather!.list[0].weather[0].weatherDescription.rawValue
+        imageWeatherState.image = setStateImage(indexList: 0)
+        temperatureMax.text = String(format:"%.f", weatherService.openWeather!.list[0].main.tempMax.celcius) + " C°"
+        temperatureMin.text =
+            String(format:"%.f", weatherService.openWeather!.list[0].main.tempMin.celcius) + " C°"
+        temperatureActual.text = String(format:"%.f", weatherService.openWeather!.list[0].main.temp.celcius) + " C°"
+    }
+
+    func setStateImage(indexList: Int) -> UIImage{
+        var imageStateDay = UIImage()
+        let value = weatherService.openWeather?.list[indexList].weather[0].main
+        
+        switch value {
+        case .clouds :
+            imageStateDay = UIImage(named: "partly-cloudy-day")!
+        case .clear:
+            imageStateDay = UIImage(named: "sun")!
+        case .rain:
+            imageStateDay = UIImage(named: "rain")!
+          default:
+            print("Type is something else")
+        }
+        return imageStateDay
+    }
+   fileprivate func setStackViewDaysState() {
+      if stackViewState.arrangedSubviews.count != 0 {
+           resetStackViewDaysState()
+       }
+       stackViewState.insertArrangedSubview(createDayState(number: 8), at: 0)
+       stackViewState.insertArrangedSubview(createDayState(number: 16), at: 1)
+       stackViewState.insertArrangedSubview(createDayState(number: 24), at: 2)
+       stackViewState.insertArrangedSubview(createDayState(number: 32), at: 3)
+       stackViewState.insertArrangedSubview(createDayState(number: 39), at: 4)
+   }
+   fileprivate func resetStackViewDaysState() {
+       stackViewState.subviews.forEach { (view) in
+           view.removeFromSuperview()
+       }
+    }
+//    func setupVisualEffectBlur() {
+//        animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear, animations: {
+//
+//            let blurEffect = UIBlurEffect(style: .dark)
+//            let visualEffectView = UIVisualEffectView(effect: blurEffect)
+//            let imageView = self.tableViewWeather.backgroundView
+//            visualEffectView.frame = imageView!.bounds
+//            imageView!.addSubview(visualEffectView)
+//        })
+//        animator.fractionComplete = 0.5
+//    }
 }
