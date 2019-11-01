@@ -15,6 +15,7 @@
 		DA1FEFE1234A6BED007E9E23 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DA1FEFE0234A6BED007E9E23 /* .gitignore */; };
 		DA299867234B2B63000C7C98 /* ExtensionURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA299866234B2B63000C7C98 /* ExtensionURL.swift */; };
 		DA6CF4D7236C998800D0EF5E /* ActualDayWeather.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA6CF4D6236C998800D0EF5E /* ActualDayWeather.xib */; };
+		DA6CF4DB236CB1F600D0EF5E /* ActualDayWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6CF4DA236CB1F600D0EF5E /* ActualDayWeather.swift */; };
 		DA915BB22368AED400215602 /* DayWeatherState.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA915BB12368AED400215602 /* DayWeatherState.xib */; };
 		DA915BB42368AEDE00215602 /* DayWeatherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA915BB32368AEDE00215602 /* DayWeatherState.swift */; };
 		DADE8CC6232E77720057B0BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CC5232E77720057B0BB /* AppDelegate.swift */; };
@@ -52,6 +53,7 @@
 		DA1FEFE0234A6BED007E9E23 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DA299866234B2B63000C7C98 /* ExtensionURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionURL.swift; sourceTree = "<group>"; };
 		DA6CF4D6236C998800D0EF5E /* ActualDayWeather.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActualDayWeather.xib; sourceTree = "<group>"; };
+		DA6CF4DA236CB1F600D0EF5E /* ActualDayWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualDayWeather.swift; sourceTree = "<group>"; };
 		DA915BB12368AED400215602 /* DayWeatherState.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayWeatherState.xib; sourceTree = "<group>"; };
 		DA915BB32368AEDE00215602 /* DayWeatherState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayWeatherState.swift; sourceTree = "<group>"; };
 		DADE8CC2232E77720057B0BB /* RuckSack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RuckSack.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				DA915BB32368AEDE00215602 /* DayWeatherState.swift */,
+				DA6CF4DA236CB1F600D0EF5E /* ActualDayWeather.swift */,
 			);
 			path = "Custom View Controller";
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				DA1FEFDD234A67A0007E9E23 /* TranslateStructure.swift in Sources */,
 				DA072DBA236439A100DDAD7A /* ExtensionDouble.swift in Sources */,
 				DA299867234B2B63000C7C98 /* ExtensionURL.swift in Sources */,
+				DA6CF4DB236CB1F600D0EF5E /* ActualDayWeather.swift in Sources */,
 				DADE8CF5232E7D1D0057B0BB /* WeatherViewController.swift in Sources */,
 				DADE8D00232E7F850057B0BB /* WeatherService.swift in Sources */,
 				DADE8D02232E7F850057B0BB /* TranslateService.swift in Sources */,

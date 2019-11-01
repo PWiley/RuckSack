@@ -62,8 +62,8 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         
     }
     func didUpdateCurrencyData(eurRate: Double, usdRate: Double) {
-        currencyOrigin.text = String(eurRate)
-        currencyDestination.text = String(usdRate)
+        currencyOrigin.text = String(format:"%.4f", eurRate)
+        currencyDestination.text = String(format:"%.4f", usdRate)
     }
     
     func addDoneButtonOnKeyboard()
@@ -95,10 +95,10 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         currencyService.askCurrencyRate()
         if amountOrigin.text != "" {
             guard let amountDouble = Double(amountOrigin.text!) else {return}
-            amountDestination.text = String(currencyService.calculateConversion(amount: amountDouble, base: "EUR"))
+            amountDestination.text = String(format:"%.3f", currencyService.calculateConversion(amount: amountDouble, base: "EUR"))
         } else {
             guard let amountDouble = Double(amountDestination.text!) else {return}
-            amountOrigin.text = String(currencyService.calculateConversion(amount: amountDouble, base: "USD"))
+            amountOrigin.text = String(format:"%.3f", currencyService.calculateConversion(amount: amountDouble, base: "USD"))
         }
         
         
