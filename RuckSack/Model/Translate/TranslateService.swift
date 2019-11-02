@@ -14,7 +14,7 @@ class TranslateService {
     private var task: URLSessionDataTask?
     var delegate: TranslateServiceDelegate?
     private static let translateURL = URL(string: "https://translation.googleapis.com/language/translate/v2/")!
-    
+    var translate: Translate?
 //    func createJson() -> String {
 //        let translation = TranslationToSend(q: ["Hello world, it's time to go far away"], target: "de")
 //        
@@ -25,26 +25,24 @@ class TranslateService {
 //        print(json as Any)
 //        return jsonString!
 //    }
-    
-    func createRequest() -> URLRequest {
-        
-        let query: [String: String] = [
-            "key": "AIzaSyDd_8AuTs9gGs_jA233qUPv2_P69qtnW7c",
-            "q": "Hello world, it's time to go far away",
-            "target": "fr"
-        ]
-        
+    static var query: [String: String] = [
+               "key": "AIzaSyAbFRlWhZO4li5HUWUSZ3V3f2n3Z8ooqKs",
+               "q": getTextToTranslate(),
+               "target": "fr"
+           ]
+    func createRequest(query: [String: String]) -> URLRequest {
         var request = URLRequest(url: TranslateService.translateURL.withQueries(query)!)
+        print("query: \(query)")
         request.httpMethod = "POST"
         print(request)
         return request
     }
     func createCall() {
         
-        let request = createRequest()
+        let request = createRequest(query: TranslateService.query)
         
         task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            print("Hourra")
+            
             if error != nil {
                 print("Client error!")
                 print("something went wrong ", error!)
@@ -53,16 +51,20 @@ class TranslateService {
             guard let jsonData = data, error == nil else { return}
             guard let response = response as? HTTPURLResponse, (200...209).contains(response.statusCode) else {return}
             DispatchQueue.main.async{
-            let translate = try? JSONDecoder().decode(Translate.self, from: jsonData)
-                       //let jsonAnswerDataClass = try? JSONDecoder().decode(DataClass.self , from: data)
-                       //let jsonAnswerTranslationElement = try? JSONDecoder().decode(TranslationElement.self , from: data)
+                self.translate = try? JSONDecoder().decode(Translate.self, from: jsonData)
                        print(jsonData)
-                       print(translate?.data.translations[0].translatedText as Any)
+                print(self.translate?.data.translations[0].translatedText as Any)
             
             }
-           
+            print(self.translate?.data.translations[0].translatedText as Any)
+
         }
         task?.resume()
+    }
+    
+    static func getTextToTranslate() -> String{
+        var sentence = "Hello"
+        return sentence
     }
     
 }

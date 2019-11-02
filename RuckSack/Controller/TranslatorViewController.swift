@@ -106,7 +106,16 @@ class TranslatorViewController: UIViewController {
        {
            self.textLanguageOrigin.resignFirstResponder()
            self.textLanguageDestination.resignFirstResponder()
-        translate.createCall()
+        if textLanguageOrigin.isEditable == true {
+            textLanguageDestination.text = ""
+            print(textLanguageOrigin.text)
+            TranslateService.getTextToTranslate()
+        }
+        if textLanguageDestination.isEditable == true {
+            textLanguageOrigin.text = ""
+            TranslateService.getTextToTranslate()
+        }
+            translate.createCall()
            
        }
 }
