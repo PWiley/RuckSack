@@ -98,7 +98,7 @@ struct Weather: Codable {
     let id: Int
     let main: MainEnum
     let weatherDescription: Description
-    let icon: Icon
+    let icon: String
 
     enum CodingKeys: String, CodingKey {
         case id, main
@@ -107,19 +107,45 @@ struct Weather: Codable {
     }
 }
 
-enum Icon: String, Codable {
-    case the01D = "01d"
-    case the03D = "03d"
-    case the04D = "04d"
-    case the04N = "04n"
-    case the10D = "10d"
-    case the10N = "10n"
-}
+//enum Icon: String, Codable {
+//    case the01D = "01d"
+//    case the03D = "03d"
+//    case the04D = "04d"
+//    case the04N = "04n"
+//    case the10D = "10d"
+//    case the10N = "10n"
+//    case the03N = "03n"
+//    case the02D = "02d"
+//    //case the03N = "03n"
+//    //case the03D = "03d"
+//    //case the04D = "04d"
+//    //case the04N = "04n"
+//    //case the09D = "09d"
+//    //case the10D = "10d"
+//    //case the10N = "10n"
+//    case the11D = "11d"
+//    case the13D = "13d"
+//    case the50D = "50d"
+//}
 
 enum MainEnum: String, Codable {
     case clear = "Clear"
     case clouds = "Clouds"
     case rain = "Rain"
+    //case rain = "Rain"
+    //case clear = "Clear"
+    case thunderstorm = "Thunderstorm"
+    case drizzle = "Drizzle"
+    case snow = "Snow"
+    case mist = "Mist"
+    case smoke = "Smoke"
+    case haze = "Haze"
+    case dust = "sand/ dust whirls"
+    case fog = "fog"
+    case sand = "sand"
+    case ash = "volcanic ash"
+    case squall = "squalls"
+    case tornado = "tornado"
 }
 
 enum Description: String, Codable {
@@ -129,7 +155,16 @@ enum Description: String, Codable {
     case moderateRain = "moderate rain"
     case overcastClouds = "overcast clouds"
     case scatteredClouds = "scattered clouds"
-}
+    //case brokenClouds = "broken clouds"
+    case fewClouds = "few clouds"
+    //case lightRain = "light rain"
+    //case moderateRain = "moderate rain"
+    //case overcastClouds = "overcast clouds"
+    //case scatteredClouds = "scattered clouds"
+    case mist = "mist"
+    case thunderstorm = "thunderstorm"
+    //case clearSky = "clear sky"
+    case ShowerRain = "shower rain"}
 
 // MARK: - Wind
 struct Wind: Codable {

@@ -8,27 +8,19 @@
 
 import Foundation
 
+import Foundation
 
-
-// MARK: - Translation
-struct TranslationToSend: Codable {
-   let q: [String]
-   let target: String
-}
-
-
-// MARK: - Translation
-struct Translation: Decodable {
+// MARK: - Translate
+struct Translate: Codable {
     let data: DataClass
 }
 
 // MARK: - DataClass
-struct DataClass: Decodable {
-    let translations: [TranslationElement]
+struct DataClass: Codable {
+    let translations: [Translation]
 }
 
-// MARK: - TranslationElement
-struct TranslationElement: Decodable {
-    let translatedText: String
+// MARK: - Translation
+struct Translation: Codable {
+    let translatedText, detectedSourceLanguage: String
 }
-

@@ -154,6 +154,8 @@ enum NetworkError: Error {
     case serverError
     case jsonError
 }
+
+
 //
 //enum WichTown {
 //    case berlin

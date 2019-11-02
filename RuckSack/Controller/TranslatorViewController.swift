@@ -106,7 +106,7 @@ class TranslatorViewController: UIViewController {
        {
            self.textLanguageOrigin.resignFirstResponder()
            self.textLanguageDestination.resignFirstResponder()
-        //translate.createCall(jsonData: translate.createJson())
+        translate.createCall()
            
        }
 }

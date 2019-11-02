@@ -9,9 +9,9 @@
 import UIKit
 
 class WeatherViewController: UITableViewController, WeatherServiceDelegate {
-   
-    // MARK: - TableView
     
+    // MARK: - TableView
+    var night = false
     @IBOutlet var tableViewWeather: UITableView!
     
     // MARK: - TemperatureCell
@@ -26,26 +26,29 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
     @IBOutlet weak var actualDayWeather: ActualDayWeather!
     @IBOutlet weak var stackViewState: UIStackView!
-
-   let weatherService = WeatherService()
     
-   
+    let weatherService = WeatherService()
+    
+    
     func didUpdateWeatherData(openWeather: OpenWeather) {
-       setStackViewDaysState()
+        setStackViewDaysState()
         createTodayState()
-       
-   }
-   
-   static var whichTown: Bool = true
+        print("We just get our infos")
+        
+    }
+    
+    static var whichTown: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
+        tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
+        navigationItem.title = "Berlin"
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Town?", style: .plain, target: self, action: #selector(changeTown))
         weatherService.delegate = self
         weatherService.askWeatherState(town: WeatherService.berlin)
-
-   }
+        
+    }
     override func viewDidAppear(_ animated: Bool) {
         let indexPath: IndexPath = IndexPath(row: 1, section: 0)
         tableViewWeather.scrollToRow(at: indexPath, at: .bottom, animated: true)
@@ -54,7 +57,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         tableViewWeather.backgroundView?.fadeIn()
         //setupVisualEffectBlur()
     }
- 
+    
     @objc func changeTown() {
         print("Changed town")
         WeatherViewController.whichTown = !WeatherViewController.whichTown
@@ -62,14 +65,16 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         changeTownAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             print("I want to change to another town")
             if WeatherViewController.self.whichTown == true {
+                self.navigationItem.title = "Berlin"
                 self.tableViewWeather.backgroundView?.fadeOut()
-            self.weatherService.askWeatherState(town: WeatherService.berlin)
-            self.tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
+                self.weatherService.askWeatherState(town: WeatherService.berlin)
+                self.tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
                 self.tableViewWeather.backgroundView?.fadeIn()
             } else {
+                self.navigationItem.title = "New-York"
                 self.tableViewWeather.backgroundView?.fadeOut()
-            self.weatherService.askWeatherState(town: WeatherService.newYork)
-            self.tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
+                self.weatherService.askWeatherState(town: WeatherService.newYork)
+                self.tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
                 self.tableViewWeather.backgroundView?.fadeIn()
             }
         }))
@@ -98,47 +103,99 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             String(format:"%.f", weatherService.openWeather!.list[0].main.tempMin.celcius) + " C°"
         actualDayWeather.tempActual.text = String(format:"%.f", weatherService.openWeather!.list[0].main.temp.celcius) + " C°"
     }
-
-    func setStateImage(indexList: Int) -> UIImage{
+    
+    func setStateImage(indexList: Int) -> UIImage {
         var imageStateDay = UIImage()
         let value = weatherService.openWeather?.list[indexList].weather[0].main
+        //print("State value impossible to get")
+        //throw StructureError.valueError
+        
+        let description = weatherService.openWeather?.list[indexList].weather[0].weatherDescription
+        //print("Description impossible to get")
+        //throw StructureError.descriptionError
         
         switch value {
-        case .clouds :
-            imageStateDay = UIImage(named: "partly-cloudy-day")!
-        case .clear:
-            imageStateDay = UIImage(named: "sun")!
+        case .clouds:
+            if night == false {
+                if description!.rawValue == "few clouds" {
+                    imageStateDay = UIImage(named: "02d")!
+                }
+                if description!.rawValue == "scattered clouds" {
+                    imageStateDay = UIImage(named: "03d")!
+                }
+                if description!.rawValue == "broken clouds" || description!.rawValue == "overcast clouds" {
+                    imageStateDay = UIImage(named: "04d")!
+                }
+            } else{
+                if description!.rawValue == "few clouds" {
+                    imageStateDay = UIImage(named: "02n")!
+                }
+                if description!.rawValue == "scattered clouds" {
+                    imageStateDay = UIImage(named: "03n")!
+                }
+                if description!.rawValue == "broken clouds" || description!.rawValue == "overcast clouds" {
+                    imageStateDay = UIImage(named: "04n")!
+                }
+            }
         case .rain:
-            imageStateDay = UIImage(named: "rain")!
-          default:
+            if description!.rawValue == "freezing rain" {
+                imageStateDay = UIImage(named: "13d")!
+            }
+            if description!.rawValue == "light intensity shower rain" ||   description!.rawValue == "shower rain" || description!.rawValue == "heavy intensity shower rain" || description!.rawValue == "ragged shower rain" {
+                imageStateDay = UIImage(named: "09d")!
+            }
+            else {
+                imageStateDay = UIImage(named: "10d")!
+            }
+        case .clear:
+            if night == false {
+                imageStateDay = UIImage(named: "01d")!
+            } else{
+                imageStateDay = UIImage(named: "01n")!
+            }
+        case .thunderstorm:
+            imageStateDay = UIImage(named: "11d")!
+        case .drizzle:
+            imageStateDay = UIImage(named: "09d")!
+        case .snow:
+            imageStateDay = UIImage(named: "13d")!
+        case .mist, .smoke, .haze, .dust, .fog, .sand, .ash, .squall, .tornado :
+            imageStateDay = UIImage(named: "50d")!
+            
+        default:
             print("Type is something else")
+            
         }
         return imageStateDay
     }
-   fileprivate func setStackViewDaysState() {
-      if stackViewState.arrangedSubviews.count != 0 {
-           resetStackViewDaysState()
-       }
-       stackViewState.insertArrangedSubview(createDayState(number: 8), at: 0)
-       stackViewState.insertArrangedSubview(createDayState(number: 16), at: 1)
-       stackViewState.insertArrangedSubview(createDayState(number: 24), at: 2)
-       stackViewState.insertArrangedSubview(createDayState(number: 32), at: 3)
-       stackViewState.insertArrangedSubview(createDayState(number: 39), at: 4)
-   }
-   fileprivate func resetStackViewDaysState() {
-       stackViewState.subviews.forEach { (view) in
-           view.removeFromSuperview()
-       }
+    fileprivate func setStackViewDaysState() {
+        if stackViewState.arrangedSubviews.count != 0 {
+            resetStackViewDaysState()
+        }
+        stackViewState.insertArrangedSubview(createDayState(number: 8), at: 0)
+        stackViewState.insertArrangedSubview(createDayState(number: 16), at: 1)
+        stackViewState.insertArrangedSubview(createDayState(number: 24), at: 2)
+        stackViewState.insertArrangedSubview(createDayState(number: 32), at: 3)
+        stackViewState.insertArrangedSubview(createDayState(number: 39), at: 4)
     }
-//    func setupVisualEffectBlur() {
-//        animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear, animations: {
-//
-//            let blurEffect = UIBlurEffect(style: .dark)
-//            let visualEffectView = UIVisualEffectView(effect: blurEffect)
-//            let imageView = self.tableViewWeather.backgroundView
-//            visualEffectView.frame = imageView!.bounds
-//            imageView!.addSubview(visualEffectView)
-//        })
-//        animator.fractionComplete = 0.5
-//    }
+    fileprivate func resetStackViewDaysState() {
+        stackViewState.subviews.forEach { (view) in
+            view.removeFromSuperview()
+        }
+    }
+    //    func setupVisualEffectBlur() {
+    //        animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear, animations: {
+    //
+    //            let blurEffect = UIBlurEffect(style: .dark)
+    //            let visualEffectView = UIVisualEffectView(effect: blurEffect)
+    //            let imageView = self.tableViewWeather.backgroundView
+    //            visualEffectView.frame = imageView!.bounds
+    //            imageView!.addSubview(visualEffectView)
+    //        })
+    //        animator.fractionComplete = 0.5
+    //    }
+}
+enum StructureError: Error {
+    case valueError
+    case descriptionError
 }
