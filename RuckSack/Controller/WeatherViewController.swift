@@ -12,6 +12,8 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
     // MARK: - TableView
     var night = false
+    var town = Town.berlin
+    
     @IBOutlet var tableViewWeather: UITableView!
     
     // MARK: - TemperatureCell
@@ -41,22 +43,38 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
-        navigationItem.title = "Berlin"
+        whichTown(town: .berlin)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Town?", style: .plain , target: self, action: #selector(changeTown))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(displayP3Red: 247.0, green: 0.0, blue: 143.0, alpha: 1)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Town?", style: .plain, target: self, action: #selector(changeTown))
         weatherService.delegate = self
         weatherService.askWeatherState(town: WeatherService.berlin)
-        
+        //etupEffectBlur()
+        setupAlphaBackground()
+        //self.tableViewWeather.backgroundColor = UIColor.clear
+//        let gestureRefresh = UISwipeGestureRecognizer(target: self, action: #selector(self.refreshWeatherState))
+//        gestureRefresh.direction = .down
+//        self.view.addGestureRecognizer(gestureRefresh)
     }
     override func viewDidAppear(_ animated: Bool) {
         let indexPath: IndexPath = IndexPath(row: 1, section: 0)
         tableViewWeather.scrollToRow(at: indexPath, at: .bottom, animated: true)
-        tableViewWeather.backgroundView?.fadeOut()
+        //tableViewWeather.backgroundView?.fadeOut()
+        print(tableViewWeather.bounds.maxY)
         weatherService.askWeatherState(town: WeatherService.berlin)
-        tableViewWeather.backgroundView?.fadeIn()
+        //tableViewWeather.backgroundView?.fadeIn()
         //setupVisualEffectBlur()
     }
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffSetY = scrollView.contentOffset.y
+        print(contentOffSetY)
+        if contentOffSetY > 0 {
+            animator.fractionComplete = 0.5
+            return
+        }
+        animator.fractionComplete = 1
+    }
+    
     
     @objc func changeTown() {
         print("Changed town")
@@ -65,17 +83,19 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         changeTownAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             print("I want to change to another town")
             if WeatherViewController.self.whichTown == true {
-                self.navigationItem.title = "Berlin"
-                self.tableViewWeather.backgroundView?.fadeOut()
+                self.whichTown(town: .berlin)
+                //self.navigationItem.title = "Berlin"
+                //self.tableViewWeather.backgroundView?.fadeOut()
                 self.weatherService.askWeatherState(town: WeatherService.berlin)
-                self.tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
-                self.tableViewWeather.backgroundView?.fadeIn()
+                //self.tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin_Ver2"))
+                //self.tableViewWeather.backgroundView?.fadeIn()
             } else {
-                self.navigationItem.title = "New-York"
-                self.tableViewWeather.backgroundView?.fadeOut()
+                self.whichTown(town: .newYork)
+                //self.navigationItem.title = "New-York"
+                //self.tableViewWeather.backgroundView?.fadeOut()
                 self.weatherService.askWeatherState(town: WeatherService.newYork)
-                self.tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
-                self.tableViewWeather.backgroundView?.fadeIn()
+                //self.tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
+                //self.tableViewWeather.backgroundView?.fadeIn()
             }
         }))
         changeTownAlert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
@@ -89,19 +109,19 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         dayWeatherState.dayName.text = weatherService.setDayStateName(indexList: number)
         dayWeatherState.imageState.image = setStateImage(indexList: number)
         dayWeatherState.tempMax.text =
-            String(format:"%.f", weatherService.openWeather!.list[number].main.tempMax.celcius) + " C°"
+            String(format:"%.f", weatherService.openWeather!.list[number].main.tempMax.celcius) + " °C"
         dayWeatherState.tempMin.text =
-            String(format:"%.f", weatherService.openWeather!.list[number].main.tempMin.celcius) + " C°"
+            String(format:"%.f", weatherService.openWeather!.list[number].main.tempMin.celcius) + " °C"
         return dayWeatherState
     }
     func createTodayState() {
         
         actualDayWeather.weatherDescription.text = weatherService.openWeather!.list[0].weather[0].weatherDescription.rawValue
         actualDayWeather.imageActualWeather.image = setStateImage(indexList: 0)
-        actualDayWeather.tempMax.text = String(format:"%.f", weatherService.openWeather!.list[0].main.tempMax.celcius) + " C°"
+        actualDayWeather.tempMax.text = String(format:"%.f", weatherService.openWeather!.list[0].main.tempMax.celcius) + " °C"
         actualDayWeather.tempMin.text =
-            String(format:"%.f", weatherService.openWeather!.list[0].main.tempMin.celcius) + " C°"
-        actualDayWeather.tempActual.text = String(format:"%.f", weatherService.openWeather!.list[0].main.temp.celcius) + " C°"
+            String(format:"%.f", weatherService.openWeather!.list[0].main.tempMin.celcius) + " °C"
+        actualDayWeather.tempActual.text = String(format:"%.f", weatherService.openWeather!.list[0].main.temp.celcius) + " °C"
     }
     
     func setStateImage(indexList: Int) -> UIImage {
@@ -183,6 +203,48 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             view.removeFromSuperview()
         }
     }
+    var animator: UIViewPropertyAnimator!
+//
+//    fileprivate func setupEffectBlur() {
+//        animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear, animations: { [weak self] in
+//             let blurEffect = UIBlurEffect(style: .regular)
+//                   let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//            blurEffectView.frame = self!.tableViewWeather.frame
+//            self!.tableViewWeather.backgroundView!.insertSubview(blurEffectView, at: 0)
+//            //self!.tableViewWeather.addSubview(blurEffectView)
+//            self!.tableViewWeather.separatorEffect = UIVibrancyEffect(blurEffect: blurEffect)
+//        })
+////        animator.fractionComplete = 1
+//
+//
+//
+//
+//
+//    }
+    
+    func setupAlphaBackground() {
+         animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear, animations: { [unowned self] in
+            self.tableViewWeather.backgroundView?.alpha = self.animator.fractionComplete
+//                    self!.tableViewWeather.backgroundView!.insertSubview(blurEffectView, at: 0)
+//                    //self!.tableViewWeather.addSubview(blurEffectView)
+//                    self!.tableViewWeather.separatorEffect = UIVibrancyEffect(blurEffect: blurEffect)
+                })
+        animator.startAnimation()
+        
+    }
+    func whichTown(town: Town) {
+//        var town = Town.berlin
+        switch town {
+        case .berlin:
+            tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin_Ver2"))
+            navigationItem.title = "Berlin"
+        case .newYork:
+            tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
+            navigationItem.title = "Berlin"
+            
+            
+        }
+    }
     //    func setupVisualEffectBlur() {
     //        animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear, animations: {
     //
@@ -194,8 +256,16 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     //        })
     //        animator.fractionComplete = 0.5
     //    }
+//    @objc func refreshWeatherState() {
+//        weatherService.askWeatherState(town: )
+//    }
 }
 enum StructureError: Error {
     case valueError
     case descriptionError
+}
+
+enum Town {
+    case berlin
+    case newYork
 }
