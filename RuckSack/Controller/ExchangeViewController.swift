@@ -30,22 +30,14 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.hideKeyboardWhenTappedAround()
         currencyService.delegate = self
         currencyService.askCurrencyRate()
         setBackGroundTown()
         // Do any additional setup after loading the view.
     }
     
-    fileprivate func setBackGroundTown() {
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        if WeatherViewController.whichTown == true {
-            backgroundImage.image = UIImage(named: "Background_Exchange_Berlin")
-        } else {
-            backgroundImage.image = UIImage(named: "Background_Exchange_NewYork")
-        }
-        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
-        exchangeViewController.insertSubview(backgroundImage, at: 0)
-    }
+    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -102,5 +94,19 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         }
         
         
+    }
+    
+     // MARK : Configuration Background
+    
+    
+    fileprivate func setBackGroundTown() {
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        if WeatherViewController.whichTown == true {
+            backgroundImage.image = UIImage(named: "Background_Exchange_Berlin")
+        } else {
+            backgroundImage.image = UIImage(named: "Background_Exchange_NewYork")
+        }
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        exchangeViewController.insertSubview(backgroundImage, at: 0)
     }
 }
