@@ -18,9 +18,9 @@
 		DA6CF4DB236CB1F600D0EF5E /* ActualDayWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6CF4DA236CB1F600D0EF5E /* ActualDayWeather.swift */; };
 		DA915BB22368AED400215602 /* DayWeatherState.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA915BB12368AED400215602 /* DayWeatherState.xib */; };
 		DA915BB42368AEDE00215602 /* DayWeatherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA915BB32368AEDE00215602 /* DayWeatherState.swift */; };
+		DADBCDF8236F5DAD00273602 /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBCDF7236F5DAD00273602 /* ExtensionViewController.swift */; };
 		DADE8CC6232E77720057B0BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CC5232E77720057B0BB /* AppDelegate.swift */; };
 		DADE8CCD232E77730057B0BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DADE8CCC232E77730057B0BB /* Assets.xcassets */; };
-		DADE8CDB232E77730057B0BB /* RuckSackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CDA232E77730057B0BB /* RuckSackTests.swift */; };
 		DADE8CEB232E7C940057B0BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DADE8CE9232E7C940057B0BB /* Main.storyboard */; };
 		DADE8CEC232E7C940057B0BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DADE8CEA232E7C940057B0BB /* LaunchScreen.storyboard */; };
 		DADE8CF5232E7D1D0057B0BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CEE232E7D1D0057B0BB /* WeatherViewController.swift */; };
@@ -56,13 +56,12 @@
 		DA6CF4DA236CB1F600D0EF5E /* ActualDayWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualDayWeather.swift; sourceTree = "<group>"; };
 		DA915BB12368AED400215602 /* DayWeatherState.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayWeatherState.xib; sourceTree = "<group>"; };
 		DA915BB32368AEDE00215602 /* DayWeatherState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayWeatherState.swift; sourceTree = "<group>"; };
+		DADBCDF7236F5DAD00273602 /* ExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
 		DADE8CC2232E77720057B0BB /* RuckSack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RuckSack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADE8CC5232E77720057B0BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DADE8CCC232E77730057B0BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DADE8CD1232E77730057B0BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DADE8CD6232E77730057B0BB /* RuckSackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RuckSackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DADE8CDA232E77730057B0BB /* RuckSackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuckSackTests.swift; sourceTree = "<group>"; };
-		DADE8CDC232E77730057B0BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DADE8CE9232E7C940057B0BB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DADE8CEA232E7C940057B0BB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DADE8CEE232E7D1D0057B0BB /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -143,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				DADE8CC4232E77720057B0BB /* RuckSack */,
-				DADE8CD9232E77730057B0BB /* RuckSackTests */,
 				DADE8CC3232E77720057B0BB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -172,15 +170,6 @@
 			path = RuckSack;
 			sourceTree = "<group>";
 		};
-		DADE8CD9232E77730057B0BB /* RuckSackTests */ = {
-			isa = PBXGroup;
-			children = (
-				DADE8CDA232E77730057B0BB /* RuckSackTests.swift */,
-				DADE8CDC232E77730057B0BB /* Info.plist */,
-			);
-			path = RuckSackTests;
-			sourceTree = "<group>";
-		};
 		DADE8CE5232E7C130057B0BB /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +178,7 @@
 				DA0241F9233D1888004EE3BC /* ExtensionTextView.swift */,
 				DA299866234B2B63000C7C98 /* ExtensionURL.swift */,
 				DA072DB9236439A100DDAD7A /* ExtensionDouble.swift */,
+				DADBCDF7236F5DAD00273602 /* ExtensionViewController.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -331,6 +321,7 @@
 			files = (
 				DAE21C49233C1096009F7001 /* ExtensionUITextField.swift in Sources */,
 				DA915BB42368AEDE00215602 /* DayWeatherState.swift in Sources */,
+				DADBCDF8236F5DAD00273602 /* ExtensionViewController.swift in Sources */,
 				DADE8CFA232E7D1D0057B0BB /* TranslatorViewController.swift in Sources */,
 				DA1FEFDB234A6787007E9E23 /* CurrencyStructure.swift in Sources */,
 				DA1FEFDD234A67A0007E9E23 /* TranslateStructure.swift in Sources */,
@@ -354,7 +345,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DADE8CDB232E77730057B0BB /* RuckSackTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
