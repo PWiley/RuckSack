@@ -6,7 +6,6 @@
 //  Copyright © 2019 Patrick Wiley. All rights reserved.
 //
 
-import UIKit
 import Foundation
 
 class TranslateService {
@@ -15,33 +14,43 @@ class TranslateService {
     var delegate: TranslateServiceDelegate?
     private static let translateURL = URL(string: "https://translation.googleapis.com/language/translate/v2/")!
     var translate: Translate?
-//    func createJson() -> String {
-//        let translation = TranslationToSend(q: ["Hello world, it's time to go far away"], target: "de")
-//        
-//        let json = try? JSONEncoder().encode(translation)
-//        let jsonString = String(data: json!, encoding: .utf8)
-//        
-//        print(jsonString as Any)
-//        print(json as Any)
-//        return jsonString!
-//    }
-    static var query: [String: String] = [
-               "key": "AIzaSyAbFRlWhZO4li5HUWUSZ3V3f2n3Z8ooqKs",
-               "q": getTextToTranslate(),
-               "target": "fr"
-           ]
-    func createRequest(query: [String: String]) -> URLRequest {
-        var request = URLRequest(url: TranslateService.translateURL.withQueries(query)!)
+    var sentence: String = ""
+    var request: URLRequest?
+    
+//    static var query: [String: String] = [
+//        "key": "AIzaSyAbFRlWhZO4li5HUWUSZ3V3f2n3Z8ooqKs",
+//        "q": "",
+//        "target": ""
+//    ]
+    func createRequest(sentence: String, targetLanguage: String){
+        let query: [String: String] = [
+            "key": "AIzaSyAbFRlWhZO4li5HUWUSZ3V3f2n3Z8ooqKs",
+            "q": sentence,
+            "target": targetLanguage
+        ]
+        request = URLRequest(url: TranslateService.translateURL.withQueries(query)!)
         print("query: \(query)")
-        request.httpMethod = "POST"
+        request?.httpMethod = "POST"
         print(request)
-        return request
     }
+    func checkLanguageTarget(target: String) {
+          switch target{
+          case "fr":
+            self.delegate?.didUpdateTranslateData(translate: translate!, languageField: "fr")
+              print("Tout est ok")
+          case "en":
+            self.delegate?.didUpdateTranslateData(translate: translate!, languageField: "en")
+              print("All good")
+          default:
+            print("erreur de language")
+          }
+        
+      }
     func createCall() {
         
-        let request = createRequest(query: TranslateService.query)
         
-        task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        
+        task = URLSession.shared.dataTask(with: request!) { (data, response, error) in
             
             if error != nil {
                 print("Client error!")
@@ -51,23 +60,29 @@ class TranslateService {
             guard let jsonData = data, error == nil else { return}
             guard let response = response as? HTTPURLResponse, (200...209).contains(response.statusCode) else {return}
             DispatchQueue.main.async{
+                
                 self.translate = try? JSONDecoder().decode(Translate.self, from: jsonData)
-                       print(jsonData)
+                print(jsonData)
                 print(self.translate?.data.translations[0].translatedText as Any)
-            
+                self.checkLanguageTarget(target: (self.translate?.data.translations[0].detectedSourceLanguage)!)
+                //self.delegate?.didUpdateTranslateData(translate: self.translate!)
+                
+//                do {
+//                    self.translate = try? JSONDecoder().decode(Translate.self, from: jsonData)
+//                    print(jsonData)
+//                    print(self.translate?.data.translations[0].translatedText as Any)
+//                    self.delegate?.didUpdateTranslateData(translate: self.translate!)
+//                } catch {
+//                    print("JSON error: \(error)")
+//                }
             }
-            print(self.translate?.data.translations[0].translatedText as Any)
-
         }
         task?.resume()
     }
     
-    static func getTextToTranslate() -> String{
-        var sentence = "Hello"
-        return sentence
-    }
-    
+  
 }
+
 protocol TranslateServiceDelegate{
-    func didUpdateTranslateData()
+    func didUpdateTranslateData(translate: Translate, languageField: String)
 }
