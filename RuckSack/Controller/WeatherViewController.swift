@@ -49,8 +49,8 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         
         weatherService.delegate = self
         weatherService.askWeatherState(town: WeatherService.berlin)
-        //etupEffectBlur()
-        setupAlphaBackground()
+        //setupEffectBlur()
+        //setupAlphaBackground()
         //self.tableViewWeather.backgroundColor = UIColor.clear
 //        let gestureRefresh = UISwipeGestureRecognizer(target: self, action: #selector(self.refreshWeatherState))
 //        gestureRefresh.direction = .down
@@ -65,16 +65,25 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         //tableViewWeather.backgroundView?.fadeIn()
         //setupVisualEffectBlur()
     }
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let contentOffSetY = scrollView.contentOffset.y
-        print(contentOffSetY)
-        if contentOffSetY > 0 {
-            animator.fractionComplete = 0.5
-            return
-        }
-        animator.fractionComplete = 1
+//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let contentOffSetY = scrollView.contentOffset.y
+//        print(contentOffSetY)
+//        if contentOffSetY > 0 {
+//            animator.fractionComplete = 0.5
+//            return
+//        }
+//        animator.fractionComplete = abs(contentOffSetY)
+//
+//    }
+   override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let indexpath = IndexPath(row: 0, section: 0)
+        let rowZeroFrame = tableViewWeather.rectForRow(at: indexpath)
+        //print(rowZeroFrame.height)
+        let offset = scrollView.contentOffset.y/(self.tableViewWeather.contentSize.height - rowZeroFrame.height)
+        //print(offset)
+        self.tableViewWeather.backgroundView?.alpha = 1-offset
     }
-    
+
     
     @objc func changeTown() {
         print("Changed town")
@@ -203,7 +212,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             view.removeFromSuperview()
         }
     }
-    var animator: UIViewPropertyAnimator!
+   //var animator: UIViewPropertyAnimator!
 //
 //    fileprivate func setupEffectBlur() {
 //        animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear, animations: { [weak self] in
@@ -222,25 +231,31 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
 //
 //    }
     
-    func setupAlphaBackground() {
-         animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear, animations: { [unowned self] in
-            self.tableViewWeather.backgroundView?.alpha = self.animator.fractionComplete
-//                    self!.tableViewWeather.backgroundView!.insertSubview(blurEffectView, at: 0)
-//                    //self!.tableViewWeather.addSubview(blurEffectView)
-//                    self!.tableViewWeather.separatorEffect = UIVibrancyEffect(blurEffect: blurEffect)
-                })
-        animator.startAnimation()
-        
-    }
+//    func setupAlphaBackground() {
+//         animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear, animations: { [unowned self] in
+//            self.tableViewWeather.backgroundView?.alpha = self.animator.fractionComplete
+////                    self!.tableViewWeather.backgroundView!.insertSubview(blurEffectView, at: 0)
+////                    //self!.tableViewWeather.addSubview(blurEffectView)
+////                    self!.tableViewWeather.separatorEffect = UIVibrancyEffect(blurEffect: blurEffect)
+//                })
+//        animator.startAnimation()
+//
+//    }
     func whichTown(town: Town) {
-//        var town = Town.berlin
+        
+//        var backgroundTableView = UIImageView()
+//        backgroundTableView.contentMode = .scaleAspectFit
+        //tableViewWeather.backgroundView = backgroundTableView
+        
         switch town {
         case .berlin:
             tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin_Ver2"))
+            tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
             navigationItem.title = "Berlin"
         case .newYork:
             tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
-            navigationItem.title = "Berlin"
+            tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
+            navigationItem.title = "New-York"
             
             
         }
