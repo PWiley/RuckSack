@@ -14,11 +14,15 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     
     var translateService = TranslateService()
    
+    
     @IBOutlet var translatorViewController: UIView!
+    
+    @IBOutlet weak var viewOrigin: DesignableView!
     @IBOutlet weak var flagLanguageOrigin: UIImageView!
     @IBOutlet weak var titleLanguageOrigin: UILabel!
     @IBOutlet weak var textLanguageOrigin: UITextView!
     
+    @IBOutlet weak var viewDestination: DesignableView!
     @IBOutlet weak var flagLanguageDestination: UIImageView!
     @IBOutlet weak var titleLanguageDestination: UILabel!
     @IBOutlet weak var textLanguageDestination: UITextView!
@@ -41,12 +45,13 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == textLanguageOrigin {
             textLanguageDestination.text = ""
-            print("TEXT ORIGIN")
-            
+            viewOrigin.alpha = 0.85
+            viewDestination.alpha = 0.65
         }
         if textView == textLanguageDestination {
             textLanguageOrigin.text = ""
-            print("TEXT DESTINATION")
+            viewDestination.alpha = 0.85
+            viewOrigin.alpha = 0.65
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -75,11 +80,11 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
         
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if textLanguageDestination.isFirstResponder {
-                self.view.frame.origin.y = -(keyboardSize.height)/2
+                self.view.frame.origin.y = -(keyboardSize.height)/1.5
             }
-            if textLanguageOrigin.isFirstResponder {
-                self.view.frame.origin.y = -(keyboardSize.height)/14
-            }
+//            if textLanguageOrigin.isFirstResponder {
+//                self.view.frame.origin.y = -(keyboardSize.height)/16
+//            }
         }
     }
     
@@ -104,13 +109,20 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     {
         self.textLanguageOrigin.resignFirstResponder()
         self.textLanguageDestination.resignFirstResponder()
+        viewOrigin.alpha = 0.65
+        viewDestination.alpha = 0.65
         if textLanguageOrigin.text != "" {
             translateService.createRequest(sentence: textLanguageOrigin.text, targetLanguage: "en")
+            translateService.createCall()
         }
         if textLanguageDestination.text != "" {
             translateService.createRequest(sentence: textLanguageDestination.text, targetLanguage: "fr")
+            translateService.createCall()
         }
-        translateService.createCall()
+        if textLanguageOrigin.text == "" && textLanguageDestination.text == ""{
+            self.alert(title: "Action impossible", message: "You didn't enter any text to translate", titleAction: "ok", actionStyle: .default)
+        }
+        
         
     }
     
@@ -119,20 +131,37 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
         
         //if targetLanguage == "fr" && textLanguageOrigin.text != "" {
         if targetLanguage == "fr" {
-            print(translatedAnswer.translatedText)
-            print("Translated from English")
+            if textLanguageOrigin.text != "" {
+                self.alert(title: "Action impossible", message: "Check your entry", titleAction: "ok", actionStyle: .default)
+            }
+            else {
             textLanguageOrigin.text = translatedAnswer.translatedText
+            viewOrigin.alpha = 0.85
+            }
             
         }
         if targetLanguage == "en" {
-        //if targetLanguage == "en" && textLanguageDestination.text != "" {
-            print(translatedAnswer.translatedText)
-            print("Translated from French")
+            if textLanguageDestination.text != "" {
+                self.alert(title: "Action impossible", message: "Check your entry", titleAction: "ok", actionStyle: .default)
+            }
+            else {
             textLanguageDestination.text = translatedAnswer.translatedText
+            viewDestination.alpha = 0.85
+            }
+           
             
         }
         
     }
+    
+    func didHappenedError(error: TranslationError) {
+           switch error {
+           case .clientError: alert(title: "Internet Connection" , message: "We cannot etablish an internet connection. Please retry in a moment", titleAction: "Ok", actionStyle: .default)
+           case .wrongLanguage : alert(title: "Incorrect entry" , message: "Please check your entries and try again.", titleAction: "Ok", actionStyle: .default)
+           //case .jsonError: alert(title: "Json problem" , message: "Retry please in a moment", titleAction: "Ok", actionStyle: .default)
+           }
+           
+       }
     
     // MARK: Background settings
     
@@ -145,7 +174,7 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
             backgroundImage.image = UIImage(named: "Background_Translator_Berlin")
             backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         } else {
-            backgroundImage.image = UIImage(named: "Background_Translator_NewYork_Ver2")
+            backgroundImage.image = UIImage(named: "Background_Translator_NewYork")
             backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         }
         

@@ -10,12 +10,15 @@ import UIKit
 
 class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
+    
+    
     // MARK: - TableView
     var night = false
     var town = Town.berlin
     
     @IBOutlet var tableViewWeather: UITableView!
     
+    @IBOutlet weak var buttonTown: UIBarButtonItem!
     // MARK: - TemperatureCell
     
     @IBOutlet weak var imageWeatherState: UIImageView!
@@ -38,8 +41,9 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         whichTown(town: .berlin)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Town?", style: .plain , target: self, action: #selector(changeTown))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor(displayP3Red: 247.0, green: 0.0, blue: 143.0, alpha: 1)
+        navigationItem.title = "Berlin"
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [NSAttributedString.Key.foregroundColor: UIColor.init(red:0.97, green:0.44, blue:0.56, alpha:1.0), NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 19.0)!]
         
         weatherService.delegate = self
         weatherService.askWeatherState(town: WeatherService.berlin)
@@ -55,29 +59,30 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let indexpath = IndexPath(row: 0, section: 0)
+        let indexpath = IndexPath(row: 1, section: 0)
         let rowZeroFrame = tableViewWeather.rectForRow(at: indexpath)
         
-        let offset = scrollView.contentOffset.y/(self.tableViewWeather.contentSize.height - rowZeroFrame.height)
-        
-        self.tableViewWeather.backgroundView?.alpha = 1.7-offset
+        let offset = scrollView.contentOffset.y/(self.tableViewWeather.contentSize.height/2 - rowZeroFrame.height/2)
+        print(offset)
+        self.tableViewWeather.backgroundView?.alpha = 1.8-offset
     }
     
     
-    
-    
-    @objc func changeTown() {
+    @IBAction func changeTown(_ sender: Any) {
+        
         print("Changed town")
         WeatherViewController.whichTown = !WeatherViewController.whichTown
         let changeTownAlert = UIAlertController(title: "Change Town?", message: "Do You want to change the town?", preferredStyle: .alert)
         changeTownAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-            print("I want to change to another town")
+            
             if WeatherViewController.self.whichTown == true {
                 self.whichTown(town: .berlin)
+                self.buttonTown.image = UIImage(named: "tv_tower")
                 self.weatherService.askWeatherState(town: WeatherService.berlin)
                 self.repositionCell()
             } else {
                 self.whichTown(town: .newYork)
+                self.buttonTown.image = UIImage(named: "liberty")
                 self.weatherService.askWeatherState(town: WeatherService.newYork)
                 self.repositionCell()
             }
@@ -87,7 +92,12 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         self.present(changeTownAlert, animated: true, completion: nil)
     }
     
+    
+    
     func createDayState(number: Int) -> UIView {
+        
+        
+        
         let dayWeatherState = DayWeatherState()
         
         dayWeatherState.dayName.text = weatherService.setDayStateName(indexList: number)
@@ -113,9 +123,8 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         let value = weatherService.openWeather?.list[indexList].weather[0].main
         let description = weatherService.openWeather?.list[indexList].weather[0].weatherDescription
         let timestamp = Double(((weatherService.openWeather?.list[indexList].dt)!))
-//        print("timestamp: \(timestamp)")
         night = weatherService.setTime(timestamp: timestamp)
-//        print("Night:\(night)")
+        
         switch value {
         case .clouds:
             if night == false {
@@ -174,10 +183,15 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     func didUpdateWeatherData(openWeather: OpenWeather) {
         setStackViewDaysState()
         createTodayState()
-        print("We just get our infos")
+    }
+    func didHappenedError(error: NetworkError) {
+        switch error {
+        case .clientError: self.alert(title: "Internet Connection" , message: "We cannot etablish an internet connection. Please retry in a moment", titleAction: "Ok", actionStyle: .default)
+        case .serverError: self.alert(title: "Internet Connection" , message: "Retry please in a moment", titleAction: "Ok", actionStyle: .default)
+        case .jsonError: self.alert(title: "Json problem" , message: "Retry please in a moment", titleAction: "Ok", actionStyle: .default)
+        }
         
     }
-    
     fileprivate func setStackViewDaysState() {
         if stackViewState.arrangedSubviews.count != 0 {
             resetStackViewDaysState()
@@ -202,10 +216,11 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         
         switch town {
         case .berlin:
-            tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin_Ver2"))
+            tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
             tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
             navigationItem.title = "Berlin"
         case .newYork:
+//            tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
             tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
             tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
             navigationItem.title = "New-York"
@@ -214,7 +229,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     }
     @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
         if sender.direction == .up {
-        print("RefreshWeather")
+            print("RefreshWeather")
         }
     }
     

@@ -107,26 +107,21 @@ struct Weather: Codable {
     }
 }
 
-//enum Icon: String, Codable {
-//    case the01D = "01d"
-//    case the03D = "03d"
-//    case the04D = "04d"
-//    case the04N = "04n"
-//    case the10D = "10d"
-//    case the10N = "10n"
-//    case the03N = "03n"
-//    case the02D = "02d"
-//    //case the03N = "03n"
-//    //case the03D = "03d"
-//    //case the04D = "04d"
-//    //case the04N = "04n"
-//    //case the09D = "09d"
-//    //case the10D = "10d"
-//    //case the10N = "10n"
-//    case the11D = "11d"
-//    case the13D = "13d"
-//    case the50D = "50d"
-//}
+enum Icon: String, Codable {
+    case the01D = "01d"
+    case the02D = "02d"
+    case the03D = "03d"
+    case the04D = "04d"
+    case the10D = "10d"
+    case the11D = "11d"
+    case the13D = "13d"
+    case the01N = "01n"
+    case the02N = "02n"
+    case the03N = "03n"
+    case the04N = "04n"
+    case the10N = "10n"
+    case the50D = "50d"
+}
 
 enum MainEnum: String, Codable {
     case clear = "Clear"
@@ -155,15 +150,10 @@ enum Description: String, Codable {
     case moderateRain = "moderate rain"
     case overcastClouds = "overcast clouds"
     case scatteredClouds = "scattered clouds"
-    //case brokenClouds = "broken clouds"
+    case heavyIntensityRain = "heavy intensity rain"
     case fewClouds = "few clouds"
-    //case lightRain = "light rain"
-    //case moderateRain = "moderate rain"
-    //case overcastClouds = "overcast clouds"
-    //case scatteredClouds = "scattered clouds"
     case mist = "mist"
     case thunderstorm = "thunderstorm"
-    //case clearSky = "clear sky"
     case ShowerRain = "shower rain"}
 
 // MARK: - Wind

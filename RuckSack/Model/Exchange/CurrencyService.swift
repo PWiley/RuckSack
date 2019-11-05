@@ -91,7 +91,14 @@ class CurrencyService {
         return result!
         }
 }
+enum CurrencyError: Error {
+    case clientError
+    case currencyError
+    
+}
+
 
 protocol CurrencyServiceDelegate {
     func didUpdateCurrencyData(eurRate: Double, usdRate: Double)
+    func didHappenedError(error: CurrencyError)
 }

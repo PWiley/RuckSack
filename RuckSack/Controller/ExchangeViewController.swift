@@ -10,6 +10,7 @@ import UIKit
 
 class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     
+    
     let currencyService = CurrencyService()
     let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
     @IBOutlet var exchangeViewController: UIView!
@@ -51,11 +52,32 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         setBackGroundTown()
         addDoneButtonOnKeyboard()
         
-        
+    }
+   
+    @IBAction func originDidBegin(_ sender: Any) {
+        setAlphaView(origin: 0.95, destination: 0.65)
+    }
+    @IBAction func destinationDidBegin(_ sender: Any) {
+        setAlphaView(origin: 0.65, destination: 0.95)
+    }
+    
+    @IBAction func originChanged(_ sender: Any) {
+        amountDestination.text = ""
+    }
+    @IBAction func destinationChanged(_ sender: Any) {
+        amountOrigin.text = ""
     }
     func didUpdateCurrencyData(eurRate: Double, usdRate: Double) {
         currencyOrigin.text = String(format:"%.4f", eurRate)
         currencyDestination.text = String(format:"%.4f", usdRate)
+    }
+    func didHappenedError(error: CurrencyError) {
+        switch error {
+        case .clientError:
+            self.alert(title: "Internet Connection" , message: "We cannot etablish an internet connection. Please retry in a moment", titleAction: "Ok", actionStyle: .default)
+        case .currencyError:
+            self.alert(title: "Incorrect entry" , message: "Please check your entries and try again.", titleAction: "Ok", actionStyle: .default)
+        }
     }
     
     func addDoneButtonOnKeyboard()
@@ -73,24 +95,26 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         self.amountOrigin.inputAccessoryView = doneToolbar
         self.amountDestination.inputAccessoryView = doneToolbar
     }
+   
     
-    @IBAction func OriginChanged(_ sender: Any) {
-        amountDestination.text = ""
-    }
-    @IBAction func destinationChanged(_ sender: Any) {
-        amountOrigin.text = ""
-    }
     @objc func doneButtonAction()
     {
         self.amountOrigin.resignFirstResponder()
         self.amountDestination.resignFirstResponder()
-        currencyService.askCurrencyRate()
+        
         if amountOrigin.text != "" {
-            guard let amountDouble = Double(amountOrigin.text!) else {return}
-            amountDestination.text = String(format:"%.3f", currencyService.calculateConversion(amount: amountDouble, base: "EUR"))
+            currencyService.askCurrencyRate()
+            let amountDouble = Double(amountOrigin.text!)
+            amountDestination.text = String(format:"%.2f", currencyService.calculateConversion(amount: amountDouble!, base: "EUR"))
+            setAlphaView(origin: 0.65, destination: 0.95)
+        }
+        if amountDestination.text != "" {
+            currencyService.askCurrencyRate()
+            let amountDouble = Double(amountDestination.text!)
+            amountOrigin.text = String(format:"%.2f", currencyService.calculateConversion(amount: amountDouble!, base: "USD"))
+            setAlphaView(origin: 0.95, destination: 0.65)
         } else {
-            guard let amountDouble = Double(amountDestination.text!) else {return}
-            amountOrigin.text = String(format:"%.3f", currencyService.calculateConversion(amount: amountDouble, base: "USD"))
+            self.alert(title: "Action impossible", message: "You didn't enter any value to exchange", titleAction: "ok", actionStyle: .default)
         }
        
     }
@@ -107,5 +131,11 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
                backgroundImage.image = UIImage(named: "Background_Exchange_NewYork")
                backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
            }
+       }
+    fileprivate func setAlphaView(origin: Float, destination: Float) {
+           viewOrigin.alpha = CGFloat(origin)
+           viewDestination.alpha = CGFloat(destination)
+           amountOrigin.alpha = CGFloat(origin)
+           amountDestination.alpha = CGFloat(destination)
        }
 }

@@ -119,8 +119,9 @@ extension UIView {
     
     func fadeOut() {
         UIView.animate(withDuration: 1.0, delay: 0.0, options: UIView.AnimationOptions.curveEaseOut, animations: {
-            self.alpha = 0.0
+            self.alpha = 0.5
         }, completion: nil)
     }
+    
     
 }

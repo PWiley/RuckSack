@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Background_Weather_NewYork.png",
+      "filename" : "osman-rana-dI9KhXi0ooE-unsplash.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Background_Weather_NewYork@2x.png",
+      "filename" : "osman-rana-dI9KhXi0ooE-unsplash@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Background_Weather_NewYork@3x.png",
+      "filename" : "osman-rana-dI9KhXi0ooE-unsplash@3x.png",
       "scale" : "3x"
     }
   ],

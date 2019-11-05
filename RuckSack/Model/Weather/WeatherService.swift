@@ -43,16 +43,25 @@ class WeatherService {
         task = session.dataTask(with: request) { data, response, error in
             print(response as Any)
             if error != nil {
+                DispatchQueue.main.async {
+                self.delegate?.didHappenedError(error: .clientError)
+                }
                 print("Client error!")
                 print("something went wrong ", error!)
                 return
             }
             guard let jsonData = data else {
+                DispatchQueue.main.async {
+                self.delegate?.didHappenedError(error: .jsonError)
+                }
                 print("Error data!")
                 
                 return
             }
             guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                DispatchQueue.main.async {
+                self.delegate?.didHappenedError(error: .serverError)
+                }
                 print("Server error!")
                 return
             }
@@ -166,4 +175,5 @@ enum NetworkError: Error {
 }
 protocol WeatherServiceDelegate {
     func didUpdateWeatherData(openWeather: OpenWeather)
+    func didHappenedError(error: NetworkError)
 }

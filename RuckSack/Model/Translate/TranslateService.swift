@@ -15,13 +15,10 @@ class TranslateService {
     private static let translateURL = URL(string: "https://translation.googleapis.com/language/translate/v2/")!
     var translate: Translate?
     var sentence: String = ""
+    var targetLanguage: String = ""
     var request: URLRequest?
     
-//    static var query: [String: String] = [
-//        "key": "AIzaSyAbFRlWhZO4li5HUWUSZ3V3f2n3Z8ooqKs",
-//        "q": "",
-//        "target": ""
-//    ]
+
     func createRequest(sentence: String, targetLanguage: String){
         let query: [String: String] = [
             "key": "AIzaSyAbFRlWhZO4li5HUWUSZ3V3f2n3Z8ooqKs",
@@ -29,30 +26,29 @@ class TranslateService {
             "target": targetLanguage
         ]
         request = URLRequest(url: TranslateService.translateURL.withQueries(query)!)
-        print("query: \(query)")
         request?.httpMethod = "POST"
-        print(request)
+    
     }
     func checkLanguageTarget(target: String) {
           switch target{
           case "fr":
             self.delegate?.didUpdateTranslateData(translate: translate!, targetLanguage: "en")
-              print("Tout est ok")
           case "en":
             self.delegate?.didUpdateTranslateData(translate: translate!, targetLanguage: "fr")
-              print("All good")
           default:
-            print("erreur de language")
+            self.delegate?.didHappenedError(error: .wrongLanguage)
+            
           }
         
       }
     func createCall() {
         
-        
-        
         task = URLSession.shared.dataTask(with: request!) { (data, response, error) in
             
             if error != nil {
+                DispatchQueue.main.async {
+                    self.delegate?.didHappenedError(error: .clientError)
+                }
                 print("Client error!")
                 print("something went wrong ", error!)
                 return
@@ -74,27 +70,18 @@ class TranslateService {
             DispatchQueue.main.async{
                 
                 self.translate = try? JSONDecoder().decode(Translate.self, from: jsonData)
-                print(jsonData)
-                print(self.translate?.data.translations[0].translatedText as Any)
                 self.checkLanguageTarget(target: (self.translate?.data.translations[0].detectedSourceLanguage)!)
-                //self.delegate?.didUpdateTranslateData(translate: self.translate!)
-                
-//                do {
-//                    self.translate = try? JSONDecoder().decode(Translate.self, from: jsonData)
-//                    print(jsonData)
-//                    print(self.translate?.data.translations[0].translatedText as Any)
-//                    self.delegate?.didUpdateTranslateData(translate: self.translate!)
-//                } catch {
-//                    print("JSON error: \(error)")
-//                }
             }
         }
         task?.resume()
     }
-    
-  
+}
+enum TranslationError: Error {
+    case clientError
+    case wrongLanguage
 }
 
 protocol TranslateServiceDelegate{
     func didUpdateTranslateData(translate: Translate, targetLanguage: String)
+    func didHappenedError(error: TranslationError)
 }
