@@ -47,8 +47,8 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         
         weatherService.delegate = self
         weatherService.askWeatherState(town: WeatherService.berlin)
-        let tapRefresh = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        self.tableViewWeather.addGestureRecognizer(tapRefresh)
+//        let tapRefresh = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+//        self.tableViewWeather.addGestureRecognizer(tapRefresh)
     }
     override func viewDidAppear(_ animated: Bool) {
         repositionCell()
@@ -57,29 +57,22 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         
     }
     
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print("refresh can go")
+        if WeatherViewController.self.whichTown == true {
+            self.weatherService.askWeatherState(town: WeatherService.newYork)
+            self.repositionCell()
+        } else {
+            self.weatherService.askWeatherState(town: WeatherService.berlin)
+            self.repositionCell()
+        }
+    }
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let indexpath = IndexPath(row: 1, section: 0)
         let rowZeroFrame = tableViewWeather.rectForRow(at: indexpath)
         
         let offset = scrollView.contentOffset.y/(self.tableViewWeather.contentSize.height/2 - rowZeroFrame.height/2)
-        print(offset)
-        self.tableViewWeather.backgroundView?.alpha = 1.8-offset
-        
-        if offset >= 1.15 {
-            print("refreshWeather")
-            
-            if WeatherViewController.self.whichTown == true {
-                self.weatherService.askWeatherState(town: WeatherService.newYork)
-                self.repositionCell()
-            } else {
-                self.weatherService.askWeatherState(town: WeatherService.berlin)
-                self.repositionCell()
-            }
-            
-        }
-        
-        
-        
+            self.tableViewWeather.backgroundView?.alpha = 1.8-offset
     }
     
     
@@ -235,18 +228,18 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
             navigationItem.title = "Berlin"
         case .newYork:
-//            tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
+            //            tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
             tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
             tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
             navigationItem.title = "New-York"
             
         }
     }
-    @objc func handleTap(_ sender:UITapGestureRecognizer) {
-        if sender.numberOfTapsRequired == 1 {
-            print("RefreshWeather")
-        }
-    }
+//    @objc func handleTap(_ sender:UITapGestureRecognizer) {
+//        if sender.numberOfTapsRequired == 1 {
+//            print("RefreshWeather")
+//        }
+//    }
     
 }
 enum StructureError: Error {
