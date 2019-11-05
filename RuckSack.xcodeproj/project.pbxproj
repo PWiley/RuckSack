@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA0241FA233D1888004EE3BC /* ExtensionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0241F9233D1888004EE3BC /* ExtensionTextView.swift */; };
 		DA072DBA236439A100DDAD7A /* ExtensionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA072DB9236439A100DDAD7A /* ExtensionDouble.swift */; };
 		DA1FEFDB234A6787007E9E23 /* CurrencyStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FEFDA234A6787007E9E23 /* CurrencyStructure.swift */; };
 		DA1FEFDD234A67A0007E9E23 /* TranslateStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FEFDC234A67A0007E9E23 /* TranslateStructure.swift */; };
@@ -31,7 +30,6 @@
 		DADE8D01232E7F850057B0BB /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CFE232E7F850057B0BB /* CurrencyService.swift */; };
 		DADE8D02232E7F850057B0BB /* TranslateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CFF232E7F850057B0BB /* TranslateService.swift */; };
 		DADE8D04232E9F150057B0BB /* ExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8D03232E9F150057B0BB /* ExchangeViewController.swift */; };
-		DAE21C49233C1096009F7001 /* ExtensionUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE21C48233C1096009F7001 /* ExtensionUITextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +43,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DA0241F9233D1888004EE3BC /* ExtensionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionTextView.swift; sourceTree = "<group>"; };
 		DA072DB9236439A100DDAD7A /* ExtensionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDouble.swift; sourceTree = "<group>"; };
 		DA1FEFDA234A6787007E9E23 /* CurrencyStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyStructure.swift; sourceTree = "<group>"; };
 		DA1FEFDC234A67A0007E9E23 /* TranslateStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateStructure.swift; sourceTree = "<group>"; };
@@ -72,7 +69,6 @@
 		DADE8CFE232E7F850057B0BB /* CurrencyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
 		DADE8CFF232E7F850057B0BB /* TranslateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateService.swift; sourceTree = "<group>"; };
 		DADE8D03232E9F150057B0BB /* ExchangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewController.swift; sourceTree = "<group>"; };
-		DAE21C48233C1096009F7001 /* ExtensionUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUITextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,8 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				DADE8CFB232E7DCD0057B0BB /* ExtensionUIView.swift */,
-				DAE21C48233C1096009F7001 /* ExtensionUITextField.swift */,
-				DA0241F9233D1888004EE3BC /* ExtensionTextView.swift */,
 				DA299866234B2B63000C7C98 /* ExtensionURL.swift */,
 				DA072DB9236439A100DDAD7A /* ExtensionDouble.swift */,
 				DADBCDF7236F5DAD00273602 /* ExtensionViewController.swift */,
@@ -319,7 +313,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAE21C49233C1096009F7001 /* ExtensionUITextField.swift in Sources */,
 				DA915BB42368AEDE00215602 /* DayWeatherState.swift in Sources */,
 				DADBCDF8236F5DAD00273602 /* ExtensionViewController.swift in Sources */,
 				DADE8CFA232E7D1D0057B0BB /* TranslatorViewController.swift in Sources */,
@@ -337,7 +330,6 @@
 				DADE8D01232E7F850057B0BB /* CurrencyService.swift in Sources */,
 				DADE8CC6232E77720057B0BB /* AppDelegate.swift in Sources */,
 				DADE8D04232E9F150057B0BB /* ExchangeViewController.swift in Sources */,
-				DA0241FA233D1888004EE3BC /* ExtensionTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
