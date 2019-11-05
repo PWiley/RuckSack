@@ -287,7 +287,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Berlin" id="aIY-Ls-tNa">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="tv_tower" style="plain" id="hXT-se-iVd">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="tv_tower" id="hXT-se-iVd">
                             <color key="tintColor" red="0.96862745098039216" green="0.4392156862745098" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="changeTown:" destination="yyZ-Xj-FZX" id="QSd-pW-4Le"/>
