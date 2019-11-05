@@ -65,7 +65,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         print(offset)
         self.tableViewWeather.backgroundView?.alpha = 1.8-offset
         
-        if offset >= 1.29 {
+        if offset >= 1.15 {
             print("refreshWeather")
             
             if WeatherViewController.self.whichTown == true {
