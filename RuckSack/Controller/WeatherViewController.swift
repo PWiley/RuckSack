@@ -47,9 +47,8 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         
         weatherService.delegate = self
         weatherService.askWeatherState(town: WeatherService.berlin)
-        let gestureRefresh = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-        gestureRefresh.direction = .up
-        self.tableViewWeather.addGestureRecognizer(gestureRefresh)
+        let tapRefresh = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        self.tableViewWeather.addGestureRecognizer(tapRefresh)
     }
     override func viewDidAppear(_ animated: Bool) {
         repositionCell()
@@ -65,6 +64,22 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         let offset = scrollView.contentOffset.y/(self.tableViewWeather.contentSize.height/2 - rowZeroFrame.height/2)
         print(offset)
         self.tableViewWeather.backgroundView?.alpha = 1.8-offset
+        
+        if offset >= 1.29 {
+            print("refreshWeather")
+            
+            if WeatherViewController.self.whichTown == true {
+                self.weatherService.askWeatherState(town: WeatherService.newYork)
+                self.repositionCell()
+            } else {
+                self.weatherService.askWeatherState(town: WeatherService.berlin)
+                self.repositionCell()
+            }
+            
+        }
+        
+        
+        
     }
     
     
@@ -227,8 +242,8 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             
         }
     }
-    @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
-        if sender.direction == .up {
+    @objc func handleTap(_ sender:UITapGestureRecognizer) {
+        if sender.numberOfTapsRequired == 1 {
             print("RefreshWeather")
         }
     }
