@@ -180,7 +180,7 @@
                         <outlet property="flagLanguageDestination" destination="0nt-yS-zVo" id="zJC-3u-T1s"/>
                         <outlet property="flagLanguageOrigin" destination="7vE-KZ-BDP" id="WKX-Hl-6PN"/>
                         <outlet property="textLanguageDestination" destination="gmE-y4-cPO" id="SVO-UN-MdR"/>
-                        <outlet property="textLanguageOrigin" destination="vHu-qx-riL" id="aQk-xP-2cc"/>
+                        <outlet property="textLanguageOrigin" destination="vHu-qx-riL" id="X6c-87-cWM"/>
                         <outlet property="titleLanguageDestination" destination="Q06-Ea-MHA" id="2aW-DL-uWR"/>
                         <outlet property="titleLanguageOrigin" destination="RRU-R0-pim" id="UQ4-Rm-zBv"/>
                         <outlet property="translatorViewController" destination="JYs-9e-bZe" id="WES-Z4-ErK"/>
@@ -240,7 +240,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLD-3e-wBY" customClass="ActualDayWeather" customModule="RuckSack" customModuleProvider="target">
+                                                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLD-3e-wBY" customClass="ActualDayWeather" customModule="RuckSack" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -264,6 +264,7 @@
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="6pN-r1-txa">
                                                     <rect key="frame" x="8" y="0.0" width="359" height="143"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </stackView>
                                             </subviews>
                                             <constraints>

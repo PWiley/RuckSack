@@ -36,10 +36,10 @@ class TranslateService {
     func checkLanguageTarget(target: String) {
           switch target{
           case "fr":
-            self.delegate?.didUpdateTranslateData(translate: translate!, languageField: "fr")
+            self.delegate?.didUpdateTranslateData(translate: translate!, targetLanguage: "en")
               print("Tout est ok")
           case "en":
-            self.delegate?.didUpdateTranslateData(translate: translate!, languageField: "en")
+            self.delegate?.didUpdateTranslateData(translate: translate!, targetLanguage: "fr")
               print("All good")
           default:
             print("erreur de language")
@@ -57,8 +57,20 @@ class TranslateService {
                 print("something went wrong ", error!)
                 return
             }
-            guard let jsonData = data, error == nil else { return}
-            guard let response = response as? HTTPURLResponse, (200...209).contains(response.statusCode) else {return}
+            guard let jsonData = data else {
+                print("Error data!")
+                
+                return
+            }
+            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                print("Server error!")
+                return
+            }
+            
+            guard let mime = response.mimeType, mime == "application/json" else {
+                print("Wrong MIME type!")
+                return
+            }
             DispatchQueue.main.async{
                 
                 self.translate = try? JSONDecoder().decode(Translate.self, from: jsonData)
@@ -84,5 +96,5 @@ class TranslateService {
 }
 
 protocol TranslateServiceDelegate{
-    func didUpdateTranslateData(translate: Translate, languageField: String)
+    func didUpdateTranslateData(translate: Translate, targetLanguage: String)
 }

@@ -32,12 +32,6 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     let weatherService = WeatherService()
     
     
-    func didUpdateWeatherData(openWeather: OpenWeather) {
-        setStackViewDaysState()
-        createTodayState()
-        print("We just get our infos")
-        
-    }
     
     static var whichTown: Bool = true
     
@@ -49,41 +43,28 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         
         weatherService.delegate = self
         weatherService.askWeatherState(town: WeatherService.berlin)
-        //setupEffectBlur()
-        //setupAlphaBackground()
-        //self.tableViewWeather.backgroundColor = UIColor.clear
-//        let gestureRefresh = UISwipeGestureRecognizer(target: self, action: #selector(self.refreshWeatherState))
-//        gestureRefresh.direction = .down
-//        self.view.addGestureRecognizer(gestureRefresh)
+        let gestureRefresh = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        gestureRefresh.direction = .up
+        self.tableViewWeather.addGestureRecognizer(gestureRefresh)
     }
     override func viewDidAppear(_ animated: Bool) {
-        let indexPath: IndexPath = IndexPath(row: 1, section: 0)
-        tableViewWeather.scrollToRow(at: indexPath, at: .bottom, animated: true)
-        //tableViewWeather.backgroundView?.fadeOut()
+        repositionCell()
         print(tableViewWeather.bounds.maxY)
         weatherService.askWeatherState(town: WeatherService.berlin)
-        //tableViewWeather.backgroundView?.fadeIn()
-        //setupVisualEffectBlur()
+        
     }
-//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let contentOffSetY = scrollView.contentOffset.y
-//        print(contentOffSetY)
-//        if contentOffSetY > 0 {
-//            animator.fractionComplete = 0.5
-//            return
-//        }
-//        animator.fractionComplete = abs(contentOffSetY)
-//
-//    }
-   override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let indexpath = IndexPath(row: 0, section: 0)
         let rowZeroFrame = tableViewWeather.rectForRow(at: indexpath)
-        //print(rowZeroFrame.height)
+        
         let offset = scrollView.contentOffset.y/(self.tableViewWeather.contentSize.height - rowZeroFrame.height)
-        //print(offset)
-        self.tableViewWeather.backgroundView?.alpha = 1-offset
+        
+        self.tableViewWeather.backgroundView?.alpha = 1.7-offset
     }
-
+    
+    
+    
     
     @objc func changeTown() {
         print("Changed town")
@@ -93,18 +74,12 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             print("I want to change to another town")
             if WeatherViewController.self.whichTown == true {
                 self.whichTown(town: .berlin)
-                //self.navigationItem.title = "Berlin"
-                //self.tableViewWeather.backgroundView?.fadeOut()
                 self.weatherService.askWeatherState(town: WeatherService.berlin)
-                //self.tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin_Ver2"))
-                //self.tableViewWeather.backgroundView?.fadeIn()
+                self.repositionCell()
             } else {
                 self.whichTown(town: .newYork)
-                //self.navigationItem.title = "New-York"
-                //self.tableViewWeather.backgroundView?.fadeOut()
                 self.weatherService.askWeatherState(town: WeatherService.newYork)
-                //self.tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
-                //self.tableViewWeather.backgroundView?.fadeIn()
+                self.repositionCell()
             }
         }))
         changeTownAlert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
@@ -112,7 +87,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         self.present(changeTownAlert, animated: true, completion: nil)
     }
     
-    func createDayState(number: Int) -> UIView{
+    func createDayState(number: Int) -> UIView {
         let dayWeatherState = DayWeatherState()
         
         dayWeatherState.dayName.text = weatherService.setDayStateName(indexList: number)
@@ -136,13 +111,11 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     func setStateImage(indexList: Int) -> UIImage {
         var imageStateDay = UIImage()
         let value = weatherService.openWeather?.list[indexList].weather[0].main
-        //print("State value impossible to get")
-        //throw StructureError.valueError
-        
         let description = weatherService.openWeather?.list[indexList].weather[0].weatherDescription
-        //print("Description impossible to get")
-        //throw StructureError.descriptionError
-        
+        let timestamp = Double(((weatherService.openWeather?.list[indexList].dt)!))
+//        print("timestamp: \(timestamp)")
+        night = weatherService.setTime(timestamp: timestamp)
+//        print("Night:\(night)")
         switch value {
         case .clouds:
             if night == false {
@@ -174,7 +147,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
                 imageStateDay = UIImage(named: "09d")!
             }
             else {
-                imageStateDay = UIImage(named: "10d")!
+                imageStateDay = UIImage(named: "10n")!
             }
         case .clear:
             if night == false {
@@ -197,6 +170,14 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         }
         return imageStateDay
     }
+    
+    func didUpdateWeatherData(openWeather: OpenWeather) {
+        setStackViewDaysState()
+        createTodayState()
+        print("We just get our infos")
+        
+    }
+    
     fileprivate func setStackViewDaysState() {
         if stackViewState.arrangedSubviews.count != 0 {
             resetStackViewDaysState()
@@ -212,40 +193,12 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             view.removeFromSuperview()
         }
     }
-   //var animator: UIViewPropertyAnimator!
-//
-//    fileprivate func setupEffectBlur() {
-//        animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear, animations: { [weak self] in
-//             let blurEffect = UIBlurEffect(style: .regular)
-//                   let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//            blurEffectView.frame = self!.tableViewWeather.frame
-//            self!.tableViewWeather.backgroundView!.insertSubview(blurEffectView, at: 0)
-//            //self!.tableViewWeather.addSubview(blurEffectView)
-//            self!.tableViewWeather.separatorEffect = UIVibrancyEffect(blurEffect: blurEffect)
-//        })
-////        animator.fractionComplete = 1
-//
-//
-//
-//
-//
-//    }
+    fileprivate func repositionCell() {
+        let indexPath: IndexPath = IndexPath(row: 1, section: 0)
+        self.tableViewWeather.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
     
-//    func setupAlphaBackground() {
-//         animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear, animations: { [unowned self] in
-//            self.tableViewWeather.backgroundView?.alpha = self.animator.fractionComplete
-////                    self!.tableViewWeather.backgroundView!.insertSubview(blurEffectView, at: 0)
-////                    //self!.tableViewWeather.addSubview(blurEffectView)
-////                    self!.tableViewWeather.separatorEffect = UIVibrancyEffect(blurEffect: blurEffect)
-//                })
-//        animator.startAnimation()
-//
-//    }
     func whichTown(town: Town) {
-        
-//        var backgroundTableView = UIImageView()
-//        backgroundTableView.contentMode = .scaleAspectFit
-        //tableViewWeather.backgroundView = backgroundTableView
         
         switch town {
         case .berlin:
@@ -257,23 +210,14 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
             navigationItem.title = "New-York"
             
-            
         }
     }
-    //    func setupVisualEffectBlur() {
-    //        animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear, animations: {
-    //
-    //            let blurEffect = UIBlurEffect(style: .dark)
-    //            let visualEffectView = UIVisualEffectView(effect: blurEffect)
-    //            let imageView = self.tableViewWeather.backgroundView
-    //            visualEffectView.frame = imageView!.bounds
-    //            imageView!.addSubview(visualEffectView)
-    //        })
-    //        animator.fractionComplete = 0.5
-    //    }
-//    @objc func refreshWeatherState() {
-//        weatherService.askWeatherState(town: )
-//    }
+    @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+        if sender.direction == .up {
+        print("RefreshWeather")
+        }
+    }
+    
 }
 enum StructureError: Error {
     case valueError

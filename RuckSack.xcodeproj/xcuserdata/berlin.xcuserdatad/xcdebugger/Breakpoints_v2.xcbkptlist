@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C306F71D-7908-448F-BECC-F3A56E97EDC7"
+            uuid = "8A99E4DE-6B6B-4332-8D03-BA857E79B93F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RuckSack/Controller/TranslatorViewController.swift"
+            filePath = "RuckSack/Controller/WeatherViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "TranslatorViewController"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
+            landmarkName = "WeatherViewController"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>

@@ -8,14 +8,12 @@
 
 import UIKit
 
-class TranslatorViewController: UIViewController, TranslateServiceDelegate {
+class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITextViewDelegate {
     
     
     
     var translateService = TranslateService()
-    
-    //var sentence: String?
-    //static var source: String?
+   
     @IBOutlet var translatorViewController: UIView!
     @IBOutlet weak var flagLanguageOrigin: UIImageView!
     @IBOutlet weak var titleLanguageOrigin: UILabel!
@@ -27,8 +25,6 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate {
     
     let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         translateService.delegate = self
@@ -36,21 +32,34 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        textLanguageOrigin.delegate = self
+        textLanguageDestination.delegate = self
         setBackGroundTown()
         translatorViewController.insertSubview(backgroundImage, at: 0)
         
     }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView == textLanguageOrigin {
+            textLanguageDestination.text = ""
+            print("TEXT ORIGIN")
+            
+        }
+        if textView == textLanguageDestination {
+            textLanguageOrigin.text = ""
+            print("TEXT DESTINATION")
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        //setBackGroundTown()
+        setBackGroundTown()
         addDoneButtonOnKeyboard()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //setBackGroundTown()
+        setBackGroundTown()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -96,38 +105,29 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate {
         self.textLanguageOrigin.resignFirstResponder()
         self.textLanguageDestination.resignFirstResponder()
         if textLanguageOrigin.text != "" {
-            textLanguageDestination.text = ""
-            //print(textLanguageOrigin.text)
-            //translateService.sentence = textLanguageOrigin.text
-            //translateService.setLanguageTarget(target: .english)
             translateService.createRequest(sentence: textLanguageOrigin.text, targetLanguage: "en")
-            //translateService.createCall()
-            
         }
         if textLanguageDestination.text != "" {
-            textLanguageOrigin.text = ""
-            //translateService.sentence = textLanguageDestination.text
-            //translateService.setLanguageTarget(target: .french)
-            translateService.createRequest(sentence: textLanguageOrigin.text, targetLanguage: "fr")
-            //translateService.createCall()
+            translateService.createRequest(sentence: textLanguageDestination.text, targetLanguage: "fr")
         }
         translateService.createCall()
         
     }
     
-    func didUpdateTranslateData(translate: Translate, languageField: String) {
+    func didUpdateTranslateData(translate: Translate, targetLanguage: String) {
         let translatedAnswer = translate.data.translations[0]
-//        translateService.checkLanguageTarget(target: translatedAnswer.detectedSourceLanguage)
         
-        if languageField == "en" && textLanguageDestination.text != "" {
+        //if targetLanguage == "fr" && textLanguageOrigin.text != "" {
+        if targetLanguage == "fr" {
             print(translatedAnswer.translatedText)
-            print("Translated from english")
+            print("Translated from English")
             textLanguageOrigin.text = translatedAnswer.translatedText
             
         }
-        if languageField == "fr" && textLanguageOrigin.text != "" {
+        if targetLanguage == "en" {
+        //if targetLanguage == "en" && textLanguageDestination.text != "" {
             print(translatedAnswer.translatedText)
-            print("Translated from french")
+            print("Translated from French")
             textLanguageDestination.text = translatedAnswer.translatedText
             
         }
@@ -143,11 +143,11 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate {
         print(WeatherViewController.whichTown)
         if WeatherViewController.whichTown == true {
             backgroundImage.image = UIImage(named: "Background_Translator_Berlin")
+            backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         } else {
             backgroundImage.image = UIImage(named: "Background_Translator_NewYork_Ver2")
+            backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         }
-        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         
-        //        translatorViewController.insertSubview(backgroundImage, at: 0)
     }
 }

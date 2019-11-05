@@ -11,7 +11,7 @@ import UIKit
 class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     
     let currencyService = CurrencyService()
-    
+    let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
     @IBOutlet var exchangeViewController: UIView!
     
     @IBOutlet weak var viewOrigin: DesignableView!
@@ -33,7 +33,7 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         //self.hideKeyboardWhenTappedAround()
         currencyService.delegate = self
         currencyService.askCurrencyRate()
-        setBackGroundTown()
+        exchangeViewController.insertSubview(backgroundImage, at: 0)
         // Do any additional setup after loading the view.
     }
     
@@ -92,21 +92,20 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
             guard let amountDouble = Double(amountDestination.text!) else {return}
             amountOrigin.text = String(format:"%.3f", currencyService.calculateConversion(amount: amountDouble, base: "USD"))
         }
-        
-        
+       
     }
     
      // MARK : Configuration Background
     
-    
     fileprivate func setBackGroundTown() {
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        if WeatherViewController.whichTown == true {
-            backgroundImage.image = UIImage(named: "Background_Exchange_Berlin")
-        } else {
-            backgroundImage.image = UIImage(named: "Background_Exchange_NewYork")
-        }
-        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
-        exchangeViewController.insertSubview(backgroundImage, at: 0)
-    }
+          
+           print(WeatherViewController.whichTown)
+           if WeatherViewController.whichTown == true {
+               backgroundImage.image = UIImage(named: "Background_Exchange_Berlin")
+               backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+           } else {
+               backgroundImage.image = UIImage(named: "Background_Exchange_NewYork")
+               backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+           }
+       }
 }
