@@ -58,7 +58,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     }
     
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print("refresh can go")
+        //print("refresh can go")
         if WeatherViewController.self.whichTown == true {
             self.weatherService.askWeatherState(town: WeatherService.newYork)
             self.repositionCell()

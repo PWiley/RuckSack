@@ -22,23 +22,23 @@ class WeatherService {
         "appid": "d2fc02766020f446cb8063c244166041"
     ]
     static var newYork: [String: String] = [
-        "q": "new York,us",
+        "q": "new york,us",
         "mode": "json",
         "appid": "d2fc02766020f446cb8063c244166041"
     ]
     
-    func createRequest() -> URLRequest {
+    func createRequest(query: [String: String]) -> URLRequest {
         
-        var request = URLRequest(url: (WeatherService.baseURL.withQueries(WeatherService.berlin)!))
+        var request = URLRequest(url: (WeatherService.baseURL.withQueries(query)!))
         request.httpMethod = "POST"
         return request
     }
     
     func askWeatherState(town: [String: String]) {
         
-        let request = createRequest()
-        
-        print(town.values)
+        let request = createRequest(query: town)
+        print(request)
+        print(town)
         let session = URLSession(configuration: .default)
         task = session.dataTask(with: request) { data, response, error in
             print(response as Any)
