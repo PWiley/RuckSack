@@ -104,14 +104,11 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
     func createDayState(number: Int) -> UIView {
         
-        
-        
         let dayWeatherState = DayWeatherState()
         
         dayWeatherState.dayName.text = weatherService.setDayStateName(indexList: number)
         dayWeatherState.imageState.image = setStateImage(indexList: number)
-        dayWeatherState.humidityAmount.text =
-            String(format:"%.f", weatherService.openWeather!.list[number].main.humidity) + "%"
+        dayWeatherState.humidityAmount.text = String(weatherService.openWeather!.list[number].main.humidity) + "%"
         dayWeatherState.temp.text =
             String(format:"%.f", weatherService.openWeather!.list[number].main.tempMax.celcius) + "°C"
         return dayWeatherState
