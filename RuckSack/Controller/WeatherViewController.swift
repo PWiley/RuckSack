@@ -110,20 +110,19 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         
         dayWeatherState.dayName.text = weatherService.setDayStateName(indexList: number)
         dayWeatherState.imageState.image = setStateImage(indexList: number)
-        dayWeatherState.tempMax.text =
-            String(format:"%.f", weatherService.openWeather!.list[number].main.tempMax.celcius) + " °C"
-        dayWeatherState.tempMin.text =
-            String(format:"%.f", weatherService.openWeather!.list[number].main.tempMin.celcius) + " °C"
+        dayWeatherState.humidityAmount.text =
+            String(format:"%.f", weatherService.openWeather!.list[number].main.humidity) + "%"
+        dayWeatherState.temp.text =
+            String(format:"%.f", weatherService.openWeather!.list[number].main.tempMax.celcius) + "°C"
         return dayWeatherState
     }
     func createTodayState() {
         
-        actualDayWeather.weatherDescription.text = weatherService.openWeather!.list[0].weather[0].weatherDescription.rawValue
+        actualDayWeather.weatherDescription.text = weatherService.openWeather!.list[0].weather[0].weatherDescription.rawValue.capitalized
         actualDayWeather.imageActualWeather.image = setStateImage(indexList: 0)
-        actualDayWeather.tempMax.text = String(format:"%.f", weatherService.openWeather!.list[0].main.tempMax.celcius) + " °C"
-        actualDayWeather.tempMin.text =
-            String(format:"%.f", weatherService.openWeather!.list[0].main.tempMin.celcius) + " °C"
-        actualDayWeather.tempActual.text = String(format:"%.f", weatherService.openWeather!.list[0].main.temp.celcius) + " °C"
+        actualDayWeather.humidyAmount.text = String(weatherService.openWeather!.list[0].main.humidity) + "%"
+        print(weatherService.openWeather!.list[0].main.humidity)
+        actualDayWeather.tempActual.text = String(format:"%.f", weatherService.openWeather!.list[0].main.temp.celcius) + "°C"
     }
     
     func setStateImage(indexList: Int) -> UIImage {
@@ -164,7 +163,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
                 imageStateDay = UIImage(named: "09d")!
             }
             else {
-                imageStateDay = UIImage(named: "10n")!
+                imageStateDay = UIImage(named: "10d")!
             }
         case .clear:
             if night == false {
