@@ -379,7 +379,7 @@
                                             <constraint firstAttribute="width" constant="173" id="sVy-vm-4KZ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="NO"/>
                                         </userDefinedRuntimeAttributes>
