@@ -15,8 +15,7 @@ class ActualDayWeather: UIView {
     @IBOutlet weak var imageActualWeather: UIImageView!
     @IBOutlet weak var weatherDescription: UILabel!
     @IBOutlet weak var tempActual: UILabel!
-    @IBOutlet weak var tempMax: UILabel!
-    @IBOutlet weak var tempMin: UILabel!
+    @IBOutlet weak var humidyAmount: UILabel!
    
     /*
      // Only override draw() if you perform custom drawing.
