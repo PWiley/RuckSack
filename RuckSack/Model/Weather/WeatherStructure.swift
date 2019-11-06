@@ -127,8 +127,6 @@ enum MainEnum: String, Codable {
     case clear = "Clear"
     case clouds = "Clouds"
     case rain = "Rain"
-    //case rain = "Rain"
-    //case clear = "Clear"
     case thunderstorm = "Thunderstorm"
     case drizzle = "Drizzle"
     case snow = "Snow"
@@ -154,7 +152,10 @@ enum Description: String, Codable {
     case fewClouds = "few clouds"
     case mist = "mist"
     case thunderstorm = "thunderstorm"
-    case ShowerRain = "shower rain"}
+    case showerRain = "shower rain"
+    case lightSnow = "light snow"
+    
+}
 
 // MARK: - Wind
 struct Wind: Codable {

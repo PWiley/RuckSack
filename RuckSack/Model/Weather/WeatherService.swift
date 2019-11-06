@@ -17,7 +17,7 @@ class WeatherService {
     var openWeather: OpenWeather?
     
     static var berlin: [String: String] = [
-        "q": "Berlin,de",
+        "q": "berlin,de",
         "mode": "json",
         "appid": "d2fc02766020f446cb8063c244166041"
     ]
