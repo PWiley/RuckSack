@@ -49,6 +49,10 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         weatherService.askWeatherState(town: WeatherService.berlin)
 //        let tapRefresh = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
 //        self.tableViewWeather.addGestureRecognizer(tapRefresh)
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl?.addTarget(self, action: #selector(handleSwipes(_:)), for: .valueChanged)
+        
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         repositionCell()
@@ -57,16 +61,16 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         
     }
     
-    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        //print("refresh can go")
-        if WeatherViewController.self.whichTown == true {
-            self.weatherService.askWeatherState(town: WeatherService.newYork)
-            self.repositionCell()
-        } else {
-            self.weatherService.askWeatherState(town: WeatherService.berlin)
-            self.repositionCell()
-        }
-    }
+//    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        //print("refresh can go")
+//        if WeatherViewController.self.whichTown == true {
+//            self.weatherService.askWeatherState(town: WeatherService.newYork)
+//            self.repositionCell()
+//        } else {
+//            self.weatherService.askWeatherState(town: WeatherService.berlin)
+//            self.repositionCell()
+//        }
+//    }
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let indexpath = IndexPath(row: 1, section: 0)
         let rowZeroFrame = tableViewWeather.rectForRow(at: indexpath)
@@ -128,7 +132,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         let description = weatherService.openWeather?.list[indexList].weather[0].weatherDescription
         let timestamp = Double(((weatherService.openWeather?.list[indexList].dt)!))
         night = weatherService.setTime(timestamp: timestamp)
-        
+        print(night)
         switch value {
         case .clouds:
             if night == false {
@@ -158,10 +162,12 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             }
             if description!.rawValue == "light intensity shower rain" ||   description!.rawValue == "shower rain" || description!.rawValue == "heavy intensity shower rain" || description!.rawValue == "ragged shower rain" {
                 imageStateDay = UIImage(named: "09d")!
-            }
-            else {
+            } else if night == true {
+                imageStateDay = UIImage(named: "10n")!
+            } else {
                 imageStateDay = UIImage(named: "10d")!
             }
+            
         case .clear:
             if night == false {
                 imageStateDay = UIImage(named: "01d")!
@@ -231,11 +237,14 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             
         }
     }
-//    @objc func handleTap(_ sender:UITapGestureRecognizer) {
-//        if sender.numberOfTapsRequired == 1 {
-//            print("RefreshWeather")
-//        }
-//    }
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .down {
+        print("refreshing")
+        self.tableViewWeather.reloadData()
+        self.refreshControl?.endRefreshing()
+        print("refresh")
+        }
+    }
     
 }
 enum StructureError: Error {
