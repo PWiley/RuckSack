@@ -14,8 +14,8 @@ class DayWeatherState: UIView {
     
     @IBOutlet weak var dayName: UILabel!
     @IBOutlet weak var imageState: UIImageView!
-    @IBOutlet weak var tempMax: UILabel!
-    @IBOutlet weak var tempMin: UILabel!
+    @IBOutlet weak var humidityAmount: UILabel!
+    @IBOutlet weak var temp: UILabel!
     
     
     

@@ -12,9 +12,9 @@
             <connections>
                 <outlet property="dayName" destination="zcI-CR-6Ft" id="kvo-Pp-5cg"/>
                 <outlet property="dayWeatherState" destination="iN0-l3-epB" id="W8Z-KH-kGz"/>
+                <outlet property="humidityAmount" destination="gPT-Mt-ck2" id="ruw-Dl-rtx"/>
                 <outlet property="imageState" destination="qn0-mH-OnB" id="N9I-BL-jsl"/>
-                <outlet property="tempMax" destination="gPT-Mt-ck2" id="ruw-Dl-rtx"/>
-                <outlet property="tempMin" destination="siU-sQ-EDR" id="IyE-nW-kLu"/>
+                <outlet property="temp" destination="siU-sQ-EDR" id="IyE-nW-kLu"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -25,24 +25,24 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xmr-Ai-sA6" userLabel="DayWeatherState">
                     <rect key="frame" x="0.0" y="0.0" width="374" height="32"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15C°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPT-Mt-ck2" userLabel="Temp Max">
-                            <rect key="frame" x="320" y="0.0" width="40" height="32"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="82 %" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPT-Mt-ck2" userLabel="Humidity Amount">
+                            <rect key="frame" x="311" y="-4" width="49" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="40" id="EBG-r1-Zv2"/>
+                                <constraint firstAttribute="width" constant="49" id="EBG-r1-Zv2"/>
                                 <constraint firstAttribute="width" secondItem="gPT-Mt-ck2" secondAttribute="height" multiplier="35:32" constant="5" id="Yyv-lG-tWG"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                            <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10C°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="siU-sQ-EDR" userLabel="Temp Min" customClass="Day">
-                            <rect key="frame" x="264" y="0.0" width="44" height="32"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10C°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="siU-sQ-EDR" userLabel="Temp" customClass="Day">
+                            <rect key="frame" x="251" y="-1.5" width="48" height="35"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="44" id="BQk-1F-BZ1"/>
+                                <constraint firstAttribute="width" constant="48" id="BQk-1F-BZ1"/>
                                 <constraint firstAttribute="width" secondItem="siU-sQ-EDR" secondAttribute="height" multiplier="11:8" id="bDI-PF-7D2"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wednesday 25/11" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zcI-CR-6Ft">
@@ -81,7 +81,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" red="0.31764705882352939" green="0.31764705882352939" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="xmr-Ai-sA6" secondAttribute="bottom" id="2rQ-ZF-IeN"/>
                 <constraint firstAttribute="trailing" secondItem="xmr-Ai-sA6" secondAttribute="trailing" id="3iz-b3-COx"/>
