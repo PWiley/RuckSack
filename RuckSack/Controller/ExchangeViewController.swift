@@ -63,13 +63,16 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     
     @IBAction func originChanged(_ sender: Any) {
         amountDestination.text = ""
-    }
+        amountOrigin.text = amountOrigin.text?.trimmed
+        
+        }
     @IBAction func destinationChanged(_ sender: Any) {
         amountOrigin.text = ""
+        amountDestination.text = amountDestination.text?.trimmed
     }
-    func didUpdateCurrencyData(eurRate: Double, usdRate: Double) {
-        currencyOrigin.text = String(format:"%.4f", eurRate)
-        currencyDestination.text = String(format:"%.4f", usdRate)
+    func didUpdateCurrencyData(eurRate: String, usdRate: String) {
+        currencyOrigin.text = eurRate
+        currencyDestination.text = usdRate
     }
     func didHappenedError(error: CurrencyError) {
         switch error {
@@ -102,19 +105,18 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         self.amountOrigin.resignFirstResponder()
         self.amountDestination.resignFirstResponder()
         
-        if amountOrigin.text != "" {
+        if amountOrigin.text != "" && !(amountOrigin.text?.contains(".."))! {
             currencyService.askCurrencyRate()
             let amountDouble = Double(amountOrigin.text!)
             amountDestination.text = String(format:"%.2f", currencyService.calculateConversion(amount: amountDouble!, base: "EUR"))
             setAlphaView(origin: 0.65, destination: 0.95)
-        }
-        if amountDestination.text != "" {
+        } else if amountDestination.text != "" && !(amountDestination.text?.contains(".."))! {
             currencyService.askCurrencyRate()
             let amountDouble = Double(amountDestination.text!)
             amountOrigin.text = String(format:"%.2f", currencyService.calculateConversion(amount: amountDouble!, base: "USD"))
             setAlphaView(origin: 0.95, destination: 0.65)
         } else {
-            self.alert(title: "Action impossible", message: "You didn't enter any value to exchange", titleAction: "ok", actionStyle: .default)
+            self.alert(title: "Action impossible", message: "Check please your entry ", titleAction: "ok", actionStyle: .default)
         }
        
     }
