@@ -1,21 +1,20 @@
 //
-//  ExtensionString.swift
+//  ExtensionDouble.swift
 //  RuckSack
 //
-//  Created by Patrick Wiley on 26.10.19.
+//  Created by Patrick Wiley on 06.11.19.
 //  Copyright © 2019 Patrick Wiley. All rights reserved.
 //
 
 import Foundation
 
-
 extension Double {
-    var celcius: Double {
-        return self - 273.15
+    var clean: String {
+        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
-//    var roundTo: Double {
-//        let divisor = pow(100.0, Double(0))
-//        (format:"%.f", weatherService.forecast!.list[number].main.tempMax.celcius)
-//        return (self * divisor).rounded() / divisor
-//    }
+    
+    var celcius: Double {
+        let tempCelcius = self - 273.15
+        return tempCelcius
+    }
 }
