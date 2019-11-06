@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA072DBA236439A100DDAD7A /* ExtensionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA072DB9236439A100DDAD7A /* ExtensionDouble.swift */; };
 		DA1FEFDB234A6787007E9E23 /* CurrencyStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FEFDA234A6787007E9E23 /* CurrencyStructure.swift */; };
 		DA1FEFDD234A67A0007E9E23 /* TranslateStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FEFDC234A67A0007E9E23 /* TranslateStructure.swift */; };
 		DA1FEFDF234A67AF007E9E23 /* WeatherStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FEFDE234A67AF007E9E23 /* WeatherStructure.swift */; };
 		DA1FEFE1234A6BED007E9E23 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DA1FEFE0234A6BED007E9E23 /* .gitignore */; };
 		DA299867234B2B63000C7C98 /* ExtensionURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA299866234B2B63000C7C98 /* ExtensionURL.swift */; };
+		DA6C85CD2372CB1900B70BF1 /* ExtensionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C85CC2372CB1900B70BF1 /* ExtensionDouble.swift */; };
+		DA6C85CF2372DAD700B70BF1 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C85CE2372DAD700B70BF1 /* ExtensionString.swift */; };
 		DA6CF4D7236C998800D0EF5E /* ActualDayWeather.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA6CF4D6236C998800D0EF5E /* ActualDayWeather.xib */; };
 		DA6CF4DB236CB1F600D0EF5E /* ActualDayWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6CF4DA236CB1F600D0EF5E /* ActualDayWeather.swift */; };
 		DA915BB22368AED400215602 /* DayWeatherState.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA915BB12368AED400215602 /* DayWeatherState.xib */; };
@@ -43,12 +44,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DA072DB9236439A100DDAD7A /* ExtensionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDouble.swift; sourceTree = "<group>"; };
 		DA1FEFDA234A6787007E9E23 /* CurrencyStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyStructure.swift; sourceTree = "<group>"; };
 		DA1FEFDC234A67A0007E9E23 /* TranslateStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateStructure.swift; sourceTree = "<group>"; };
 		DA1FEFDE234A67AF007E9E23 /* WeatherStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStructure.swift; sourceTree = "<group>"; };
 		DA1FEFE0234A6BED007E9E23 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DA299866234B2B63000C7C98 /* ExtensionURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionURL.swift; sourceTree = "<group>"; };
+		DA6C85CC2372CB1900B70BF1 /* ExtensionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDouble.swift; sourceTree = "<group>"; };
+		DA6C85CE2372DAD700B70BF1 /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
 		DA6CF4D6236C998800D0EF5E /* ActualDayWeather.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActualDayWeather.xib; sourceTree = "<group>"; };
 		DA6CF4DA236CB1F600D0EF5E /* ActualDayWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualDayWeather.swift; sourceTree = "<group>"; };
 		DA915BB12368AED400215602 /* DayWeatherState.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayWeatherState.xib; sourceTree = "<group>"; };
@@ -171,8 +173,9 @@
 			children = (
 				DADE8CFB232E7DCD0057B0BB /* ExtensionUIView.swift */,
 				DA299866234B2B63000C7C98 /* ExtensionURL.swift */,
-				DA072DB9236439A100DDAD7A /* ExtensionDouble.swift */,
 				DADBCDF7236F5DAD00273602 /* ExtensionViewController.swift */,
+				DA6C85CC2372CB1900B70BF1 /* ExtensionDouble.swift */,
+				DA6C85CE2372DAD700B70BF1 /* ExtensionString.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -318,15 +321,16 @@
 				DADE8CFA232E7D1D0057B0BB /* TranslatorViewController.swift in Sources */,
 				DA1FEFDB234A6787007E9E23 /* CurrencyStructure.swift in Sources */,
 				DA1FEFDD234A67A0007E9E23 /* TranslateStructure.swift in Sources */,
-				DA072DBA236439A100DDAD7A /* ExtensionDouble.swift in Sources */,
 				DA299867234B2B63000C7C98 /* ExtensionURL.swift in Sources */,
 				DA6CF4DB236CB1F600D0EF5E /* ActualDayWeather.swift in Sources */,
 				DADE8CF5232E7D1D0057B0BB /* WeatherViewController.swift in Sources */,
 				DADE8D00232E7F850057B0BB /* WeatherService.swift in Sources */,
+				DA6C85CD2372CB1900B70BF1 /* ExtensionDouble.swift in Sources */,
 				DADE8D02232E7F850057B0BB /* TranslateService.swift in Sources */,
 				DADE8CF9232E7D1D0057B0BB /* ViewController.swift in Sources */,
 				DA1FEFDF234A67AF007E9E23 /* WeatherStructure.swift in Sources */,
 				DADE8CFC232E7DCD0057B0BB /* ExtensionUIView.swift in Sources */,
+				DA6C85CF2372DAD700B70BF1 /* ExtensionString.swift in Sources */,
 				DADE8D01232E7F850057B0BB /* CurrencyService.swift in Sources */,
 				DADE8CC6232E77720057B0BB /* AppDelegate.swift in Sources */,
 				DADE8D04232E9F150057B0BB /* ExchangeViewController.swift in Sources */,
