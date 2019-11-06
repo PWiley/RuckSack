@@ -73,8 +73,10 @@ class CurrencyService {
     func requestData(currency: Currency) {
         // the data was received and parsed to String
         guard let euroRate = currency.rates?.usd else {return}
-        let usdRate = 1/euroRate
-        self.delegate?.didUpdateCurrencyData(eurRate: euroRate, usdRate: usdRate)
+        let usdValue = String(format:"%.3f", 1/euroRate)
+        let euroValue = String(format:"%.3f", euroRate)
+        
+        self.delegate?.didUpdateCurrencyData(eurRate: euroValue, usdRate: usdValue)
         
     }
     
@@ -90,6 +92,7 @@ class CurrencyService {
         //print("Le result est : \(result)")
         return result!
         }
+    
 }
 enum CurrencyError: Error {
     case clientError
@@ -99,6 +102,6 @@ enum CurrencyError: Error {
 
 
 protocol CurrencyServiceDelegate {
-    func didUpdateCurrencyData(eurRate: Double, usdRate: Double)
+    func didUpdateCurrencyData(eurRate: String, usdRate: String)
     func didHappenedError(error: CurrencyError)
 }
