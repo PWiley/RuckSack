@@ -10,7 +10,7 @@ import UIKit
 
 class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     
-    
+    let weatherViewController = WeatherViewController()
     let currencyService = CurrencyService()
     let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
     @IBOutlet var exchangeViewController: UIView!
@@ -125,8 +125,8 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     
     fileprivate func setBackGroundTown() {
           
-           print(WeatherViewController.whichTown)
-           if WeatherViewController.whichTown == true {
+           print(WeatherViewController.setTown)
+        if weatherViewController.town == true {
                backgroundImage.image = UIImage(named: "Background_Exchange_Berlin")
                backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
            } else {

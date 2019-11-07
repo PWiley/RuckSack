@@ -11,7 +11,7 @@ import UIKit
 class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITextViewDelegate {
     
     
-    
+    let weatherViewController = WeatherViewController()
     var translateService = TranslateService()
    
     
@@ -169,8 +169,8 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
         // Do any additional setup after loading the view.
         //        'let backgroundImage = UIImageView(frame: UIScreen.main.bounds)'
         
-        print(WeatherViewController.whichTown)
-        if WeatherViewController.whichTown == true {
+        print(WeatherViewController.setTown)
+        if weatherViewController.town == true {
             backgroundImage.image = UIImage(named: "Background_Translator_Berlin")
             backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         } else {

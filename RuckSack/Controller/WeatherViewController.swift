@@ -14,7 +14,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
     // MARK: - TableView
     var night = false
-    var town = Town.berlin
+    //var town: Town?
     
     @IBOutlet var tableViewWeather: UITableView!
     
@@ -36,28 +36,33 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
     
     
-    static var whichTown: Bool = true
+    var town: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        whichTown(town: .berlin)
+        setTown(town: town)
         navigationItem.title = "Berlin"
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSAttributedString.Key.foregroundColor: UIColor.init(red:0.97, green:0.44, blue:0.56, alpha:1.0), NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 19.0)!]
         
         weatherService.delegate = self
-        weatherService.askWeatherState(town: WeatherService.berlin)
+        weatherService.askWeatherState(town: weatherService.berlin)
 //        let tapRefresh = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
 //        self.tableViewWeather.addGestureRecognizer(tapRefresh)
+       
+        let myAttribute = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 26)]
+        self.refreshControl?.tintColor = UIColor.white
+        self.refreshControl?.backgroundColor = .init(UIColor(displayP3Red: 0.5, green: 0.5, blue: 0.5, alpha: 0.65))
         self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControl?.addTarget(self, action: #selector(handleSwipes(_:)), for: .valueChanged)
+        //.refreshControl?.addTarget(self, action: #selector(handleSwipes(_:)), for: .valueChanged)
+        self.view.addSubview(self.refreshControl!)
         
         
     }
     override func viewDidAppear(_ animated: Bool) {
         repositionCell()
         print(tableViewWeather.bounds.maxY)
-        weatherService.askWeatherState(town: WeatherService.berlin)
+        weatherService.askWeatherState(town: weatherService.berlin)
         
     }
     
@@ -78,26 +83,38 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         let offset = scrollView.contentOffset.y/(self.tableViewWeather.contentSize.height/2 - rowZeroFrame.height/2)
             self.tableViewWeather.backgroundView?.alpha = 1.8-offset
     }
-    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        print(velocity)
+        
+        if(velocity.y > -0.1)
+        {
+            print("velocity")
+            //WeatherViewController.handleSwipes(_:)
+        }
+    }
     
     @IBAction func changeTown(_ sender: Any) {
         
         print("Changed town")
-        WeatherViewController.whichTown = !WeatherViewController.whichTown
+        //WeatherViewController.whichTown = !WeatherViewController.whichTown
         let changeTownAlert = UIAlertController(title: "Change Town?", message: "Do You want to change the town?", preferredStyle: .alert)
         changeTownAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            self.setTown(town: !self.town)
+//            if self.town == true {
+////                self.buttonTown.image = UIImage(named: "tv_tower")
+//                //self.weatherService.askWeatherState(town: self.weatherService.berlin)
+////                self.repositionCell()
+//                self.setTown(town: true)
+//            }
+//            if self.town == false {
+//                //self.buttonTown.image = UIImage(named: "liberty")
+//                //self.weatherService.askWeatherState(town: self.weatherService.newYork)
+////                self.repositionCell()
+//                self.setTown(town: false)
+//            }
+            self.town = !self.town
+            self.repositionCell()
             
-            if WeatherViewController.self.whichTown == true {
-                self.whichTown(town: .berlin)
-                self.buttonTown.image = UIImage(named: "tv_tower")
-                self.weatherService.askWeatherState(town: WeatherService.berlin)
-                self.repositionCell()
-            } else {
-                self.whichTown(town: .newYork)
-                self.buttonTown.image = UIImage(named: "liberty")
-                self.weatherService.askWeatherState(town: WeatherService.newYork)
-                self.repositionCell()
-            }
         }))
         changeTownAlert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
         
@@ -222,28 +239,37 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         self.tableViewWeather.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
     
-    func whichTown(town: Town) {
+    func setTown(town: Bool) {
         
         switch town {
-        case .berlin:
+        case true:
+            buttonTown.image = UIImage(named: "tv_tower")
             tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
             tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
             navigationItem.title = "Berlin"
-        case .newYork:
+            self.weatherService.askWeatherState(town: self.weatherService.berlin)
+            repositionCell()
+        case false:
+            self.buttonTown.image = UIImage(named: "liberty")
             //            tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
             tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
             tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
             navigationItem.title = "New-York"
+            self.weatherService.askWeatherState(town: self.weatherService.newYork)
+            repositionCell()
             
         }
     }
-    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {
-        if sender.direction == .down {
+    func handleSwipes(_ sender: UISwipeGestureRecognizer) {
+        
         print("refreshing")
+        setTown(town: town)
         self.tableViewWeather.reloadData()
+        //repositionCell()
         self.refreshControl?.endRefreshing()
+        repositionCell()
         print("refresh")
-        }
+        
     }
     
 }
@@ -251,8 +277,8 @@ enum StructureError: Error {
     case valueError
     case descriptionError
 }
-
-enum Town {
-    case berlin
-    case newYork
-}
+//
+//enum Town {
+//    case berlin
+//    case newYork
+//}

@@ -16,12 +16,12 @@ class WeatherService {
     var delegate: WeatherServiceDelegate?
     var openWeather: OpenWeather?
     
-    static var berlin: [String: String] = [
+    var berlin: [String: String] = [
         "q": "berlin,de",
         "mode": "json",
         "appid": "d2fc02766020f446cb8063c244166041"
     ]
-    static var newYork: [String: String] = [
+    var newYork: [String: String] = [
         "q": "new york,us",
         "mode": "json",
         "appid": "d2fc02766020f446cb8063c244166041"
