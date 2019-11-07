@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,22 +26,22 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Humidity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JK1-aH-HhI" userLabel="Humidity">
-                            <rect key="frame" x="105" y="80" width="68.5" height="19"/>
+                            <rect key="frame" x="105" y="80" width="81.5" height="19"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="JK1-aH-HhI" secondAttribute="height" multiplier="68:19" id="LaD-3T-Oz7"/>
-                                <constraint firstAttribute="width" constant="68.5" id="OIr-jk-ryq"/>
+                                <constraint firstAttribute="width" secondItem="JK1-aH-HhI" secondAttribute="height" multiplier="68:19" constant="13.5" id="LaD-3T-Oz7"/>
+                                <constraint firstAttribute="width" constant="81.5" id="OIr-jk-ryq"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                             <color key="textColor" red="0.066666666666666666" green="0.1764705882352941" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="82 %" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfS-ZZ-WRc" userLabel="Humidity Amount">
-                            <rect key="frame" x="181" y="80" width="38.5" height="19"/>
+                            <rect key="frame" x="186" y="80" width="38.5" height="19"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="xfS-ZZ-WRc" secondAttribute="height" multiplier="2:1" id="T4S-V8-U7d"/>
                                 <constraint firstAttribute="width" constant="38.5" id="TNT-9V-hK1"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                             <color key="textColor" red="0.066666666666666666" green="0.1764705882352941" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -61,7 +61,7 @@
                                 <constraint firstAttribute="width" secondItem="pDW-8O-st5" secondAttribute="height" multiplier="214:19" id="363-gQ-idM"/>
                                 <constraint firstAttribute="width" constant="214" id="WcM-Q5-cKm"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                             <color key="textColor" red="0.066666666666666666" green="0.1764705882352941" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -80,7 +80,7 @@
                         <constraint firstAttribute="bottom" secondItem="VOj-Aq-tQq" secondAttribute="bottom" constant="15" id="H3d-9o-MN4"/>
                         <constraint firstItem="JK1-aH-HhI" firstAttribute="leading" secondItem="pDW-8O-st5" secondAttribute="leading" id="W4M-Jn-X2L"/>
                         <constraint firstAttribute="bottom" secondItem="JK1-aH-HhI" secondAttribute="bottom" constant="121" id="Ydq-Me-RWe"/>
-                        <constraint firstItem="xfS-ZZ-WRc" firstAttribute="leading" secondItem="JK1-aH-HhI" secondAttribute="trailing" constant="7.5" id="Ygm-yQ-y0Y"/>
+                        <constraint firstItem="xfS-ZZ-WRc" firstAttribute="leading" secondItem="JK1-aH-HhI" secondAttribute="trailing" constant="-0.5" id="Ygm-yQ-y0Y"/>
                         <constraint firstItem="pDW-8O-st5" firstAttribute="top" secondItem="DnX-Ze-ebG" secondAttribute="top" constant="43.5" id="Zdd-w8-z3R"/>
                         <constraint firstItem="VOj-Aq-tQq" firstAttribute="top" secondItem="pDW-8O-st5" secondAttribute="bottom" constant="35.5" id="uFW-3n-a8F"/>
                         <constraint firstItem="pDW-8O-st5" firstAttribute="leading" secondItem="wDL-xA-cKi" secondAttribute="trailing" constant="8" id="xnP-QS-Unb"/>

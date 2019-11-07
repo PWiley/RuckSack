@@ -80,7 +80,7 @@
                                             <constraint firstAttribute="width" secondItem="7vE-KZ-BDP" secondAttribute="height" multiplier="45:46" constant="1.0108695652173907" id="rJ7-Xf-9YE"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Français" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRU-R0-pim">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Français" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRU-R0-pim">
                                         <rect key="frame" x="175" y="17" width="65" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="RRU-R0-pim" secondAttribute="height" multiplier="65:46" id="HoV-Pv-XJ1"/>
@@ -93,7 +93,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="RRU-R0-pim" firstAttribute="leading" secondItem="7vE-KZ-BDP" secondAttribute="trailing" constant="73.5" id="4Bp-Zs-rtq"/>
+                                    <constraint firstItem="RRU-R0-pim" firstAttribute="leading" secondItem="7vE-KZ-BDP" secondAttribute="trailing" constant="101.5" id="4Bp-Zs-rtq"/>
                                     <constraint firstAttribute="width" secondItem="9sN-Fc-GuY" secondAttribute="height" multiplier="359:203" id="MF6-xO-wAV"/>
                                     <constraint firstAttribute="bottom" secondItem="vHu-qx-riL" secondAttribute="bottom" constant="7.5" id="O0B-aX-SMH"/>
                                     <constraint firstItem="7vE-KZ-BDP" firstAttribute="top" secondItem="9sN-Fc-GuY" secondAttribute="top" constant="17" id="Zjo-Dm-dIG"/>
@@ -132,7 +132,7 @@
                                             <constraint firstAttribute="height" constant="46.5" id="dIJ-Y7-uL9"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="English" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q06-Ea-MHA">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q06-Ea-MHA">
                                         <rect key="frame" x="175" y="17" width="65" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Q06-Ea-MHA" secondAttribute="height" multiplier="65:46" id="GTN-cq-z8S"/>
@@ -149,7 +149,7 @@
                                     <constraint firstItem="0nt-yS-zVo" firstAttribute="leading" secondItem="Rae-yL-d4c" secondAttribute="leading" constant="27" id="BME-VT-QdP"/>
                                     <constraint firstAttribute="width" secondItem="Rae-yL-d4c" secondAttribute="height" multiplier="359:203" id="EZX-GX-V6x"/>
                                     <constraint firstAttribute="trailing" secondItem="gmE-y4-cPO" secondAttribute="trailing" constant="10" id="PJC-sp-Qu3"/>
-                                    <constraint firstItem="Q06-Ea-MHA" firstAttribute="leading" secondItem="0nt-yS-zVo" secondAttribute="trailing" constant="73.5" id="TeP-aY-2nv"/>
+                                    <constraint firstItem="Q06-Ea-MHA" firstAttribute="leading" secondItem="0nt-yS-zVo" secondAttribute="trailing" constant="101.5" id="TeP-aY-2nv"/>
                                     <constraint firstItem="gmE-y4-cPO" firstAttribute="leading" secondItem="Rae-yL-d4c" secondAttribute="leading" constant="10" id="bII-CJ-drv"/>
                                     <constraint firstItem="Q06-Ea-MHA" firstAttribute="top" secondItem="Rae-yL-d4c" secondAttribute="top" constant="17" id="cYq-YA-ya8"/>
                                     <constraint firstItem="gmE-y4-cPO" firstAttribute="top" secondItem="0nt-yS-zVo" secondAttribute="bottom" constant="8" id="f2h-MO-oeT"/>
@@ -225,30 +225,30 @@
                         <sections>
                             <tableViewSection id="s5h-A4-A7r">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" alpha="0.40000000000000002" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="519" id="rbX-cz-PXk" userLabel="DayCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="519"/>
+                                    <tableViewCell clipsSubviews="YES" alpha="0.40000000000000002" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="498" id="rbX-cz-PXk" userLabel="DayCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="498"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rbX-cz-PXk" id="Mhh-zg-AfK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="519"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="498"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLD-3e-wBY" customClass="ActualDayWeather" customModule="RuckSack" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="320" width="375" height="188"/>
+                                                    <rect key="frame" x="0.0" y="295" width="375" height="203"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="iLD-3e-wBY" secondAttribute="bottom" constant="11" id="FLW-cX-49B"/>
+                                                <constraint firstAttribute="bottom" secondItem="iLD-3e-wBY" secondAttribute="bottom" id="FLW-cX-49B"/>
                                                 <constraint firstAttribute="trailing" secondItem="iLD-3e-wBY" secondAttribute="trailing" id="JOZ-kU-Ofr"/>
-                                                <constraint firstItem="iLD-3e-wBY" firstAttribute="top" secondItem="Mhh-zg-AfK" secondAttribute="top" constant="320" id="cAJ-pq-8an"/>
+                                                <constraint firstItem="iLD-3e-wBY" firstAttribute="top" secondItem="Mhh-zg-AfK" secondAttribute="top" constant="295" id="qBg-jW-zPO"/>
                                                 <constraint firstItem="iLD-3e-wBY" firstAttribute="leading" secondItem="Mhh-zg-AfK" secondAttribute="leading" id="tLc-mg-z7N"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="143" id="ve2-OF-xJQ" userLabel="WeekCell">
-                                        <rect key="frame" x="0.0" y="547" width="375" height="143"/>
+                                        <rect key="frame" x="0.0" y="526" width="375" height="143"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ve2-OF-xJQ" id="mTO-bz-Ait">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="143"/>
@@ -278,7 +278,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Berlin" id="aIY-Ls-tNa">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="tv_tower" id="hXT-se-iVd">
-                            <color key="tintColor" red="0.96862745098039216" green="0.4392156862745098" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.96862745098039216" green="0.40000000000000002" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="changeTown:" destination="yyZ-Xj-FZX" id="QSd-pW-4Le"/>
                             </connections>
@@ -290,7 +290,7 @@
                         <attributedString key="attributedTitle">
                             <fragment content="Weather Forecast Update">
                                 <attributes>
-                                    <font key="NSFont" size="11" name=".SFNS-Regular"/>
+                                    <font key="NSFont" metaFont="message" size="11"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>

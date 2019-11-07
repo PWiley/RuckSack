@@ -50,11 +50,11 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
 //        let tapRefresh = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
 //        self.tableViewWeather.addGestureRecognizer(tapRefresh)
        
-        let myAttribute = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 26)]
+        let titleAttribute = [NSAttributedString.Key.foregroundColor: UIColor.blue, NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)]
         self.refreshControl?.tintColor = UIColor.white
-        self.refreshControl?.backgroundColor = .init(UIColor(displayP3Red: 0.5, green: 0.5, blue: 0.5, alpha: 0.65))
-        self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        //.refreshControl?.addTarget(self, action: #selector(handleSwipes(_:)), for: .valueChanged)
+        self.refreshControl?.backgroundColor =  UIColor(displayP3Red: 0.612, green: 0.804, blue: 0.91, alpha: 1)
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: titleAttribute )
+        self.refreshControl?.addTarget(self, action: #selector(handleSwipes(_:)), for: .valueChanged)
         self.view.addSubview(self.refreshControl!)
         
         
@@ -81,17 +81,9 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         let rowZeroFrame = tableViewWeather.rectForRow(at: indexpath)
         
         let offset = scrollView.contentOffset.y/(self.tableViewWeather.contentSize.height/2 - rowZeroFrame.height/2)
-            self.tableViewWeather.backgroundView?.alpha = 1.8-offset
+            self.tableViewWeather.backgroundView?.alpha = 1-offset
     }
-    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        print(velocity)
-        
-        if(velocity.y > -0.1)
-        {
-            print("velocity")
-            //WeatherViewController.handleSwipes(_:)
-        }
-    }
+    
     
     @IBAction func changeTown(_ sender: Any) {
         
@@ -235,7 +227,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         }
     }
     fileprivate func repositionCell() {
-        let indexPath: IndexPath = IndexPath(row: 1, section: 0)
+        let indexPath: IndexPath = IndexPath(row: 0, section: 0)
         self.tableViewWeather.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
     
@@ -260,15 +252,23 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             
         }
     }
-    func handleSwipes(_ sender: UISwipeGestureRecognizer) {
+    @objc func handleSwipes(_ sender: Any) {
         
         print("refreshing")
         setTown(town: town)
-        self.tableViewWeather.reloadData()
-        //repositionCell()
-        self.refreshControl?.endRefreshing()
-        repositionCell()
-        print("refresh")
+        DispatchQueue.main.async {
+            //self.repositionCell()
+            self.tableViewWeather.reloadData()
+            //repositionCell()
+            self.refreshControl?.endRefreshing()
+            
+            print("refresh")
+        }
+//        self.tableViewWeather.reloadData()
+//        //repositionCell()
+//        self.refreshControl?.endRefreshing()
+//        repositionCell()
+//        print("refresh")
         
     }
     
