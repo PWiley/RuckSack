@@ -11,24 +11,43 @@ import XCTest
 
 class WeatherServiceTestCase: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testGetWeatherShouldPostFailedIfError() {
+        //Given=
+        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: nil, response: nil, error: WeatherDataResponseFake.error))
+//        let berlin: [String: String] = [
+//            "q": "berlin,de",
+//            "mode": "json",
+//            "appid": "d2fc02766020f446cb8063c244166041"
+//        ]
+        //When
+        weatherService.askWeatherState(town: weatherService.berlin)
+        //Then
+        XCTAssertTrue(weatherService.openWeather == nil)
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testGetWeatherShouldPostFailedNoData() {
+        //Given=
+        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: nil, response: nil, error: nil))
+//        let berlin: [String: String] = [
+//            "q": "berlin,de",
+//            "mode": "json",
+//            "appid": "d2fc02766020f446cb8063c244166041"
+//        ]
+        //When
+        weatherService.askWeatherState(town: weatherService.berlin)
+        //Then
+        XCTAssertTrue(weatherService.openWeather == nil)
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testGetWeatherShouldPostFailedIfIncorrectResponse() {
+            //Given=
+        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: WeatherDataResponseFake.quoteIncorrectData, response: WeatherDataResponseFake.responseIncorrect, error: nil))
+    //        let berlin: [String: String] = [
+    //            "q": "berlin,de",
+    //            "mode": "json",
+    //            "appid": "d2fc02766020f446cb8063c244166041"
+    //        ]
+            //When
+            weatherService.askWeatherState(town: weatherService.berlin)
+            //Then
+            XCTAssertTrue(weatherService.openWeather == nil)
         }
-    }
-
 }
