@@ -53,7 +53,7 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         addDoneButtonOnKeyboard()
         
     }
-   
+    
     @IBAction func originDidBegin(_ sender: Any) {
         setAlphaView(origin: 0.95, destination: 0.65)
     }
@@ -65,7 +65,7 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         amountDestination.text = ""
         amountOrigin.text = amountOrigin.text?.trimmed
         
-        }
+    }
     @IBAction func destinationChanged(_ sender: Any) {
         amountOrigin.text = ""
         amountDestination.text = amountDestination.text?.trimmed
@@ -79,8 +79,9 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         case .clientError:
             self.alert(title: "Internet Connection" , message: "We cannot etablish an internet connection. Please retry in a moment", titleAction: "Ok", actionStyle: .default)
         case .currencyError:
-            self.alert(title: "Incorrect entry" , message: "Please check your entries and try again.", titleAction: "Ok", actionStyle: .default)
+            self.alert(title: "Action impossible", message: "Check please your entry ", titleAction: "ok", actionStyle: .default)
         }
+        
     }
     
     func addDoneButtonOnKeyboard()
@@ -98,7 +99,7 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         self.amountOrigin.inputAccessoryView = doneToolbar
         self.amountDestination.inputAccessoryView = doneToolbar
     }
-   
+    
     
     @objc func doneButtonAction()
     {
@@ -116,28 +117,29 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
             amountOrigin.text = String(format:"%.2f", currencyService.calculateConversion(amount: amountDouble!, base: "USD"))
             setAlphaView(origin: 0.95, destination: 0.65)
         } else {
-            self.alert(title: "Action impossible", message: "Check please your entry ", titleAction: "ok", actionStyle: .default)
+            //            self.alert(title: "Action impossible", message: "Check please your entry ", titleAction: "ok", actionStyle: .default)
+            didHappenedError(error: .currencyError)
         }
-       
+        
     }
     
-     // MARK : Configuration Background
+    // MARK : Configuration Background
     
     fileprivate func setBackGroundTown() {
-          
-           print(WeatherViewController.setTown)
+        
+        print(WeatherViewController.setTown)
         if weatherViewController.town == true {
-               backgroundImage.image = UIImage(named: "Background_Exchange_Berlin")
-               backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
-           } else {
-               backgroundImage.image = UIImage(named: "Background_Exchange_NewYork")
-               backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
-           }
-       }
+            backgroundImage.image = UIImage(named: "Background_Exchange_Berlin")
+            backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        } else {
+            backgroundImage.image = UIImage(named: "Background_Exchange_NewYork")
+            backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        }
+    }
     fileprivate func setAlphaView(origin: Float, destination: Float) {
-           viewOrigin.alpha = CGFloat(origin)
-           viewDestination.alpha = CGFloat(destination)
-           amountOrigin.alpha = CGFloat(origin)
-           amountDestination.alpha = CGFloat(destination)
-       }
+        viewOrigin.alpha = CGFloat(origin)
+        viewDestination.alpha = CGFloat(destination)
+        amountOrigin.alpha = CGFloat(origin)
+        amountDestination.alpha = CGFloat(destination)
+    }
 }

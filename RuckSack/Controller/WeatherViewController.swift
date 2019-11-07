@@ -38,6 +38,8 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             [NSAttributedString.Key.foregroundColor: UIColor.init(red:0.97, green:0.44, blue:0.56, alpha:1.0), NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 19.0)!]
 //
         weatherService.delegate = self
+        weatherService.askWeatherState(town: weatherService.berlin)
+        repositionCell()
 //        weatherService.askWeatherState(town: weatherService.berlin)
 //        let tapRefresh = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
 //        self.tableViewWeather.addGestureRecognizer(tapRefresh)
@@ -51,15 +53,15 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         
         
     }
-    override func viewDidAppear(_ animated: Bool) {
-        
-               
-               weatherService.askWeatherState(town: weatherService.berlin)
-        repositionCell()
-        print(tableViewWeather.bounds.maxY)
-        weatherService.askWeatherState(town: weatherService.berlin)
-        
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//
+//
+//        weatherService.askWeatherState(town: weatherService.berlin)
+//        repositionCell()
+//        print(tableViewWeather.bounds.maxY)
+//        weatherService.askWeatherState(town: weatherService.berlin)
+//
+//    }
     
 //    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 //        //print("refresh can go")
@@ -76,7 +78,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         let rowZeroFrame = tableViewWeather.rectForRow(at: indexpath)
         
         let offset = scrollView.contentOffset.y/(self.tableViewWeather.contentSize.height/2 - rowZeroFrame.height/2)
-            self.tableViewWeather.backgroundView?.alpha = 1-offset
+        self.tableViewWeather.backgroundView?.alpha = 1.8-offset
     }
     
     
@@ -250,7 +252,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     @objc func handleSwipes(_ sender: Any) {
         
         print("refreshing")
-        setTown(town: town)
+        //setTown(town: town)
         DispatchQueue.main.async {
             //self.repositionCell()
             self.tableViewWeather.reloadData()
@@ -268,10 +270,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     }
     
 }
-enum StructureError: Error {
-    case valueError
-    case descriptionError
-}
+
 //
 //enum Town {
 //    case berlin
