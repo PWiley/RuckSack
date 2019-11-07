@@ -12,6 +12,10 @@
 		DA1FEFDF234A67AF007E9E23 /* WeatherStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FEFDE234A67AF007E9E23 /* WeatherStructure.swift */; };
 		DA1FEFE1234A6BED007E9E23 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DA1FEFE0234A6BED007E9E23 /* .gitignore */; };
 		DA299867234B2B63000C7C98 /* ExtensionURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA299866234B2B63000C7C98 /* ExtensionURL.swift */; };
+		DA5B6A5723744EF8006B9B35 /* RuckSackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5B6A5623744EF8006B9B35 /* RuckSackTests.swift */; };
+		DA5B6A5E23744F06006B9B35 /* CurrencyServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5B6A4A23744DA4006B9B35 /* CurrencyServiceTestCase.swift */; };
+		DA5B6A5F23744F0A006B9B35 /* WeatherServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5B6A4C23744DC9006B9B35 /* WeatherServiceTestCase.swift */; };
+		DA5B6A6023744F0D006B9B35 /* TranslateServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5B6A4E23744DE5006B9B35 /* TranslateServiceTestCase.swift */; };
 		DA6C85CD2372CB1900B70BF1 /* ExtensionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C85CC2372CB1900B70BF1 /* ExtensionDouble.swift */; };
 		DA6C85CF2372DAD700B70BF1 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C85CE2372DAD700B70BF1 /* ExtensionString.swift */; };
 		DA6CF4D7236C998800D0EF5E /* ActualDayWeather.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA6CF4D6236C998800D0EF5E /* ActualDayWeather.xib */; };
@@ -34,7 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		DADE8CD7232E77730057B0BB /* PBXContainerItemProxy */ = {
+		DA5B6A5923744EF8006B9B35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DADE8CBA232E77720057B0BB /* Project object */;
 			proxyType = 1;
@@ -49,6 +53,12 @@
 		DA1FEFDE234A67AF007E9E23 /* WeatherStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStructure.swift; sourceTree = "<group>"; };
 		DA1FEFE0234A6BED007E9E23 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DA299866234B2B63000C7C98 /* ExtensionURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionURL.swift; sourceTree = "<group>"; };
+		DA5B6A4A23744DA4006B9B35 /* CurrencyServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyServiceTestCase.swift; sourceTree = "<group>"; };
+		DA5B6A4C23744DC9006B9B35 /* WeatherServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceTestCase.swift; sourceTree = "<group>"; };
+		DA5B6A4E23744DE5006B9B35 /* TranslateServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateServiceTestCase.swift; sourceTree = "<group>"; };
+		DA5B6A5423744EF8006B9B35 /* RuckSackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RuckSackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA5B6A5623744EF8006B9B35 /* RuckSackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuckSackTests.swift; sourceTree = "<group>"; };
+		DA5B6A5823744EF8006B9B35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA6C85CC2372CB1900B70BF1 /* ExtensionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDouble.swift; sourceTree = "<group>"; };
 		DA6C85CE2372DAD700B70BF1 /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
 		DA6CF4D6236C998800D0EF5E /* ActualDayWeather.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActualDayWeather.xib; sourceTree = "<group>"; };
@@ -60,7 +70,6 @@
 		DADE8CC5232E77720057B0BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DADE8CCC232E77730057B0BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DADE8CD1232E77730057B0BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DADE8CD6232E77730057B0BB /* RuckSackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RuckSackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADE8CE9232E7C940057B0BB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DADE8CEA232E7C940057B0BB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DADE8CEE232E7D1D0057B0BB /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -74,14 +83,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		DADE8CBF232E77720057B0BB /* Frameworks */ = {
+		DA5B6A5123744EF8006B9B35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DADE8CD3232E77730057B0BB /* Frameworks */ = {
+		DADE8CBF232E77720057B0BB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -118,6 +127,42 @@
 			path = Exchange;
 			sourceTree = "<group>";
 		};
+		DA5B6A5523744EF8006B9B35 /* RuckSackTests */ = {
+			isa = PBXGroup;
+			children = (
+				DA5B6A6323744F46006B9B35 /* Weather */,
+				DA5B6A6223744F32006B9B35 /* Translate */,
+				DA5B6A6123744F1B006B9B35 /* Exchange */,
+				DA5B6A5623744EF8006B9B35 /* RuckSackTests.swift */,
+				DA5B6A5823744EF8006B9B35 /* Info.plist */,
+			);
+			path = RuckSackTests;
+			sourceTree = "<group>";
+		};
+		DA5B6A6123744F1B006B9B35 /* Exchange */ = {
+			isa = PBXGroup;
+			children = (
+				DA5B6A4A23744DA4006B9B35 /* CurrencyServiceTestCase.swift */,
+			);
+			path = Exchange;
+			sourceTree = "<group>";
+		};
+		DA5B6A6223744F32006B9B35 /* Translate */ = {
+			isa = PBXGroup;
+			children = (
+				DA5B6A4E23744DE5006B9B35 /* TranslateServiceTestCase.swift */,
+			);
+			path = Translate;
+			sourceTree = "<group>";
+		};
+		DA5B6A6323744F46006B9B35 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				DA5B6A4C23744DC9006B9B35 /* WeatherServiceTestCase.swift */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
 		DA915BAD2368AB4B00215602 /* Custom View Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				DADE8CC4232E77720057B0BB /* RuckSack */,
+				DA5B6A5523744EF8006B9B35 /* RuckSackTests */,
 				DADE8CC3232E77720057B0BB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -148,7 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				DADE8CC2232E77720057B0BB /* RuckSack.app */,
-				DADE8CD6232E77730057B0BB /* RuckSackTests.xctest */,
+				DA5B6A5423744EF8006B9B35 /* RuckSackTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,6 +261,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DA5B6A5323744EF8006B9B35 /* RuckSackTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA5B6A5B23744EF8006B9B35 /* Build configuration list for PBXNativeTarget "RuckSackTests" */;
+			buildPhases = (
+				DA5B6A5023744EF8006B9B35 /* Sources */,
+				DA5B6A5123744EF8006B9B35 /* Frameworks */,
+				DA5B6A5223744EF8006B9B35 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA5B6A5A23744EF8006B9B35 /* PBXTargetDependency */,
+			);
+			name = RuckSackTests;
+			productName = RuckSackTests;
+			productReference = DA5B6A5423744EF8006B9B35 /* RuckSackTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		DADE8CC1232E77720057B0BB /* RuckSack */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DADE8CDF232E77730057B0BB /* Build configuration list for PBXNativeTarget "RuckSack" */;
@@ -232,40 +296,22 @@
 			productReference = DADE8CC2232E77720057B0BB /* RuckSack.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DADE8CD5232E77730057B0BB /* RuckSackTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DADE8CE2232E77730057B0BB /* Build configuration list for PBXNativeTarget "RuckSackTests" */;
-			buildPhases = (
-				DADE8CD2232E77730057B0BB /* Sources */,
-				DADE8CD3232E77730057B0BB /* Frameworks */,
-				DADE8CD4232E77730057B0BB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DADE8CD8232E77730057B0BB /* PBXTargetDependency */,
-			);
-			name = RuckSackTests;
-			productName = RuckSackTests;
-			productReference = DADE8CD6232E77730057B0BB /* RuckSackTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		DADE8CBA232E77720057B0BB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1030;
+				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = "Patrick Wiley";
 				TargetAttributes = {
+					DA5B6A5323744EF8006B9B35 = {
+						CreatedOnToolsVersion = 11.2;
+						TestTargetID = DADE8CC1232E77720057B0BB;
+					};
 					DADE8CC1232E77720057B0BB = {
 						CreatedOnToolsVersion = 10.3;
-					};
-					DADE8CD5232E77730057B0BB = {
-						CreatedOnToolsVersion = 10.3;
-						TestTargetID = DADE8CC1232E77720057B0BB;
 					};
 				};
 			};
@@ -283,12 +329,19 @@
 			projectRoot = "";
 			targets = (
 				DADE8CC1232E77720057B0BB /* RuckSack */,
-				DADE8CD5232E77730057B0BB /* RuckSackTests */,
+				DA5B6A5323744EF8006B9B35 /* RuckSackTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		DA5B6A5223744EF8006B9B35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DADE8CC0232E77720057B0BB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -302,16 +355,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DADE8CD4232E77730057B0BB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DA5B6A5023744EF8006B9B35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA5B6A6023744F0D006B9B35 /* TranslateServiceTestCase.swift in Sources */,
+				DA5B6A5F23744F0A006B9B35 /* WeatherServiceTestCase.swift in Sources */,
+				DA5B6A5E23744F06006B9B35 /* CurrencyServiceTestCase.swift in Sources */,
+				DA5B6A5723744EF8006B9B35 /* RuckSackTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DADE8CBE232E77720057B0BB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -337,24 +394,57 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DADE8CD2232E77730057B0BB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		DADE8CD8232E77730057B0BB /* PBXTargetDependency */ = {
+		DA5B6A5A23744EF8006B9B35 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DADE8CC1232E77720057B0BB /* RuckSack */;
-			targetProxy = DADE8CD7232E77730057B0BB /* PBXContainerItemProxy */;
+			targetProxy = DA5B6A5923744EF8006B9B35 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		DA5B6A5C23744EF8006B9B35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RuckSackTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.deutschekapital.RuckSackTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RuckSack.app/RuckSack";
+			};
+			name = Debug;
+		};
+		DA5B6A5D23744EF8006B9B35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RuckSackTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.deutschekapital.RuckSackTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RuckSack.app/RuckSack";
+			};
+			name = Release;
+		};
 		DADE8CDD232E77730057B0BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -507,51 +597,18 @@
 			};
 			name = Release;
 		};
-		DADE8CE3232E77730057B0BB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 52T6VV3859;
-				INFOPLIST_FILE = RuckSackTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.deutschekapital.RuckSackTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RuckSack.app/RuckSack";
-			};
-			name = Debug;
-		};
-		DADE8CE4232E77730057B0BB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 52T6VV3859;
-				INFOPLIST_FILE = RuckSackTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.deutschekapital.RuckSackTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RuckSack.app/RuckSack";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DA5B6A5B23744EF8006B9B35 /* Build configuration list for PBXNativeTarget "RuckSackTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA5B6A5C23744EF8006B9B35 /* Debug */,
+				DA5B6A5D23744EF8006B9B35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DADE8CBD232E77720057B0BB /* Build configuration list for PBXProject "RuckSack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -566,15 +623,6 @@
 			buildConfigurations = (
 				DADE8CE0232E77730057B0BB /* Debug */,
 				DADE8CE1232E77730057B0BB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DADE8CE2232E77730057B0BB /* Build configuration list for PBXNativeTarget "RuckSackTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DADE8CE3232E77730057B0BB /* Debug */,
-				DADE8CE4232E77730057B0BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
