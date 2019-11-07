@@ -13,9 +13,15 @@ class WeatherService {
     
     private static let baseURL = URL(string: "https://api.openweathermap.org/data/2.5/forecast?")!
     private var task: URLSessionDataTask?
+    static var sharedWeather = WeatherService()
+    private init() {}
     var delegate: WeatherServiceDelegate?
     var openWeather: OpenWeather?
     
+    private var weatherSession = URLSession(configuration: .default)
+    init(weatherSession: URLSession) {
+        self.weatherSession = weatherSession
+    }
     var berlin: [String: String] = [
         "q": "berlin,de",
         "mode": "json",
@@ -36,15 +42,14 @@ class WeatherService {
     
     func askWeatherState(town: [String: String]) {
         
+        task?.cancel()
         let request = createRequest(query: town)
-        print(request)
-        print(town)
-        let session = URLSession(configuration: .default)
-        task = session.dataTask(with: request) { data, response, error in
+        
+        task = weatherSession.dataTask(with: request) { data, response, error in
             print(response as Any)
             if error != nil {
                 DispatchQueue.main.async {
-                self.delegate?.didHappenedError(error: .clientError)
+                    self.delegate?.didHappenedError(error: .clientError)
                 }
                 print("Client error!")
                 print("something went wrong ", error!)
@@ -52,7 +57,7 @@ class WeatherService {
             }
             guard let jsonData = data else {
                 DispatchQueue.main.async {
-                self.delegate?.didHappenedError(error: .jsonError)
+                    self.delegate?.didHappenedError(error: .jsonError)
                 }
                 print("Error data!")
                 
@@ -60,7 +65,7 @@ class WeatherService {
             }
             guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
                 DispatchQueue.main.async {
-                self.delegate?.didHappenedError(error: .serverError)
+                    self.delegate?.didHappenedError(error: .serverError)
                 }
                 print("Server error!")
                 return
@@ -77,9 +82,9 @@ class WeatherService {
                 self.openWeather = try? JSONDecoder().decode(OpenWeather.self, from: jsonData)
                 //self.weatherOpenWeather = try? JSONDecoder().decode(WeatherOpenWeather.self, from: jsonData)
                 //print(self.openWeather!.list[0].dtTxt)
-                guard let openWeatherStruct = self.openWeather else {print("Erreur")
+                guard let openWeather = self.openWeather else {print("Erreur")
                     return}
-                self.delegate?.didUpdateWeatherData(openWeather: openWeatherStruct)
+                self.delegate?.didUpdateWeatherData(openWeather: openWeather)
                 //print(self.openWeather)
                 
             }
@@ -95,7 +100,7 @@ class WeatherService {
         //            print("temp\(number): \(String(describing: weather?.list[number].main.temp))")
         //        }
         //
-//        printResult()
+        //        printResult()
         
         //print(exchange?.cod as Any)
         task?.resume()
@@ -118,25 +123,25 @@ class WeatherService {
         return isNight!
     }
     
-//    func printResult() {
-//        if openWeather?.list != nil {
-//            //            print("hep: \(openWeather?.city.name as Any)")
-//            //            print(openWeather?.city.country as Any)
-//            //            print(openWeather?.list.count)
-//            //
-//            print("count: \(openWeather!.list.count)")
-//            //guard let count = openWeather?.list.capacity else {return}
-//            for number in 0..<40{
-//                print("time\(number): \(String(describing: openWeather?.list[number].dt))")
-//                print("time\(number): \(String(describing: openWeather?.list[number].dtTxt))")
-//                //print("temp\(number): \(String(describing: openWeather?.list[number].main.temp))")
-//                print("temp\(number): \(String(describing: openWeather?.list[number].main.temp))")
-//                print("tempMax\(number): \(String(describing: openWeather?.list[number].main.tempMax))")
-//                print("tempMin\(number): \(String(describing: openWeather?.list[number].main.tempMin))")
-//            }
-//            //calculateTempMedium()
-//        }
-//    }
+    //    func printResult() {
+    //        if openWeather?.list != nil {
+    //            //            print("hep: \(openWeather?.city.name as Any)")
+    //            //            print(openWeather?.city.country as Any)
+    //            //            print(openWeather?.list.count)
+    //            //
+    //            print("count: \(openWeather!.list.count)")
+    //            //guard let count = openWeather?.list.capacity else {return}
+    //            for number in 0..<40{
+    //                print("time\(number): \(String(describing: openWeather?.list[number].dt))")
+    //                print("time\(number): \(String(describing: openWeather?.list[number].dtTxt))")
+    //                //print("temp\(number): \(String(describing: openWeather?.list[number].main.temp))")
+    //                print("temp\(number): \(String(describing: openWeather?.list[number].main.temp))")
+    //                print("tempMax\(number): \(String(describing: openWeather?.list[number].main.tempMax))")
+    //                print("tempMin\(number): \(String(describing: openWeather?.list[number].main.tempMin))")
+    //            }
+    //            //calculateTempMedium()
+    //        }
+    //    }
     
     //    func calculateTempMedium() {
     //        var temp = 0.0

@@ -12,15 +12,19 @@ import Foundation
 class CurrencyService {
     
     private static let currencyURL = URL(string: "http://data.fixer.io/api/latest?")!
+
     private var task: URLSessionDataTask?
+    static var sharedCurrency = CurrencyService()
+    private init() {}
     var currency: Currency?
     var delegate: CurrencyServiceDelegate?
-    var result: Double?
-//    var amountOrigin: String?
-//    var amountDestination: String?
+//    var result: Double?
     
+    private var currencySession = URLSession(configuration: .default)
     
-    //var exchangeView: ExchangeViewController?
+    init(currencySession: URLSession) {
+        self.currencySession = currencySession
+    }
     
     func createRequest() -> URLRequest {
         
@@ -40,8 +44,8 @@ class CurrencyService {
         
         task?.cancel()
         let request = createRequest()
-        let session = URLSession(configuration: .default)
-        task = session.dataTask(with: request) { data, response, error in
+        //var currency: Currency?
+        task = currencySession.dataTask(with: request) { data, response, error in
             if error != nil {
                 print("Client error!")
                 return
@@ -83,6 +87,7 @@ class CurrencyService {
     func calculateConversion(amount: Double, base: String) -> Double{
 //            print("le montant : \(amount)")
 //            print(currency?.rates?.usd
+        var result: Double?
         guard let rates = currency?.rates?.usd else{return 0.0}
         if base == "EUR" {
         result = amount * rates

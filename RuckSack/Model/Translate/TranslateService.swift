@@ -9,17 +9,24 @@
 import Foundation
 
 class TranslateService {
-    // Get the file
+    
     private var task: URLSessionDataTask?
     var delegate: TranslateServiceDelegate?
+    static var sharedTranslate = TranslateService()
+    private init() {}
     private static let translateURL = URL(string: "https://translation.googleapis.com/language/translate/v2/")!
     var translate: Translate?
     var sentence: String = ""
     var targetLanguage: String = ""
     var request: URLRequest?
     
+    private var translateSession = URLSession(configuration: .default)
+    
+    init(translateSession: URLSession) {
+        self.translateSession = translateSession
+    }
 
-    func createRequest(sentence: String, targetLanguage: String){
+    func createRequest(sentence: String, targetLanguage: String) {
         let query: [String: String] = [
             "key": "AIzaSyAbFRlWhZO4li5HUWUSZ3V3f2n3Z8ooqKs",
             "q": sentence,
@@ -42,8 +49,8 @@ class TranslateService {
         
       }
     func createCall() {
-        
-        task = URLSession.shared.dataTask(with: request!) { (data, response, error) in
+        task?.cancel()
+        task = translateSession.dataTask(with: request!) { (data, response, error) in
             
             if error != nil {
                 DispatchQueue.main.async {
