@@ -56,22 +56,22 @@ class TranslateService {
                 DispatchQueue.main.async {
                     self.delegate?.didHappenedError(error: .clientError)
                 }
-                print("Client error!")
-                print("something went wrong ", error!)
+//                print("Client error!")
+//                print("something went wrong ", error!)
                 return
             }
             guard let jsonData = data else {
-                print("Error data!")
+                //print("Error data!")
                 
                 return
             }
             guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                print("Server error!")
+                //print("Server error!")
                 return
             }
             
             guard let mime = response.mimeType, mime == "application/json" else {
-                print("Wrong MIME type!")
+                //print("Wrong MIME type!")
                 return
             }
             DispatchQueue.main.async{
