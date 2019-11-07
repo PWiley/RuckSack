@@ -36,7 +36,7 @@ class CurrencyService {
         
         var request = URLRequest(url: CurrencyService.currencyURL.withQueries(query)!)
         request.httpMethod = "POST"
-        print(request)
+        //print(request)
         return request
     }
     
@@ -47,14 +47,17 @@ class CurrencyService {
         //var currency: Currency?
         task = currencySession.dataTask(with: request) { data, response, error in
             if error != nil {
+                self.delegate?.didHappenedError(error: .clientError)
                 print("Client error!")
                 return
             }
             guard let jsonData = data else {
+                self.delegate?.didHappenedError(error: .clientError)
                 print("Error data!")
                 return
             }
             guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                self.delegate?.didHappenedError(error: .clientError)
                 print("Server error!")
                 return
             }
