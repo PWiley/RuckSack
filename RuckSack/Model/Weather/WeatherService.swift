@@ -42,37 +42,32 @@ class WeatherService {
     
     func askWeatherState(town: [String: String]) {
         
-        task?.cancel()
+        //task?.cancel()
         let request = createRequest(query: town)
-        
+        //task?.cancel()
         task = weatherSession.dataTask(with: request) { data, response, error in
-            print(response as Any)
+            //print(response as Any)
             if error != nil {
                 DispatchQueue.main.async {
                     self.delegate?.didHappenedError(error: .clientError)
                 }
-                print("Client error!")
-                print("something went wrong ", error!)
+//                print("Client error!")
+//                print("something went wrong ", error!)
                 return
             }
-            guard let jsonData = data else {
+            guard let jsonData = data, error == nil else {
                 DispatchQueue.main.async {
-                    self.delegate?.didHappenedError(error: .jsonError)
+                    self.delegate?.didHappenedError(error: .clientError)
                 }
-                print("Error data!")
+//                print("Error data!")
                 
                 return
             }
             guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
                 DispatchQueue.main.async {
-                    self.delegate?.didHappenedError(error: .serverError)
+                    self.delegate?.didHappenedError(error: .clientError)
                 }
-                print("Server error!")
-                return
-            }
-            
-            guard let mime = response.mimeType, mime == "application/json" else {
-                print("Wrong MIME type!")
+                //print("Server error!")
                 return
             }
             DispatchQueue.main.async {
@@ -90,19 +85,7 @@ class WeatherService {
             }
             
         }
-        //        print("hep: \(openWeather?.city.name as Any)")
-        //        print(openWeather?.city.country as Any)
-        //        print(openWeather?.list.count)
-        //
-        //        //guard let count = openWeather?.list.capacity else {return}
-        //        for number in 0..<40{
-        //            print("time\(number): \(String(describing: weather?.list[number].dtTxt))")
-        //            print("temp\(number): \(String(describing: weather?.list[number].main.temp))")
-        //        }
-        //
-        //        printResult()
-        
-        //print(exchange?.cod as Any)
+      
         task?.resume()
         
     }
@@ -123,44 +106,6 @@ class WeatherService {
         return isNight!
     }
     
-    //    func printResult() {
-    //        if openWeather?.list != nil {
-    //            //            print("hep: \(openWeather?.city.name as Any)")
-    //            //            print(openWeather?.city.country as Any)
-    //            //            print(openWeather?.list.count)
-    //            //
-    //            print("count: \(openWeather!.list.count)")
-    //            //guard let count = openWeather?.list.capacity else {return}
-    //            for number in 0..<40{
-    //                print("time\(number): \(String(describing: openWeather?.list[number].dt))")
-    //                print("time\(number): \(String(describing: openWeather?.list[number].dtTxt))")
-    //                //print("temp\(number): \(String(describing: openWeather?.list[number].main.temp))")
-    //                print("temp\(number): \(String(describing: openWeather?.list[number].main.temp))")
-    //                print("tempMax\(number): \(String(describing: openWeather?.list[number].main.tempMax))")
-    //                print("tempMin\(number): \(String(describing: openWeather?.list[number].main.tempMin))")
-    //            }
-    //            //calculateTempMedium()
-    //        }
-    //    }
-    
-    //    func calculateTempMedium() {
-    //        var temp = 0.0
-    //        for number in 0..<8{
-    //            temp += (openWeather?.list[number].main.temp)!
-    //        }
-    //        print("La tmperature aujourd'hui sera de : \(temp/8)")
-    //    }
-    //    func setStateImage(stateWeather: String) {
-    //        switch stateWeather {
-    //          case "Clear":
-    //            print("Type is abc")
-    //          case "Clouds":
-    //            print("Type is def")
-    //          default:
-    //            print("Type is something else")
-    //        }
-    //
-    //    }
     func setDayStateName(indexList: Int) -> String{
         let time = openWeather!.list[indexList].dt
         let date = Date(timeIntervalSince1970: TimeInterval(time))
