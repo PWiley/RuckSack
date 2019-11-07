@@ -11,13 +11,11 @@ import UIKit
 class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
     
-    
-    // MARK: - TableView
+    let weatherService = WeatherService.sharedWeather
     var night = false
-    //var town: Town?
+    var town: Bool = true
     
     @IBOutlet var tableViewWeather: UITableView!
-    
     @IBOutlet weak var buttonTown: UIBarButtonItem!
     // MARK: - TemperatureCell
     
@@ -32,21 +30,15 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     @IBOutlet weak var actualDayWeather: ActualDayWeather!
     @IBOutlet weak var stackViewState: UIStackView!
     
-    let weatherService = WeatherService()
-    
-    
-    
-    var town: Bool = true
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setTown(town: town)
         navigationItem.title = "Berlin"
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSAttributedString.Key.foregroundColor: UIColor.init(red:0.97, green:0.44, blue:0.56, alpha:1.0), NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 19.0)!]
-        
+//
         weatherService.delegate = self
-        weatherService.askWeatherState(town: weatherService.berlin)
+//        weatherService.askWeatherState(town: weatherService.berlin)
 //        let tapRefresh = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
 //        self.tableViewWeather.addGestureRecognizer(tapRefresh)
        
@@ -60,6 +52,9 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         
     }
     override func viewDidAppear(_ animated: Bool) {
+        
+               
+               weatherService.askWeatherState(town: weatherService.berlin)
         repositionCell()
         print(tableViewWeather.bounds.maxY)
         weatherService.askWeatherState(town: weatherService.berlin)

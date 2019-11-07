@@ -11,7 +11,7 @@ import UIKit
 class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     
     let weatherViewController = WeatherViewController()
-    let currencyService = CurrencyService()
+    let currencyService = CurrencyService.sharedCurrency
     let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
     @IBOutlet var exchangeViewController: UIView!
     

@@ -12,7 +12,7 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     
     
     let weatherViewController = WeatherViewController()
-    var translateService = TranslateService()
+    var translateService = TranslateService(translateSession: .shared)
    
     
     @IBOutlet var translatorViewController: UIView!
