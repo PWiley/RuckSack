@@ -51,7 +51,7 @@ class URLSessionTranslateTaskFake: URLSessionDataTask {
     
     
     override func resume() {
-        completionHandler?(data, urlResponse, error)
+        completionHandler?(data, urlResponse, responseError)
     }
     override func cancel() {}
 }
