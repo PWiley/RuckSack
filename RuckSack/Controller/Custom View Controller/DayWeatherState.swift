@@ -17,8 +17,6 @@ class DayWeatherState: UIView {
     @IBOutlet weak var humidityAmount: UILabel!
     @IBOutlet weak var temp: UILabel!
     
-    
-    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
