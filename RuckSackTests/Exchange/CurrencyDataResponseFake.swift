@@ -12,11 +12,11 @@ class CurrencyDataResponseFake {
     
     static var currencyCorrectData: Data? {
         let bundle = Bundle(for: CurrencyDataResponseFake.self)
-        let url = bundle.url(forResource: "RuckSack", withExtension: "json")!
+        let url = bundle.url(forResource: "Currency", withExtension: "json")!
         return try! Data(contentsOf: url)
     }
 
-    static let quoteIncorrectData = "erreurData".data(using: .utf8)!
+    static let currencyIncorrectData = "erreurData".data(using: .utf8)!
 
     // MARK: - Response
     static let responseCorrect = HTTPURLResponse(

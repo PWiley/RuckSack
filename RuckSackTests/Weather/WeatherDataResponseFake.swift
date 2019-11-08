@@ -10,13 +10,13 @@ import Foundation
 
 class WeatherDataResponseFake {
     
-    static var WeatherCorrectData: Data? {
+    static var weatherCorrectData: Data? {
         let bundle = Bundle(for: WeatherDataResponseFake.self)
-        let url = bundle.url(forResource: "RuckSack", withExtension: "json")!
+        let url = bundle.url(forResource: "OpenWeather", withExtension: "json")!
         return try! Data(contentsOf: url)
     }
 
-    static let quoteIncorrectData = "erreurData".data(using: .utf8)!
+    static let weatherIncorrectData = "erreurData".data(using: .utf8)!
 
     // MARK: - Response
     static let responseCorrect = HTTPURLResponse(

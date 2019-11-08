@@ -11,13 +11,13 @@ import Foundation
 
 class TranslateDataResponseFake {
 
-static var TranslateCorrectData: Data? {
+static var translateCorrectData: Data? {
     let bundle = Bundle(for: TranslateDataResponseFake.self)
-    let url = bundle.url(forResource: "RuckSack", withExtension: "json")!
+    let url = bundle.url(forResource: "Translate", withExtension: "json")!
     return try! Data(contentsOf: url)
 }
 
-static let quoteIncorrectData = "erreurData".data(using: .utf8)!
+static let translateIncorrectData = "erreurData".data(using: .utf8)!
 
 // MARK: - Response
 static let responseCorrect = HTTPURLResponse(
