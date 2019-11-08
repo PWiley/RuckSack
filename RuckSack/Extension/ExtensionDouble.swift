@@ -9,11 +9,8 @@
 import Foundation
 
 extension Double {
-    var clean: String {
-        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
-    }
     
-    var celcius: Double {
+        var celcius: Double {
         let tempCelcius = self - 273.15
         return tempCelcius
     }
