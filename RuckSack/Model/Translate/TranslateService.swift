@@ -27,13 +27,17 @@ class TranslateService {
     }
 
     func createRequest(sentence: String, targetLanguage: String) {
+        
         let query: [String: String] = [
-            "key": "AIzaSyAbFRlWhZO4li5HUWUSZ3V3f2n3Z8ooqKs",
+            "key": "",
             "q": sentence,
             "target": targetLanguage
         ]
-        request = URLRequest(url: TranslateService.translateURL.withQueries(query)!)
+        let queryRequest = setQueryWithApi(query: query)
+        print(queryRequest)
+        request = URLRequest(url: TranslateService.translateURL.withQueries(queryRequest)!)
         request?.httpMethod = "POST"
+        print(request)
     
     }
     func checkLanguageTarget(target: String) {
@@ -56,22 +60,17 @@ class TranslateService {
                 DispatchQueue.main.async {
                     self.delegate?.didHappenedError(error: .clientError)
                 }
-//                print("Client error!")
-//                print("something went wrong ", error!)
+
                 return
             }
             guard let jsonData = data else {
-                //print("Error data!")
-                
                 return
             }
             guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                //print("Server error!")
                 return
             }
             
             guard let mime = response.mimeType, mime == "application/json" else {
-                //print("Wrong MIME type!")
                 return
             }
             DispatchQueue.main.async{
@@ -81,6 +80,11 @@ class TranslateService {
             }
         }
         task?.resume()
+    }
+    func setQueryWithApi(query: [String: String]) -> [String: String] {
+        var queryApiKey = query
+        queryApiKey["key"] = valueForAPIKey(named:"API_CLIENT_ID_TRANSLATE")
+        return queryApiKey
     }
 }
 enum TranslationError: Error {

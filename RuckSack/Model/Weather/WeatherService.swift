@@ -34,7 +34,7 @@ class WeatherService {
     ]
     
     func createRequest(query: [String: String]) -> URLRequest {
-        let queryRequest = getQueryWithApi(query: query)
+        let queryRequest = setQueryWithApi(query: query)
         var request = URLRequest(url: (WeatherService.baseURL.withQueries(queryRequest)!))
         request.httpMethod = "POST"
         return request
@@ -42,46 +42,32 @@ class WeatherService {
     
     func askWeatherState(town: [String: String]) {
         
-        //task?.cancel()
         let request = createRequest(query: town)
-        //task?.cancel()
         task = weatherSession.dataTask(with: request) { data, response, error in
-            //print(response as Any)
             if error != nil {
                 DispatchQueue.main.async {
                     self.delegate?.didHappenedError(error: .clientError)
                 }
-//                print("Client error!")
-//                print("something went wrong ", error!)
                 return
             }
             guard let jsonData = data, error == nil else {
                 DispatchQueue.main.async {
                     self.delegate?.didHappenedError(error: .clientError)
                 }
-//                print("Error data!")
-                
                 return
             }
             guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
                 DispatchQueue.main.async {
                     self.delegate?.didHappenedError(error: .clientError)
                 }
-                //print("Server error!")
                 return
             }
             DispatchQueue.main.async {
                 
-                
-                //self.weather = try? JSONDecoder().decode(WeatherStructure.self, from: jsonData)
                 self.openWeather = try? JSONDecoder().decode(OpenWeather.self, from: jsonData)
-                //self.weatherOpenWeather = try? JSONDecoder().decode(WeatherOpenWeather.self, from: jsonData)
-                //print(self.openWeather!.list[0].dtTxt)
-                guard let openWeather = self.openWeather else {print("Erreur")
-                    return}
+           guard let openWeather = self.openWeather else {return}
                 self.delegate?.didUpdateWeatherData(openWeather: openWeather)
-                //print(self.openWeather)
-                
+     
             }
             
         }
@@ -117,9 +103,9 @@ class WeatherService {
         return dayName
     }
     
-    func getQueryWithApi(query: [String: String]) -> [String: String] {
+    func setQueryWithApi(query: [String: String]) -> [String: String] {
         var queryApiKey = query
-        queryApiKey["appid"] = valueForAPIKey(named:"API_CLIENT_ID")
+        queryApiKey["appid"] = valueForAPIKey(named:"API_CLIENT_ID_WEATHER")
         return queryApiKey
     }
     

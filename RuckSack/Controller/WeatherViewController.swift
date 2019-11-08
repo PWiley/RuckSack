@@ -53,26 +53,6 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         
         
     }
-//    override func viewDidAppear(_ animated: Bool) {
-//
-//
-//        weatherService.askWeatherState(town: weatherService.berlin)
-//        repositionCell()
-//        print(tableViewWeather.bounds.maxY)
-//        weatherService.askWeatherState(town: weatherService.berlin)
-//
-//    }
-    
-//    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        //print("refresh can go")
-//        if WeatherViewController.self.whichTown == true {
-//            self.weatherService.askWeatherState(town: WeatherService.newYork)
-//            self.repositionCell()
-//        } else {
-//            self.weatherService.askWeatherState(town: WeatherService.berlin)
-//            self.repositionCell()
-//        }
-//    }
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let indexpath = IndexPath(row: 1, section: 0)
         let rowZeroFrame = tableViewWeather.rectForRow(at: indexpath)
@@ -84,23 +64,9 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
     @IBAction func changeTown(_ sender: Any) {
         
-        print("Changed town")
-        //WeatherViewController.whichTown = !WeatherViewController.whichTown
         let changeTownAlert = UIAlertController(title: "Change Town?", message: "Do You want to change the town?", preferredStyle: .alert)
         changeTownAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.setTown(town: !self.town)
-//            if self.town == true {
-////                self.buttonTown.image = UIImage(named: "tv_tower")
-//                //self.weatherService.askWeatherState(town: self.weatherService.berlin)
-////                self.repositionCell()
-//                self.setTown(town: true)
-//            }
-//            if self.town == false {
-//                //self.buttonTown.image = UIImage(named: "liberty")
-//                //self.weatherService.askWeatherState(town: self.weatherService.newYork)
-////                self.repositionCell()
-//                self.setTown(town: false)
-//            }
             self.town = !self.town
             self.repositionCell()
             
@@ -128,7 +94,6 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         actualDayWeather.weatherDescription.text = weatherService.openWeather!.list[0].weather[0].weatherDescription.rawValue.capitalized
         actualDayWeather.imageActualWeather.image = setStateImage(indexList: 0)
         actualDayWeather.humidyAmount.text = String(weatherService.openWeather!.list[0].main.humidity) + "%"
-        print(weatherService.openWeather!.list[0].main.humidity)
         actualDayWeather.tempActual.text = String(format:"%.f", weatherService.openWeather!.list[0].main.temp.celcius) + "°C"
     }
     
@@ -138,7 +103,6 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         let description = weatherService.openWeather?.list[indexList].weather[0].weatherDescription
         let timestamp = Double(((weatherService.openWeather?.list[indexList].dt)!))
         night = weatherService.setTime(timestamp: timestamp)
-        print(night)
         switch value {
         case .clouds:
             if night == false {
@@ -250,29 +214,12 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         }
     }
     @objc func handleSwipes(_ sender: Any) {
-        
-        print("refreshing")
-        //setTown(town: town)
         DispatchQueue.main.async {
-            //self.repositionCell()
             self.tableViewWeather.reloadData()
-            //repositionCell()
             self.refreshControl?.endRefreshing()
-            
-            print("refresh")
+    
         }
-//        self.tableViewWeather.reloadData()
-//        //repositionCell()
-//        self.refreshControl?.endRefreshing()
-//        repositionCell()
-//        print("refresh")
-        
     }
     
 }
 
-//
-//enum Town {
-//    case berlin
-//    case newYork
-//}

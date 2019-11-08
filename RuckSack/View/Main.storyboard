@@ -66,7 +66,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="name"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="NO"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="9"/>
                                             </userDefinedRuntimeAttribute>
@@ -81,7 +80,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Français" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRU-R0-pim">
-                                        <rect key="frame" x="175" y="17" width="65" height="46"/>
+                                        <rect key="frame" x="169" y="17" width="65" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="RRU-R0-pim" secondAttribute="height" multiplier="65:46" id="HoV-Pv-XJ1"/>
                                             <constraint firstAttribute="width" constant="65" id="wVK-A0-73A"/>
@@ -93,7 +92,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="RRU-R0-pim" firstAttribute="leading" secondItem="7vE-KZ-BDP" secondAttribute="trailing" constant="101.5" id="4Bp-Zs-rtq"/>
+                                    <constraint firstItem="RRU-R0-pim" firstAttribute="leading" secondItem="7vE-KZ-BDP" secondAttribute="trailing" constant="95.5" id="4Bp-Zs-rtq"/>
                                     <constraint firstAttribute="width" secondItem="9sN-Fc-GuY" secondAttribute="height" multiplier="359:203" id="MF6-xO-wAV"/>
                                     <constraint firstAttribute="bottom" secondItem="vHu-qx-riL" secondAttribute="bottom" constant="7.5" id="O0B-aX-SMH"/>
                                     <constraint firstItem="7vE-KZ-BDP" firstAttribute="top" secondItem="9sN-Fc-GuY" secondAttribute="top" constant="17" id="Zjo-Dm-dIG"/>
@@ -118,7 +117,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="NO"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="9"/>
                                             </userDefinedRuntimeAttribute>
@@ -133,7 +131,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q06-Ea-MHA">
-                                        <rect key="frame" x="175" y="17" width="65" height="46"/>
+                                        <rect key="frame" x="169" y="17" width="65" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Q06-Ea-MHA" secondAttribute="height" multiplier="65:46" id="GTN-cq-z8S"/>
                                             <constraint firstAttribute="width" constant="65" id="zcx-2M-rmI"/>
@@ -149,7 +147,7 @@
                                     <constraint firstItem="0nt-yS-zVo" firstAttribute="leading" secondItem="Rae-yL-d4c" secondAttribute="leading" constant="27" id="BME-VT-QdP"/>
                                     <constraint firstAttribute="width" secondItem="Rae-yL-d4c" secondAttribute="height" multiplier="359:203" id="EZX-GX-V6x"/>
                                     <constraint firstAttribute="trailing" secondItem="gmE-y4-cPO" secondAttribute="trailing" constant="10" id="PJC-sp-Qu3"/>
-                                    <constraint firstItem="Q06-Ea-MHA" firstAttribute="leading" secondItem="0nt-yS-zVo" secondAttribute="trailing" constant="101.5" id="TeP-aY-2nv"/>
+                                    <constraint firstItem="Q06-Ea-MHA" firstAttribute="leading" secondItem="0nt-yS-zVo" secondAttribute="trailing" constant="95.5" id="TeP-aY-2nv"/>
                                     <constraint firstItem="gmE-y4-cPO" firstAttribute="leading" secondItem="Rae-yL-d4c" secondAttribute="leading" constant="10" id="bII-CJ-drv"/>
                                     <constraint firstItem="Q06-Ea-MHA" firstAttribute="top" secondItem="Rae-yL-d4c" secondAttribute="top" constant="17" id="cYq-YA-ya8"/>
                                     <constraint firstItem="gmE-y4-cPO" firstAttribute="top" secondItem="0nt-yS-zVo" secondAttribute="bottom" constant="8" id="f2h-MO-oeT"/>

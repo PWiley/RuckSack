@@ -64,6 +64,8 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        textLanguageOrigin.text = ""
+        textLanguageDestination.text = ""
         setBackGroundTown()
     }
     
@@ -132,6 +134,7 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
         //if targetLanguage == "fr" && textLanguageOrigin.text != "" {
         if targetLanguage == "fr" {
             if textLanguageOrigin.text != "" {
+                textLanguageOrigin.text = ""
                 self.alert(title: "Action impossible", message: "Check your entry", titleAction: "ok", actionStyle: .default)
             }
             else {
@@ -140,8 +143,9 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
             }
             
         }
-        if targetLanguage == "en" {
+        else if targetLanguage == "en" {
             if textLanguageDestination.text != "" {
+                textLanguageOrigin.text = ""
                 self.alert(title: "Action impossible", message: "Check your entry", titleAction: "ok", actionStyle: .default)
             }
             else {
@@ -150,6 +154,8 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
             }
            
             
+        } else {
+            print("erreur")
         }
         
     }
@@ -158,7 +164,9 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
            switch error {
            case .clientError: alert(title: "Internet Connection" , message: "We cannot etablish an internet connection. Please retry in a moment", titleAction: "Ok", actionStyle: .default)
            case .wrongLanguage : alert(title: "Incorrect entry" , message: "Please check your entries and try again.", titleAction: "Ok", actionStyle: .default)
-           //case .jsonError: alert(title: "Json problem" , message: "Retry please in a moment", titleAction: "Ok", actionStyle: .default)
+           textLanguageOrigin.text = ""
+           textLanguageOrigin.text = ""
+            //case .jsonError: alert(title: "Json problem" , message: "Retry please in a moment", titleAction: "Ok", actionStyle: .default)
            }
            
        }

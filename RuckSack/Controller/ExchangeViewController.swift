@@ -31,24 +31,21 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.hideKeyboardWhenTappedAround()
         currencyService.delegate = self
         currencyService.askCurrencyRate()
         exchangeViewController.insertSubview(backgroundImage, at: 0)
-        // Do any additional setup after loading the view.
-    }
-    
-    
+   }
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        
         setBackGroundTown()
         addDoneButtonOnKeyboard()
         
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        amountOrigin.text = ""
+        amountDestination.text = ""
         setBackGroundTown()
         addDoneButtonOnKeyboard()
         
@@ -77,9 +74,15 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     func didHappenedError(error: CurrencyError) {
         switch error {
         case .clientError:
-            self.alert(title: "Internet Connection" , message: "We cannot etablish an internet connection. Please retry in a moment", titleAction: "Ok", actionStyle: .default)
+            self.alert(title: "Internet Connection",
+                       message: "We cannot etablish an internet connection. Please retry in a moment",
+                       titleAction: "Ok",
+                       actionStyle: .default)
         case .currencyError:
-            self.alert(title: "Action impossible", message: "Check please your entry ", titleAction: "ok", actionStyle: .default)
+            self.alert(title: "Action impossible",
+                       message: "Check please your entry ",
+                       titleAction: "ok",
+                       actionStyle: .default)
         }
         
     }
@@ -90,7 +93,10 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         doneToolbar.barStyle = .default
         
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButtonAction))
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Done",
+                                                    style: .done,
+                                                    target: self,
+                                                    action: #selector(doneButtonAction))
         
         let items = [flexSpace, done]
         doneToolbar.items = items
@@ -108,16 +114,31 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         
         if amountOrigin.text != "" && !(amountOrigin.text?.contains(".."))! {
             currencyService.askCurrencyRate()
-            let amountDouble = Double(amountOrigin.text!)
-            amountDestination.text = String(format:"%.2f", currencyService.calculateConversion(amount: amountDouble!, base: "EUR"))
+            guard let amountDouble = Double(amountOrigin.text!) else {
+                self.alert(title: "Action impossible",
+                           message: "Check please your entry ",
+                           titleAction: "ok",
+                           actionStyle: .default)
+                amountOrigin.text = ""
+                return
+                }
+            amountDestination.text = String(format:"%.2f",
+                                            currencyService.calculateConversion(amount: amountDouble,
+                                                                                base: "EUR"))
             setAlphaView(origin: 0.65, destination: 0.95)
         } else if amountDestination.text != "" && !(amountDestination.text?.contains(".."))! {
             currencyService.askCurrencyRate()
-            let amountDouble = Double(amountDestination.text!)
-            amountOrigin.text = String(format:"%.2f", currencyService.calculateConversion(amount: amountDouble!, base: "USD"))
+            guard let amountDouble = Double(amountDestination.text!)else {
+                self.alert(title: "Action impossible",
+                           message: "Check please your entry ",
+                           titleAction: "ok",
+                           actionStyle: .default)
+                amountDestination.text = ""
+                return
+                }
+            amountOrigin.text = String(format:"%.2f", currencyService.calculateConversion(amount: amountDouble, base: "USD"))
             setAlphaView(origin: 0.95, destination: 0.65)
         } else {
-            //            self.alert(title: "Action impossible", message: "Check please your entry ", titleAction: "ok", actionStyle: .default)
             didHappenedError(error: .currencyError)
         }
         
