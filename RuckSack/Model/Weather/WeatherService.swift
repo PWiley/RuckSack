@@ -25,17 +25,17 @@ class WeatherService {
     var berlin: [String: String] = [
         "q": "berlin,de",
         "mode": "json",
-        "appid": "d2fc02766020f446cb8063c244166041"
+        "appid": ""
     ]
     var newYork: [String: String] = [
         "q": "new york,us",
         "mode": "json",
-        "appid": "d2fc02766020f446cb8063c244166041"
+        "appid": ""
     ]
     
     func createRequest(query: [String: String]) -> URLRequest {
-        
-        var request = URLRequest(url: (WeatherService.baseURL.withQueries(query)!))
+        let queryRequest = getQueryWithApi(query: query)
+        var request = URLRequest(url: (WeatherService.baseURL.withQueries(queryRequest)!))
         request.httpMethod = "POST"
         return request
     }
@@ -115,6 +115,12 @@ class WeatherService {
         let weekday = dateFormatter.weekdaySymbols[Calendar.current.component(.weekday, from: date)-1]
         let dayName = weekday + monthDay
         return dayName
+    }
+    
+    func getQueryWithApi(query: [String: String]) -> [String: String] {
+        var queryApiKey = query
+        queryApiKey["appid"] = valueForAPIKey(named:"API_CLIENT_ID")
+        return queryApiKey
     }
     
 }

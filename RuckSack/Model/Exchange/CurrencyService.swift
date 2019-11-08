@@ -66,7 +66,7 @@ class CurrencyService {
                     
                     self.currency = try JSONDecoder().decode(Currency.self, from: jsonData)
                     //print("Ouhra: currency = \(self.currency?.rates?.usd)")
-                    self.requestData(currency: self.currency!)
+                    self.requestCurrencyData(currency: self.currency!)
                     
                 } catch {
                     print("JSON error: \(error)")
@@ -77,7 +77,10 @@ class CurrencyService {
     }
     
     
-    func requestData(currency: Currency) {
+    /// Request for the Currency data
+    /// - Parameter currency: <#currency description#>
+    
+    func requestCurrencyData(currency: Currency) {
         // the data was received and parsed to String
         guard let euroRate = currency.rates?.usd else {return}
         let usdValue = String(format:"%.3f", 1/euroRate)
@@ -86,6 +89,11 @@ class CurrencyService {
         self.delegate?.didUpdateCurrencyData(eurRate: euroValue, usdRate: usdValue)
         
     }
+    
+    /// <#Description#>
+    /// - Parameters:
+    ///   - amount: <#amount description#>
+    ///   - base: <#base description#>
     
     func calculateConversion(amount: Double, base: String) -> Double{
 //            print("le montant : \(amount)")
