@@ -37,7 +37,7 @@ class TranslateService {
         print(queryRequest)
         request = URLRequest(url: TranslateService.translateURL.withQueries(queryRequest)!)
         request?.httpMethod = "POST"
-        print(request)
+        
     
     }
     func checkLanguageTarget(target: String) {
