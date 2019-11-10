@@ -8,11 +8,14 @@
 
 import UIKit
 
-class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
+class ExchangeViewController: UIViewController, CurrencyServiceDelegate, WeatherViewControllerDelegate {
+    
+    
     
     let weatherViewController = WeatherViewController()
     let currencyService = CurrencyService.sharedCurrency
     let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+    var exchangeTown: Bool?
     @IBOutlet var exchangeViewController: UIView!
     
     @IBOutlet weak var viewOrigin: DesignableView!
@@ -32,6 +35,7 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         currencyService.delegate = self
+        weatherViewController.delegate = self
         currencyService.askCurrencyRate()
         exchangeViewController.insertSubview(backgroundImage, at: 0)
    }
@@ -148,11 +152,12 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     
     fileprivate func setBackGroundTown() {
         
-        print(WeatherViewController.setTown)
-        if weatherViewController.town == true {
+        print(exchangeTown)
+        if exchangeTown == true {
             backgroundImage.image = UIImage(named: "Background_Exchange_Berlin")
             backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
-        } else {
+        }
+        if exchangeTown == false {
             backgroundImage.image = UIImage(named: "Background_Exchange_NewYork")
             backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         }
@@ -162,5 +167,9 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         viewDestination.alpha = CGFloat(destination)
         amountOrigin.alpha = CGFloat(origin)
         amountDestination.alpha = CGFloat(destination)
+    }
+    func didChangeBackground(town: Bool) {
+        exchangeTown = town
+        
     }
 }

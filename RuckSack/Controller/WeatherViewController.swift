@@ -14,6 +14,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     let weatherService = WeatherService.sharedWeather
     var night = false
     var town: Bool = true
+    var delegate: WeatherViewControllerDelegate?
     
     @IBOutlet var tableViewWeather: UITableView!
     @IBOutlet weak var buttonTown: UIBarButtonItem!
@@ -40,6 +41,8 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         weatherService.delegate = self
         weatherService.askWeatherState(town: weatherService.berlin)
         repositionCell()
+        
+        
 //        weatherService.askWeatherState(town: weatherService.berlin)
 //        let tapRefresh = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
 //        self.tableViewWeather.addGestureRecognizer(tapRefresh)
@@ -52,6 +55,9 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         self.view.addSubview(self.refreshControl!)
         
         
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        repositionCell()
     }
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let indexpath = IndexPath(row: 1, section: 0)
@@ -68,6 +74,8 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         changeTownAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.setTown(town: !self.town)
             self.town = !self.town
+            print("self.town: \(self.town)")
+            self.delegate?.didChangeBackground(town: self.town)
             self.repositionCell()
             
         }))
@@ -201,6 +209,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
             navigationItem.title = "Berlin"
             self.weatherService.askWeatherState(town: self.weatherService.berlin)
+            self.delegate?.didChangeBackground(town: true)
             repositionCell()
         case false:
             self.buttonTown.image = UIImage(named: "liberty")
@@ -209,6 +218,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
             navigationItem.title = "New-York"
             self.weatherService.askWeatherState(town: self.weatherService.newYork)
+            self.delegate?.didChangeBackground(town: false)
             repositionCell()
             
         }
@@ -222,4 +232,6 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     }
     
 }
-
+protocol WeatherViewControllerDelegate {
+    func didChangeBackground(town: Bool)
+}

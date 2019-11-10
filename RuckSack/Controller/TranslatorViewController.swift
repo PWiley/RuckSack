@@ -8,12 +8,14 @@
 
 import UIKit
 
-class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITextViewDelegate {
+class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITextViewDelegate, WeatherViewControllerDelegate {
+    
+    
     
     
     let weatherViewController = WeatherViewController()
     var translateService = TranslateService(translateSession: .shared)
-   
+    var translatorTown: Bool?
     
     @IBOutlet var translatorViewController: UIView!
     
@@ -32,16 +34,19 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     override func viewDidLoad() {
         super.viewDidLoad()
         translateService.delegate = self
+        weatherViewController.delegate = self
         //self.hideKeyboardWhenTappedAround()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         textLanguageOrigin.delegate = self
         textLanguageDestination.delegate = self
-        setBackGroundTown()
+        //setBackGroundTown()
         translatorViewController.insertSubview(backgroundImage, at: 0)
         
     }
+   
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == textLanguageOrigin {
             textLanguageDestination.text = ""
@@ -57,7 +62,7 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        setBackGroundTown()
+        //setBackGroundTown()
         addDoneButtonOnKeyboard()
         
     }
@@ -66,7 +71,7 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
         super.viewDidAppear(animated)
         textLanguageOrigin.text = ""
         textLanguageDestination.text = ""
-        setBackGroundTown()
+        //setBackGroundTown()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -162,8 +167,14 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     
     func didHappenedError(error: TranslationError) {
            switch error {
-           case .clientError: alert(title: "Internet Connection" , message: "We cannot etablish an internet connection. Please retry in a moment", titleAction: "Ok", actionStyle: .default)
-           case .wrongLanguage : alert(title: "Incorrect entry" , message: "Please check your entries and try again.", titleAction: "Ok", actionStyle: .default)
+           case .clientError: alert(title: "Internet Connection",
+                                    message: "We cannot etablish an internet connection. Please retry in a moment",
+                                    titleAction: "Ok",
+                                    actionStyle: .default)
+           case .wrongLanguage : alert(title: "Incorrect entry" ,
+                                       message: "Please check your entries and try again.",
+                                       titleAction: "Ok",
+                                       actionStyle: .default)
            textLanguageOrigin.text = ""
            textLanguageOrigin.text = ""
             //case .jsonError: alert(title: "Json problem" , message: "Retry please in a moment", titleAction: "Ok", actionStyle: .default)
@@ -173,18 +184,25 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     
     // MARK: Background settings
     
-    fileprivate func setBackGroundTown() {
+    fileprivate func setBackGroundTown(town: Bool) {
         // Do any additional setup after loading the view.
         //        'let backgroundImage = UIImageView(frame: UIScreen.main.bounds)'
         
-        print(WeatherViewController.setTown)
-        if weatherViewController.town == true {
+        print(town)
+        if town == true {
             backgroundImage.image = UIImage(named: "Background_Translator_Berlin")
             backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
-        } else {
-            backgroundImage.image = UIImage(named: "Background_Translator_NewYork")
+            
+        }
+        if town == false {
+            backgroundImage.image = UIImage(named:"Background_Translator_NewYork")
             backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         }
         
+    }
+    func didChangeBackground(town: Bool) {
+        //translatorTown = town
+        setBackGroundTown(town: town)
+        print(town)
     }
 }
