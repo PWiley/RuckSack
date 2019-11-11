@@ -1,6 +1,6 @@
 
 //  ExchangeViewController.swift
-//  Bundle
+//  RuckSack
 //
 //  Created by Patrick Wiley on 29.08.19.
 //  Copyright © 2019 Patrick Wiley. All rights reserved.
@@ -8,12 +8,13 @@
 
 import UIKit
 
-class ExchangeViewController: UIViewController, CurrencyServiceDelegate, WeatherViewControllerDelegate {
+class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     
     
     
     let weatherViewController = WeatherViewController()
     let currencyService = CurrencyService.sharedCurrency
+    
     let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
     var exchangeTown: Bool?
     @IBOutlet var exchangeViewController: UIView!
@@ -35,17 +36,18 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate, Weather
     override func viewDidLoad() {
         super.viewDidLoad()
         currencyService.delegate = self
-        weatherViewController.delegate = self
+        setBackGroundTown()
         currencyService.askCurrencyRate()
+
+        print("Exchange")
         exchangeViewController.insertSubview(backgroundImage, at: 0)
    }
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        setBackGroundTown()
-        addDoneButtonOnKeyboard()
-        
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        
+//        super.viewWillAppear(animated)
+//        addDoneButtonOnKeyboard()
+//        
+//    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         amountOrigin.text = ""
@@ -150,17 +152,20 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate, Weather
     
     // MARK : Configuration Background
     
-    fileprivate func setBackGroundTown() {
-        
-        print(exchangeTown)
-        if exchangeTown == true {
+   fileprivate func setBackGroundTown() {
+        // Do any additional setup after loading the view.
+        //        'let backgroundImage = UIImageView(frame: UIScreen.main.bounds)'
+        let town = weatherViewController.backgroundDefault.string(forKey: "town")
+        if  town == "Berlin" {
             backgroundImage.image = UIImage(named: "Background_Exchange_Berlin")
-            backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+            
         }
-        if exchangeTown == false {
-            backgroundImage.image = UIImage(named: "Background_Exchange_NewYork")
-            backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        if town == "NewYork" {
+            backgroundImage.image = UIImage(named:"Background_Exchange_NewYork")
+            
         }
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+
     }
     fileprivate func setAlphaView(origin: Float, destination: Float) {
         viewOrigin.alpha = CGFloat(origin)
@@ -168,8 +173,5 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate, Weather
         amountOrigin.alpha = CGFloat(origin)
         amountDestination.alpha = CGFloat(destination)
     }
-    func didChangeBackground(town: Bool) {
-        exchangeTown = town
-        
-    }
+    
 }

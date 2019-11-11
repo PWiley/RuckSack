@@ -1,6 +1,6 @@
 //
 //  TranslatorViewController.swift
-//  Bundle
+//  RuckSack
 //
 //  Created by Patrick Wiley on 29.08.19.
 //  Copyright © 2019 Patrick Wiley. All rights reserved.
@@ -8,14 +8,16 @@
 
 import UIKit
 
-class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITextViewDelegate, WeatherViewControllerDelegate {
+class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITextViewDelegate {
+    
+    
     
     
     
     
     let weatherViewController = WeatherViewController()
     var translateService = TranslateService(translateSession: .shared)
-    var translatorTown: Bool?
+    
     
     @IBOutlet var translatorViewController: UIView!
     
@@ -34,18 +36,31 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     override func viewDidLoad() {
         super.viewDidLoad()
         translateService.delegate = self
-        weatherViewController.delegate = self
+        
+        setBackGroundTown()
         //self.hideKeyboardWhenTappedAround()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         textLanguageOrigin.delegate = self
         textLanguageDestination.delegate = self
-        //setBackGroundTown()
+        print("translatorViewController")
         translatorViewController.insertSubview(backgroundImage, at: 0)
         
     }
-   
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        textLanguageOrigin.text = ""
+        textLanguageDestination.text = ""
+        setBackGroundTown()
+        addDoneButtonOnKeyboard()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == textLanguageOrigin {
@@ -59,26 +74,15 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
             viewOrigin.alpha = 0.65
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        //setBackGroundTown()
-        addDoneButtonOnKeyboard()
-        
-    }
+    //    override func viewWillAppear(_ animated: Bool) {
+    //
+    //        super.viewWillAppear(animated)
+    //        //setBackGroundTown(town: selectedTown)
+    //        addDoneButtonOnKeyboard()
+    //
+    //    }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        textLanguageOrigin.text = ""
-        textLanguageDestination.text = ""
-        //setBackGroundTown()
-    }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
     @objc func keyboardWillHide() {
         self.view.frame.origin.y = 0
     }
@@ -89,9 +93,9 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
             if textLanguageDestination.isFirstResponder {
                 self.view.frame.origin.y = -(keyboardSize.height)/1.5
             }
-//            if textLanguageOrigin.isFirstResponder {
-//                self.view.frame.origin.y = -(keyboardSize.height)/16
-//            }
+            //            if textLanguageOrigin.isFirstResponder {
+            //                self.view.frame.origin.y = -(keyboardSize.height)/16
+            //            }
         }
     }
     
@@ -143,8 +147,8 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
                 self.alert(title: "Action impossible", message: "Check your entry", titleAction: "ok", actionStyle: .default)
             }
             else {
-            textLanguageOrigin.text = translatedAnswer.translatedText
-            viewOrigin.alpha = 0.85
+                textLanguageOrigin.text = translatedAnswer.translatedText
+                viewOrigin.alpha = 0.85
             }
             
         }
@@ -154,10 +158,10 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
                 self.alert(title: "Action impossible", message: "Check your entry", titleAction: "ok", actionStyle: .default)
             }
             else {
-            textLanguageDestination.text = translatedAnswer.translatedText
-            viewDestination.alpha = 0.85
+                textLanguageDestination.text = translatedAnswer.translatedText
+                viewDestination.alpha = 0.85
             }
-           
+            
             
         } else {
             print("erreur")
@@ -166,43 +170,38 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     }
     
     func didHappenedError(error: TranslationError) {
-           switch error {
-           case .clientError: alert(title: "Internet Connection",
-                                    message: "We cannot etablish an internet connection. Please retry in a moment",
+        switch error {
+        case .clientError: alert(title: "Internet Connection",
+                                 message: "We cannot etablish an internet connection. Please retry in a moment",
+                                 titleAction: "Ok",
+                                 actionStyle: .default)
+        case .wrongLanguage : alert(title: "Incorrect entry" ,
+                                    message: "Please check your entries and try again.",
                                     titleAction: "Ok",
                                     actionStyle: .default)
-           case .wrongLanguage : alert(title: "Incorrect entry" ,
-                                       message: "Please check your entries and try again.",
-                                       titleAction: "Ok",
-                                       actionStyle: .default)
-           textLanguageOrigin.text = ""
-           textLanguageOrigin.text = ""
+        textLanguageOrigin.text = ""
+        textLanguageOrigin.text = ""
             //case .jsonError: alert(title: "Json problem" , message: "Retry please in a moment", titleAction: "Ok", actionStyle: .default)
-           }
-           
-       }
+        }
+        
+    }
     
     // MARK: Background settings
     
-    fileprivate func setBackGroundTown(town: Bool) {
+    fileprivate func setBackGroundTown() {
         // Do any additional setup after loading the view.
         //        'let backgroundImage = UIImageView(frame: UIScreen.main.bounds)'
-        
-        print(town)
-        if town == true {
+        let town = weatherViewController.backgroundDefault.string(forKey: "town")
+        if  town == "Berlin" {
             backgroundImage.image = UIImage(named: "Background_Translator_Berlin")
-            backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
             
         }
-        if town == false {
+        if town == "NewYork" {
             backgroundImage.image = UIImage(named:"Background_Translator_NewYork")
-            backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+            
         }
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         
     }
-    func didChangeBackground(town: Bool) {
-        //translatorTown = town
-        setBackGroundTown(town: town)
-        print(town)
-    }
+    
 }

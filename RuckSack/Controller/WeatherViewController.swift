@@ -1,6 +1,6 @@
 //
 //  WeatherViewController.swift
-//  Bundle
+//  RuckSack
 //
 //  Created by Patrick Wiley on 29.08.19.
 //  Copyright © 2019 Patrick Wiley. All rights reserved.
@@ -13,8 +13,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
     let weatherService = WeatherService.sharedWeather
     var night = false
-    var town: Bool = true
-    var delegate: WeatherViewControllerDelegate?
+    var backgroundDefault = UserDefaults.standard
     
     @IBOutlet var tableViewWeather: UITableView!
     @IBOutlet weak var buttonTown: UIBarButtonItem!
@@ -31,32 +30,25 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     @IBOutlet weak var actualDayWeather: ActualDayWeather!
     @IBOutlet weak var stackViewState: UIStackView!
     
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTown(town: town)
+        backgroundDefault.set("Berlin", forKey: "town")
+        tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
         navigationItem.title = "Berlin"
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSAttributedString.Key.foregroundColor: UIColor.init(red:0.97, green:0.44, blue:0.56, alpha:1.0), NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 19.0)!]
-//
         weatherService.delegate = self
         weatherService.askWeatherState(town: weatherService.berlin)
         repositionCell()
         
-        
-//        weatherService.askWeatherState(town: weatherService.berlin)
-//        let tapRefresh = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-//        self.tableViewWeather.addGestureRecognizer(tapRefresh)
-       
-        let titleAttribute = [NSAttributedString.Key.foregroundColor: UIColor.blue, NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)]
-        self.refreshControl?.tintColor = UIColor.white
-        self.refreshControl?.backgroundColor =  UIColor(displayP3Red: 0.612, green: 0.804, blue: 0.91, alpha: 1)
-        self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: titleAttribute )
-        self.refreshControl?.addTarget(self, action: #selector(handleSwipes(_:)), for: .valueChanged)
-        self.view.addSubview(self.refreshControl!)
+        setRefreshControl()
         
         
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.tableViewWeather.backgroundView?.alpha = 1
         repositionCell()
     }
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -64,7 +56,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         let rowZeroFrame = tableViewWeather.rectForRow(at: indexpath)
         
         let offset = scrollView.contentOffset.y/(self.tableViewWeather.contentSize.height/2 - rowZeroFrame.height/2)
-        self.tableViewWeather.backgroundView?.alpha = 1.8-offset
+        self.tableViewWeather.backgroundView?.alpha = 0.7-offset
     }
     
     
@@ -72,10 +64,8 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         
         let changeTownAlert = UIAlertController(title: "Change Town?", message: "Do You want to change the town?", preferredStyle: .alert)
         changeTownAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-            self.setTown(town: !self.town)
-            self.town = !self.town
-            print("self.town: \(self.town)")
-            self.delegate?.didChangeBackground(town: self.town)
+            self.switchTown()
+            self.setTown(town: self.backgroundDefault)
             self.repositionCell()
             
         }))
@@ -138,7 +128,8 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             if description!.rawValue == "freezing rain" {
                 imageStateDay = UIImage(named: "13d")!
             }
-            if description!.rawValue == "light intensity shower rain" ||   description!.rawValue == "shower rain" || description!.rawValue == "heavy intensity shower rain" || description!.rawValue == "ragged shower rain" {
+            if description!.rawValue == "light intensity shower rain" || description!.rawValue == "shower rain" ||
+                description!.rawValue == "heavy intensity shower rain" || description!.rawValue == "ragged shower rain" {
                 imageStateDay = UIImage(named: "09d")!
             } else if night == true {
                 imageStateDay = UIImage(named: "10n")!
@@ -174,12 +165,22 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     }
     func didHappenedError(error: NetworkError) {
         switch error {
-        case .clientError: self.alert(title: "Internet Connection" , message: "We cannot etablish an internet connection. Please retry in a moment", titleAction: "Ok", actionStyle: .default)
-        case .serverError: self.alert(title: "Internet Connection" , message: "Retry please in a moment", titleAction: "Ok", actionStyle: .default)
-        case .jsonError: self.alert(title: "Json problem" , message: "Retry please in a moment", titleAction: "Ok", actionStyle: .default)
+        case .clientError: self.alert(title: "Internet Connection",
+                                      message: "We cannot etablish an internet connection. Please retry in a moment",
+                                      titleAction: "Ok",
+                                      actionStyle: .default)
+        case .serverError: self.alert(title: "Internet Connection",
+                                      message: "Retry please in a moment",
+                                      titleAction: "Ok",
+                                      actionStyle: .default)
+        case .jsonError: self.alert(title: "Json problem",
+                                    message: "Retry please in a moment",
+                                    titleAction: "Ok",
+                                    actionStyle: .default)
         }
         
     }
+    
     fileprivate func setStackViewDaysState() {
         if stackViewState.arrangedSubviews.count != 0 {
             resetStackViewDaysState()
@@ -190,38 +191,54 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         stackViewState.insertArrangedSubview(createDayState(number: 32), at: 3)
         stackViewState.insertArrangedSubview(createDayState(number: 39), at: 4)
     }
+    
     fileprivate func resetStackViewDaysState() {
         stackViewState.subviews.forEach { (view) in
             view.removeFromSuperview()
         }
     }
+    
     fileprivate func repositionCell() {
         let indexPath: IndexPath = IndexPath(row: 0, section: 0)
         self.tableViewWeather.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
     
-    func setTown(town: Bool) {
-        
-        switch town {
-        case true:
+    fileprivate func setRefreshControl() {
+           let titleAttribute = [NSAttributedString.Key.foregroundColor: UIColor.blue,
+                                 NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)]
+           self.refreshControl?.tintColor = UIColor.white
+           self.refreshControl?.backgroundColor =  UIColor(displayP3Red: 0.612, green: 0.804, blue: 0.91, alpha: 1)
+           self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: titleAttribute )
+           self.refreshControl?.addTarget(self, action: #selector(handleSwipes(_:)), for: .valueChanged)
+           self.view.addSubview(self.refreshControl!)
+       }
+    
+    
+    func setTown(town: UserDefaults) {
+        let townName = backgroundDefault.string(forKey: "town")
+        switch townName {
+        case "Berlin":
             buttonTown.image = UIImage(named: "tv_tower")
             tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
-            tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
+            
             navigationItem.title = "Berlin"
             self.weatherService.askWeatherState(town: self.weatherService.berlin)
-            self.delegate?.didChangeBackground(town: true)
-            repositionCell()
-        case false:
+           
+        case "NewYork":
             self.buttonTown.image = UIImage(named: "liberty")
             //            tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
             tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
-            tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
+           
             navigationItem.title = "New-York"
             self.weatherService.askWeatherState(town: self.weatherService.newYork)
-            self.delegate?.didChangeBackground(town: false)
-            repositionCell()
+        default:
+            print("erreur")
+            
             
         }
+        tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
+        //self.delegate?.didChangeBackground(town: town)
+                   repositionCell()
     }
     @objc func handleSwipes(_ sender: Any) {
         DispatchQueue.main.async {
@@ -230,8 +247,22 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     
         }
     }
+    func switchTown() {
+        let townActual = backgroundDefault.string(forKey: "town")
+        switch townActual {
+        case "Berlin":
+            backgroundDefault.set("NewYork", forKey: "town")
+        case "NewYork":
+            backgroundDefault.set("Berlin", forKey: "town")
+        default:
+            print("Something wrong happen")
+        }
+    }
+    
     
 }
-protocol WeatherViewControllerDelegate {
-    func didChangeBackground(town: Bool)
+enum Town {
+    case berlin
+    case newYork
 }
+
