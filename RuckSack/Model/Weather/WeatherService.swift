@@ -82,11 +82,13 @@ class WeatherService {
         var isNight: Bool?
         let date = Date(timeIntervalSince1970: timestamp)
         let hour = Calendar.current.component(.hour, from: date)
-        let min = Calendar.current.component(.minute, from: date)
-        if (hour >= 6 && min >= 00) && (hour < 18 && min < 60) {
+        //let min = Calendar.current.component(.minute, from: date)
+//        if (hour >= 6 && min >= 00) && (hour < 18 && min < 60) {
+        if (hour >= 6) && (hour < 18) {
             isNight = false
         }
-        if (hour >= 18 && min >= 00) || (hour < 6 && min <= 59){
+//        if (hour >= 18 && min >= 00) || (hour < 6 && min <= 59){
+        if (hour >= 18) || (hour < 6){
             isNight = true
         }
         return isNight!
