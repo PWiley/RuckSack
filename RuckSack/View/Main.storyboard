@@ -223,11 +223,11 @@
                         <sections>
                             <tableViewSection id="s5h-A4-A7r">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" alpha="0.40000000000000002" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="724" id="ohY-5B-5ug" userLabel="DayCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="724"/>
+                                    <tableViewCell clipsSubviews="YES" alpha="0.40000000000000002" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="725" id="ohY-5B-5ug" userLabel="DayCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="725"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ohY-5B-5ug" id="vHo-tt-L9N">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="725"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K8p-1G-iw1" customClass="ActualDayWeather" customModule="RuckSack" customModuleProvider="target">
@@ -248,7 +248,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="178" id="ve2-OF-xJQ" userLabel="WeekCell">
-                                        <rect key="frame" x="0.0" y="752" width="375" height="178"/>
+                                        <rect key="frame" x="0.0" y="753" width="375" height="178"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ve2-OF-xJQ" id="mTO-bz-Ait">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="178"/>
@@ -291,7 +291,7 @@
                         <attributedString key="attributedTitle">
                             <fragment content="Weather Forecast Update">
                                 <attributes>
-                                    <font key="NSFont" metaFont="message" size="11"/>
+                                    <font key="NSFont" metaFont="label" size="11"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>
@@ -306,7 +306,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AfD-QX-BTp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="598.55072463768124" y="277.23214285714283"/>
+            <point key="canvasLocation" x="597.60000000000002" y="277.09359605911334"/>
         </scene>
         <!--Exchange-->
         <scene sceneID="IGS-iA-O43">
