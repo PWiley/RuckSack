@@ -9,7 +9,17 @@
 import XCTest
 @testable import RuckSack
 
-class WeatherServiceTestCase: XCTestCase {
+class WeatherServiceTestCase: XCTestCase, WeatherServiceDelegate {
+    
+    var expectation: XCTestExpectation!
+    func didUpdateWeatherData(openWeather: OpenWeather) {
+        expectation.fulfill()
+    }
+    
+    func didHappenedError(error: NetworkError) {
+        
+    }
+    
 
     func testGetWeatherShouldPostFailedIfError() {
         //Given=
@@ -44,25 +54,30 @@ class WeatherServiceTestCase: XCTestCase {
         XCTAssertTrue(weatherService.openWeather == nil)
     }
     
-//    func testGetWeatherShouldPostSuccessIfNoErrorCorrectData() {
-//        //Given=
-//    let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: WeatherDataResponseFake.weatherCorrectData, response: WeatherDataResponseFake.responseCorrect, error: nil))
-//        //When
-//        weatherService.askWeatherState(town: weatherService.berlin)
-//        //Then
-//
-//        
-//        
-//        print(weatherService.openWeather?.list[0].main.temp)
-//        XCTAssertEqual(weatherService.openWeather?.list[0].main.temp, 283.8)
-//        XCTAssertEqual(73, weatherService.openWeather!.list[0].main.humidity)
-//
-//    }
+    func testGetWeatherShouldPostSuccessIfNoErrorCorrectData() {
+        //Given=
+    let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: WeatherDataResponseFake.weatherCorrectData,
+                                                                              response: WeatherDataResponseFake.responseCorrect,
+                                                                              error: nil))
+        expectation = expectation(description: "Wait for info")
+        weatherService.delegate = self
+        //When
+       
+        //Then
+        
+        weatherService.askWeatherState(town: weatherService.berlin)
+       
+        waitForExpectations(timeout: 2)
+        
+        XCTAssertEqual(weatherService.openWeather?.list[0].main.temp, 283.8)
+        XCTAssertEqual(73, weatherService.openWeather!.list[0].main.humidity)
+
+    }
     func testSetTimeIfFailed() {
         let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: WeatherDataResponseFake.weatherCorrectData, response: WeatherDataResponseFake.responseCorrect, error: nil))
-        let timestamp = 1573138800
+        let timestamp = 1573160400
         let night = weatherService.setTime(timestamp: Double(timestamp))
-        XCTAssertNotEqual(night, true)
+        XCTAssertEqual(night, true)
         
         
     }
@@ -75,3 +90,4 @@ class WeatherServiceTestCase: XCTestCase {
         
     }
 }
+

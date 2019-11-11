@@ -9,7 +9,17 @@
 import XCTest
 @testable import RuckSack
 
-class CurrencyServiceTestCase: XCTestCase {
+class CurrencyServiceTestCase: XCTestCase,CurrencyServiceDelegate {
+    
+    var expectation = XCTestExpectation()
+    func didUpdateCurrencyData(eurRate: String, usdRate: String) {
+        expectation.fulfill()
+    }
+    
+    func didHappenedError(error: CurrencyError) {
+        
+    }
+    
     func testGetCurrencyShouldPostFailedIfError() {
         //Given=
         let currencyService = CurrencyService(currencySession: URLSessionCurrencyFake(data: nil, response: nil, error: CurrencyDataResponseFake.error ))
@@ -49,5 +59,17 @@ class CurrencyServiceTestCase: XCTestCase {
         XCTAssertTrue((currencyService.currency?.rates?.usd == nil))
         
     }
-    
+    func testRequestCurrencyData() {
+        
+        let currencyService = CurrencyService(currencySession: URLSessionCurrencyFake(data: CurrencyDataResponseFake.currencyCorrectData, response: CurrencyDataResponseFake.responseCorrect, error: nil))
+        expectation = expectation(description: "Wait for the info")
+        currencyService.delegate = self
+        currencyService.askCurrencyRate()
+        
+        let usd = currencyService.currency?.rates!.usd
+        print(usd)
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(usd, 1.107518)
+        
+    }
 }

@@ -9,7 +9,17 @@
 import XCTest
 @testable import RuckSack
 
-class TranslateServiceTestCase: XCTestCase {
+class TranslateServiceTestCase: XCTestCase, TranslateServiceDelegate {
+    
+    var expectation: XCTestExpectation!
+    func didUpdateTranslateData(translate: Translate, targetLanguage: String) {
+        expectation.fulfill()
+    }
+    
+    func didHappenedError(error: TranslationError) {
+        
+    }
+    
     func testGetTranslateShouldPostFailedIfError() {
         //Given=
         let translateService = TranslateService(translateSession: URLSessionTranslateFake(data: nil, response: nil, error: TranslateDataResponseFake.error ))
@@ -20,47 +30,51 @@ class TranslateServiceTestCase: XCTestCase {
         //Then
         XCTAssertTrue(translateService.sentence == "")
     }
-     func testGetTranslateShouldPostFailedNoData() {
-            //Given=
-            let translateService = TranslateService(translateSession: URLSessionTranslateFake(data: nil, response: nil, error: nil))
-            //When
+    func testGetTranslateShouldPostFailedNoData() {
+        //Given=
+        let translateService = TranslateService(translateSession: URLSessionTranslateFake(data: nil, response: nil, error: nil))
+        //When
         translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
         translateService.createCall()
-            //Then
-            XCTAssertTrue(translateService.sentence == "")
-        }
-        func testGetTranslateShouldPostFailedIfIncorrectResponse() {
-                //Given=
-            let translateService = TranslateService(translateSession: URLSessionTranslateFake(data: TranslateDataResponseFake.translateCorrectData, response: TranslateDataResponseFake.responseIncorrect, error: nil))
-                //When
-            translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
-                translateService.createCall()
-                //Then
-                XCTAssertTrue(translateService.sentence == "")
-            }
+        //Then
+        XCTAssertTrue(translateService.sentence == "")
+    }
+    func testGetTranslateShouldPostFailedIfIncorrectResponse() {
+        //Given=
+        let translateService = TranslateService(translateSession: URLSessionTranslateFake(data: TranslateDataResponseFake.translateCorrectData, response: TranslateDataResponseFake.responseIncorrect, error: nil))
+        //When
+        translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
+        translateService.createCall()
+        //Then
+        XCTAssertTrue(translateService.sentence == "")
+    }
     func testGetTranslateShouldPostFailedIncorrectData() {
-                   //Given=
-               let translateService = TranslateService(translateSession: URLSessionTranslateFake(data: TranslateDataResponseFake.translateIncorrectData, response: TranslateDataResponseFake.responseCorrect, error: nil))
-                   //When
-               translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
-                   translateService.createCall()
-                   //Then
-                   XCTAssertTrue(translateService.sentence == "")
-               }
-//       func testGetTranslateShouldPostSuccessIfNoErrorCorrectData() {
-//           //Given=
-//       let translateService = TranslateService(translateSession: URLSessionTranslateFake(data: TranslateDataResponseFake.translateCorrectData, response: TranslateDataResponseFake.responseCorrect, error: nil))
-//           //When
-//           translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
-//           //Then
-//   
-//            let text = "Bonjour"
-//        let detectedLanguage = "en"
-//            
-//        print(translateService.translate?.data.translations[0].translatedText)
-//          XCTAssertEqual(text, )
-//         XCTAssertEqual(73, translateService.opentranslate!.list[0].main.humidity)
-//   
-//       }
-       
+        //Given=
+        let translateService = TranslateService(translateSession: URLSessionTranslateFake(data:TranslateDataResponseFake.translateIncorrectData,
+                                                                                          response: TranslateDataResponseFake.responseCorrect, error: nil))
+        //When
+        translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
+        translateService.createCall()
+        //Then
+        XCTAssertTrue(translateService.sentence == "")
+    }
+    func testGetTranslateShouldPostSuccessIfNoErrorCorrectData() {
+        //Given=
+        let translateService = TranslateService(translateSession: URLSessionTranslateFake(data: TranslateDataResponseFake.translateCorrectData,
+                                                                                          response: TranslateDataResponseFake.responseCorrect,
+                                                                                          error: nil))
+        //When
+        let target = "fr"
+        expectation = expectation(description: "Wait for info")
+        translateService.delegate = self
+        translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
+        translateService.createCall()
+        waitForExpectations(timeout:0.5)
+        translateService.checkLanguageTarget(target:target)
+        
+        
+        XCTAssertEqual("Bonjour", translateService.translate?.data.translations[0].translatedText)
+        
+    }
+    
 }
