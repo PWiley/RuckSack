@@ -22,7 +22,7 @@ class URLSessionTranslateFake: URLSession {
     }
     
     override func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        let task = URLSessionTranslateTaskFake()
+        let task = URLSessionTranslateTaskFake(data: data, urlResponse: response, responseError: error)
         task.completionHandler = completionHandler
         task.data = data
         task.urlResponse = response
@@ -30,7 +30,7 @@ class URLSessionTranslateFake: URLSession {
         return task
     }
     override func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        let task = URLSessionTranslateTaskFake()
+        let task = URLSessionTranslateTaskFake(data: data, urlResponse: response, responseError: error)
         task.completionHandler = completionHandler
         task.data = data
         task.urlResponse = response
@@ -47,7 +47,11 @@ class URLSessionTranslateTaskFake: URLSessionDataTask {
     var data: Data?
     var urlResponse: URLResponse?
     var responseError: Error?
-    
+    init(data: Data?, urlResponse: URLResponse?, responseError: Error?) {
+        self.data = data
+        self.urlResponse = urlResponse
+        self.responseError = responseError
+    }
     
     
     override func resume() {
