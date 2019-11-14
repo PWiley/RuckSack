@@ -61,21 +61,17 @@ class TranslateService {
                 DispatchQueue.main.async {
                     self.delegate?.didHappenedError(error: .clientError)
                 }
-
                 return
             }
             guard let jsonData = data else {
-                self.delegate?.didHappenedError(error: .clientError)
+                self.delegate?.didHappenedError(error: .jsonError)
                 return
             }
             guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                self.delegate?.didHappenedError(error: .clientError)
+                self.delegate?.didHappenedError(error: .responseError)
                 return
             }
             
-//            guard let mime = response.mimeType, mime == "application/json" else {
-//                return
-//            }
             DispatchQueue.main.async{
                 
                 self.translate = try? JSONDecoder().decode(Translate.self, from: jsonData)
@@ -93,7 +89,10 @@ class TranslateService {
 }
 enum TranslationError: Error {
     case clientError
+    case jsonError
+    case responseError
     case wrongLanguage
+    
 }
 
 protocol TranslateServiceDelegate{
