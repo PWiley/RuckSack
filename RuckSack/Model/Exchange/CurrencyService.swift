@@ -29,16 +29,18 @@ class CurrencyService {
     func createRequest() -> URLRequest {
         
         let query: [String: String] = [
-            "access_key": "512b6a9fdea5eb6241c0cda88a1079eb",
+            "access_key": "",
             "symbols": "USD",
             "base": "EUR"
         ]
-        
-        var request = URLRequest(url: CurrencyService.currencyURL.withQueries(query)!)
+        let queryRequest = setQueryWithApi(query: query)
+        var request = URLRequest(url: CurrencyService.currencyURL.withQueries(queryRequest)!)
         request.httpMethod = "POST"
         //print(request)
         return request
     }
+    
+    
     
     func askCurrencyRate(){
         
@@ -103,6 +105,11 @@ class CurrencyService {
         }
         return result!
         }
+    func setQueryWithApi(query: [String: String]) -> [String: String] {
+        var queryApiKey = query
+        queryApiKey["key"] = valueForAPIKey(named:"API_CLIENT_ID_CURRENCY")
+        return queryApiKey
+    }
     
 }
 enum CurrencyError: Error {
