@@ -171,17 +171,17 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     
     func didHappenedError(error: TranslationError) {
         switch error {
-        case .clientError: alert(title: "Internet Connection",
-                                 message: "We cannot etablish an internet connection. Please retry in a moment",
-                                 titleAction: "Ok",
-                                 actionStyle: .default)
-        case .wrongLanguage : alert(title: "Incorrect entry" ,
+        case .clientError, .responseError, .jsonError: alert(title: "Internet Connection",
+                                                             message: "We cannot etablish an internet connection. Please retry in a moment",
+                                                             titleAction: "Ok",
+                                                             actionStyle: .default)
+        case .wrongLanguage: alert(title: "Incorrect entry" ,
                                     message: "Please check your entries and try again.",
                                     titleAction: "Ok",
                                     actionStyle: .default)
+        
         textLanguageOrigin.text = ""
         textLanguageOrigin.text = ""
-            //case .jsonError: alert(title: "Json problem" , message: "Retry please in a moment", titleAction: "Ok", actionStyle: .default)
         }
         
     }
