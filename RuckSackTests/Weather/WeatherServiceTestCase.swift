@@ -59,18 +59,18 @@ class WeatherServiceTestCase: XCTestCase, WeatherServiceDelegate {
     let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: WeatherDataResponseFake.weatherCorrectData,
                                                                               response: WeatherDataResponseFake.responseCorrect,
                                                                               error: nil))
-        expectation = expectation(description: "Wait for info")
-        weatherService.delegate = self
-        //When
-       
-        //Then
-        
+        let tempExpected = 283.8
+        let humidityExpected = 73
+        let consumer = WeatherConsumerFake()
+        weatherService.delegate = consumer
+        let expectation = XCTestExpectation(description: "Wait for info")
+        consumer.didRetrieveWeather = { (openWeather) in
+            XCTAssertEqual(openWeather.list[0].main.temp, tempExpected)
+            XCTAssertEqual(openWeather.list[0].main.humidity, humidityExpected)
+            expectation.fulfill()
+        }
         weatherService.askWeatherState(town: weatherService.berlin)
-       
-        waitForExpectations(timeout: 2)
-        
-        XCTAssertEqual(weatherService.openWeather?.list[0].main.temp, 283.8)
-        XCTAssertEqual(73, weatherService.openWeather!.list[0].main.humidity)
+        wait(for: [expectation], timeout: 3.0)
 
     }
     func testSetTimeIfFailed() {
@@ -89,5 +89,18 @@ class WeatherServiceTestCase: XCTestCase, WeatherServiceDelegate {
         
         
     }
+}
+
+class WeatherConsumerFake: WeatherServiceDelegate{
+    var didRetrieveWeather: ((OpenWeather) -> Void)?
+    func didUpdateWeatherData(openWeather: OpenWeather) {
+        didRetrieveWeather!(openWeather)
+    }
+    
+    func didHappenedError(error: NetworkError) {
+        
+    }
+    
+    
 }
 

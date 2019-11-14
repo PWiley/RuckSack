@@ -55,14 +55,14 @@ class TranslateServiceTestCase: XCTestCase {
                                                                                                  response: TranslateDataResponseFake.responseCorrect,
                                                                                                 error: nil))
         
-        let controllerFake = ControllerFake()
-        translateService.delegate = controllerFake
+        let consumer = TranslateConsumerFake()
+        translateService.delegate = consumer
         let expectedTranslateText = "Bonjour"
 
         let expectation = XCTestExpectation(description: "...")
         translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
         translateService.createCall()
-        controllerFake.didRetrieveTranslate = { (translate, target) in
+        consumer.didRetrieveTranslate = { (translate, target) in
             XCTAssertEqual(translateService.translate?.data.translations[0].translatedText, expectedTranslateText)
             expectation.fulfill()
         }
@@ -72,7 +72,7 @@ class TranslateServiceTestCase: XCTestCase {
         wait(for: [expectation], timeout: 3.0)
     }
 }
-class ControllerFake: TranslateServiceDelegate {
+class TranslateConsumerFake: TranslateServiceDelegate {
       
       var didRetrieveTranslate: ((Translate, String) -> Void)?
       func didUpdateTranslateData(translate: Translate, targetLanguage: String) {
