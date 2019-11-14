@@ -62,7 +62,8 @@ class CurrencyService {
                 do {
                     
                     self.currency = try JSONDecoder().decode(Currency.self, from: jsonData)
-                    self.requestCurrencyData(currency: self.currency!)
+                    guard let currency = self.currency else {return}
+                    self.requestCurrencyData(currency: currency)
                     
                 } catch {
                     print("JSON error: \(error)")
