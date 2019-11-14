@@ -38,7 +38,6 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         currencyService.delegate = self
         setBackGroundTown()
         currencyService.askCurrencyRate()
-
         print("Exchange")
         exchangeViewController.insertSubview(backgroundImage, at: 0)
    }
