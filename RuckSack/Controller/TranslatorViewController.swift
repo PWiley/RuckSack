@@ -12,15 +12,12 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     
     
     
-    
-    
-    
     let weatherViewController = WeatherViewController()
     var translateService = TranslateService(translateSession: .shared)
-    
+    let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+    // MARK: Outlets
     
     @IBOutlet var translatorViewController: UIView!
-    
     @IBOutlet weak var viewOrigin: DesignableView!
     @IBOutlet weak var flagLanguageOrigin: UIImageView!
     @IBOutlet weak var titleLanguageOrigin: UILabel!
@@ -31,7 +28,7 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
     @IBOutlet weak var titleLanguageDestination: UILabel!
     @IBOutlet weak var textLanguageDestination: UITextView!
     
-    let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+    // MARK: - Overriden Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +41,6 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         textLanguageOrigin.delegate = self
         textLanguageDestination.delegate = self
-        print("translatorViewController")
         translatorViewController.insertSubview(backgroundImage, at: 0)
         
     }
@@ -62,6 +58,13 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    
+    
+}
+extension TranslatorViewController {
+    
+    // MARK: - Public Methods
+    // MARK: Methods
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == textLanguageOrigin {
             textLanguageDestination.text = ""
@@ -74,31 +77,6 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
             viewOrigin.alpha = 0.65
         }
     }
-    //    override func viewWillAppear(_ animated: Bool) {
-    //
-    //        super.viewWillAppear(animated)
-    //        //setBackGroundTown(town: selectedTown)
-    //        addDoneButtonOnKeyboard()
-    //
-    //    }
-    
-    
-    @objc func keyboardWillHide() {
-        self.view.frame.origin.y = 0
-    }
-    
-    @objc func keyboardWillChange(notification: NSNotification) {
-        
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if textLanguageDestination.isFirstResponder {
-                self.view.frame.origin.y = -(keyboardSize.height)/1.5
-            }
-            //            if textLanguageOrigin.isFirstResponder {
-            //                self.view.frame.origin.y = -(keyboardSize.height)/16
-            //            }
-        }
-    }
-    
     
     func addDoneButtonOnKeyboard()
     {
@@ -114,27 +92,6 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
         
         self.textLanguageOrigin.inputAccessoryView = doneToolbar
         self.textLanguageDestination.inputAccessoryView = doneToolbar
-    }
-    
-    @objc func doneButtonAction()
-    {
-        self.textLanguageOrigin.resignFirstResponder()
-        self.textLanguageDestination.resignFirstResponder()
-        viewOrigin.alpha = 0.65
-        viewDestination.alpha = 0.65
-        if textLanguageOrigin.text != "" {
-            translateService.createRequest(sentence: textLanguageOrigin.text, targetLanguage: "en")
-            translateService.createCall()
-        }
-        if textLanguageDestination.text != "" {
-            translateService.createRequest(sentence: textLanguageDestination.text, targetLanguage: "fr")
-            translateService.createCall()
-        }
-        if textLanguageOrigin.text == "" && textLanguageDestination.text == ""{
-            self.alert(title: "Action impossible", message: "You didn't enter any text to translate", titleAction: "ok", actionStyle: .default)
-        }
-        
-        
     }
     
     func didUpdateTranslateData(translate: Translate, targetLanguage: String) {
@@ -168,7 +125,6 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
         }
         
     }
-    
     func didHappenedError(error: TranslationError) {
         switch error {
         case .clientError, .responseError, .jsonError: alert(title: "Internet Connection",
@@ -176,15 +132,53 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
                                                              titleAction: "Ok",
                                                              actionStyle: .default)
         case .wrongLanguage: alert(title: "Incorrect entry" ,
-                                    message: "Please check your entries and try again.",
-                                    titleAction: "Ok",
-                                    actionStyle: .default)
+                                   message: "Please check your entries and try again.",
+                                   titleAction: "Ok",
+                                   actionStyle: .default)
         
         textLanguageOrigin.text = ""
         textLanguageOrigin.text = ""
         }
         
     }
+    
+    // MARK: Action Methods
+    
+    @objc func keyboardWillHide() {
+        self.view.frame.origin.y = 0
+    }
+    @objc func keyboardWillChange(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if textLanguageDestination.isFirstResponder {
+                self.view.frame.origin.y = -(keyboardSize.height)/1.5
+            }
+        }
+    }
+    
+    @objc func doneButtonAction()
+    {
+        self.textLanguageOrigin.resignFirstResponder()
+        self.textLanguageDestination.resignFirstResponder()
+        viewOrigin.alpha = 0.65
+        viewDestination.alpha = 0.65
+        if textLanguageOrigin.text != "" {
+            translateService.createRequest(sentence: textLanguageOrigin.text, targetLanguage: "en")
+            translateService.createCall()
+        }
+        if textLanguageDestination.text != "" {
+            translateService.createRequest(sentence: textLanguageDestination.text, targetLanguage: "fr")
+            translateService.createCall()
+        }
+        if textLanguageOrigin.text == "" && textLanguageDestination.text == ""{
+            self.alert(title: "Action impossible", message: "You didn't enter any text to translate", titleAction: "ok", actionStyle: .default)
+        }
+        
+        
+    }
+}
+extension TranslatorViewController {
+    // MARK: - Private Methods
     
     // MARK: Background settings
     
@@ -203,5 +197,4 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         
     }
-    
 }
