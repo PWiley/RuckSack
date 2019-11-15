@@ -38,15 +38,9 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         currencyService.delegate = self
         setBackGroundTown()
         currencyService.askCurrencyRate()
-        print("Exchange")
         exchangeViewController.insertSubview(backgroundImage, at: 0)
    }
-//    override func viewWillAppear(_ animated: Bool) {
-//        
-//        super.viewWillAppear(animated)
-//        addDoneButtonOnKeyboard()
-//        
-//    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         amountOrigin.text = ""
