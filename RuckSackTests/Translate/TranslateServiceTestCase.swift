@@ -59,9 +59,8 @@ class TranslateServiceTestCase: XCTestCase {
         translateService.delegate = consumer
         let expectedTranslateText = "Bonjour"
 
-        let expectation = XCTestExpectation(description: "...")
-        translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
-        translateService.createCall()
+        let expectation = XCTestExpectation(description: "Wait for info")
+        
         consumer.didRetrieveTranslate = { (translate, target) in
             XCTAssertEqual(translateService.translate?.data.translations[0].translatedText, expectedTranslateText)
             expectation.fulfill()
@@ -70,6 +69,7 @@ class TranslateServiceTestCase: XCTestCase {
         translateService.createCall()
         
         wait(for: [expectation], timeout: 3.0)
+        
     }
 }
 class TranslateConsumerFake: TranslateServiceDelegate {
