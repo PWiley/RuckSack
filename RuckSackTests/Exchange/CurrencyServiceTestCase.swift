@@ -51,6 +51,29 @@ class CurrencyServiceTestCase: XCTestCase {
         XCTAssertTrue((currencyService.currency?.rates?.usd == nil))
 
     }
+    func testCalculateConversion() {
+        
+        let currencyService = CurrencyService(currencySession: URLSessionCurrencyFake(data: CurrencyDataResponseFake.currencyCorrectData, response: CurrencyDataResponseFake.responseCorrect, error: nil))
+        
+        let Amount = 1.0
+        let resultEur = 1.107518
+        let resultUsd = 1/1.107518
+        let baseEur = "EUR"
+        let baseUsd = "USD"
+        let expectation = XCTestExpectation(description: "Wait for info")
+        let consumer = CurrencyConsumerFake()
+        currencyService.delegate = consumer
+        consumer.didRetrieveData = {(eurRate, usdRate) in
+            let expectedUsd = currencyService.calculateConversion(amount: Amount, base: baseEur)
+            XCTAssertEqual(resultEur, expectedUsd)
+            let expectedEur = currencyService.calculateConversion(amount: Amount, base: baseUsd)
+            XCTAssertEqual(resultUsd, expectedEur)
+            expectation.fulfill()
+       }
+        currencyService.askCurrencyRate()
+        wait(for: [expectation], timeout: 3.0)
+            
+    }
     func testGetCurrencyShouldPostSuccessIfNoErrorCorrectData() {
         let currencyService = CurrencyService(currencySession: URLSessionCurrencyFake(data: CurrencyDataResponseFake.currencyCorrectData, response: CurrencyDataResponseFake.responseCorrect, error: nil))
         let eurExpected = String(format:"%.3f", 1.107518)
