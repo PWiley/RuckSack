@@ -38,13 +38,13 @@ extension CurrencyService {
             "symbols": "USD",
             "base": "EUR"
         ]
-        let queryRequest = setQueryWithApi(query: query)
+        let queryRequest = setQueryWithApiKey(query: query)
         var request = URLRequest(url: CurrencyService.currencyURL.withQueries(queryRequest)!)
         request.httpMethod = "POST"
         //print(request)
         return request
     }
-    func askCurrencyRate(){
+    func askCurrencyRate() {
         
         task?.cancel()
         let request = createRequest()
@@ -66,7 +66,7 @@ extension CurrencyService {
                     
                     self.currency = try JSONDecoder().decode(Currency.self, from: jsonData)
                     guard let currency = self.currency else {return}
-                    self.requestCurrencyData(currency: currency)
+                    self.calculateValueCurrency(currency: currency)
                     
                 } catch {
                     print("JSON error: \(error)")
@@ -78,7 +78,7 @@ extension CurrencyService {
     // MARK: ** Handling Answers
     
     
-    func requestCurrencyData(currency: Currency) {
+    func calculateValueCurrency(currency: Currency) {
         // the data was received and parsed to String
         guard let euroRate = currency.rates?.usd else {return}
         let usdValue = String(format:"%.3f", 1/euroRate)
@@ -87,7 +87,7 @@ extension CurrencyService {
         
     }
     
-    func calculateConversion(amount: Double, base: String) -> Double{
+    func calculateResult(amount: Double, base: String) -> Double{
         var result: Double?
         guard let rates = currency?.rates?.usd else{self.delegate?.didHappenedError(error: .clientError)
                                                     return 0 }
@@ -98,7 +98,7 @@ extension CurrencyService {
         }
         return result!
         }
-    func setQueryWithApi(query: [String: String]) -> [String: String] {
+    func setQueryWithApiKey(query: [String: String]) -> [String: String] {
         var queryApiKey = query
         queryApiKey["access_key"] = valueForAPIKey(named:"API_CLIENT_ID_CURRENCY")
         return queryApiKey

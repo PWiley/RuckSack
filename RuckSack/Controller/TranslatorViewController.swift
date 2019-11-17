@@ -69,7 +69,7 @@ extension TranslatorViewController {
     func didUpdateTranslateData(translate: Translate, targetLanguage: String) {
         let translatedAnswer = translate.data.translations[0]
         switch targetLanguage {
-        case "fr": print("bonjour")
+        case "fr":
         if textLanguageOrigin.text != "" {
             textLanguageOrigin.text = ""
             self.alert(title: "Action impossible", message: "Check your entry", titleAction: "ok", actionStyle: .default)
@@ -78,7 +78,7 @@ extension TranslatorViewController {
             textLanguageOrigin.text = translatedAnswer.translatedText
             viewOrigin.alpha = 0.85
             }
-        case "en": print("Hello")
+        case "en": 
         if textLanguageDestination.text != "" {
             textLanguageDestination.text = ""
             self.alert(title: "Action impossible", message: "Check your entry", titleAction: "ok", actionStyle: .default)
@@ -144,11 +144,11 @@ extension TranslatorViewController {
         viewDestination.alpha = 0.65
         if textLanguageOrigin.text != "" {
             translateService.createRequest(sentence: textLanguageOrigin.text, targetLanguage: "en")
-            translateService.createCall()
+            translateService.askTranslation()
         }
         if textLanguageDestination.text != "" {
             translateService.createRequest(sentence: textLanguageDestination.text, targetLanguage: "fr")
-            translateService.createCall()
+            translateService.askTranslation()
         }
         if textLanguageOrigin.text == "" && textLanguageDestination.text == ""{
             self.alert(title: "Action impossible", message: "You didn't enter any text to translate", titleAction: "ok", actionStyle: .default)

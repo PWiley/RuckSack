@@ -49,7 +49,7 @@ extension TranslateService {
         
     }
     
-    func createCall() {
+    func askTranslation() {
         task?.cancel()
         task = translateSession.dataTask(with: request!) { (data, response, error) in
             

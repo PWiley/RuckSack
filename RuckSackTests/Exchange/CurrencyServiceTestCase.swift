@@ -64,9 +64,9 @@ class CurrencyServiceTestCase: XCTestCase {
         let consumer = CurrencyConsumerFake()
         currencyService.delegate = consumer
         consumer.didRetrieveData = {(eurRate, usdRate) in
-            let expectedUsd = currencyService.calculateConversion(amount: Amount, base: baseEur)
+            let expectedUsd = currencyService.calculateResult(amount: Amount, base: baseEur)
             XCTAssertEqual(resultEur, expectedUsd)
-            let expectedEur = currencyService.calculateConversion(amount: Amount, base: baseUsd)
+            let expectedEur = currencyService.calculateResult(amount: Amount, base: baseUsd)
             XCTAssertEqual(resultUsd, expectedEur)
             expectation.fulfill()
        }

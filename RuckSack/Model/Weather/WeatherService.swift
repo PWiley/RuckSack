@@ -44,7 +44,7 @@ extension WeatherService {
     // MARK: ** Network Calls
     
     func createRequest(query: [String: String]) -> URLRequest {
-        let queryRequest = setQueryWithApi(query: query)
+        let queryRequest = setQueryWithApiKey(query: query)
         var request = URLRequest(url: (WeatherService.baseURL.withQueries(queryRequest)!))
         request.httpMethod = "POST"
         return request
@@ -87,17 +87,14 @@ extension WeatherService {
     }
     // MARK: ** Handling Answers
    
-    func setTime(timestamp: Double) -> Bool{
+    func checkDayState(timestamp: Double) -> Bool{
         
         var isNight: Bool?
         let date = Date(timeIntervalSince1970: timestamp)
         let hour = Calendar.current.component(.hour, from: date)
-        //let min = Calendar.current.component(.minute, from: date)
-//        if (hour >= 6 && min >= 00) && (hour < 18 && min < 60) {
         if (hour >= 6) && (hour < 18) {
             isNight = false
         }
-//        if (hour >= 18 && min >= 00) || (hour < 6 && min <= 59){
         if (hour >= 18) || (hour < 6){
             isNight = true
         }
@@ -105,17 +102,18 @@ extension WeatherService {
     }
     
     func setDayStateName(indexList: Int) -> String{
+        
         let time = openWeather!.list[indexList].dt
         let date = Date(timeIntervalSince1970: TimeInterval(time))
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = " dd/MM" //Specify your format that you want
+        dateFormatter.dateFormat = " dd/MM"
         let monthDay = dateFormatter.string(from: date)
         let weekday = dateFormatter.weekdaySymbols[Calendar.current.component(.weekday, from: date)-1]
         let dayName = weekday + monthDay
         return dayName
     }
     
-    func setQueryWithApi(query: [String: String]) -> [String: String] {
+    func setQueryWithApiKey(query: [String: String]) -> [String: String] {
         var queryApiKey = query
         queryApiKey["appid"] = valueForAPIKey(named:"API_CLIENT_ID_WEATHER")
         return queryApiKey

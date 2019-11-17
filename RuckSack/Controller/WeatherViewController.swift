@@ -113,7 +113,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             let value = weatherService.openWeather?.list[indexList].weather[0].main
             let description = weatherService.openWeather?.list[indexList].weather[0].weatherDescription
             let timestamp = Double(((weatherService.openWeather?.list[indexList].dt)!))
-            night = weatherService.setTime(timestamp: timestamp)
+            night = weatherService.checkDayState(timestamp: timestamp)
             switch value {
             case .clouds:
                 if night == false {

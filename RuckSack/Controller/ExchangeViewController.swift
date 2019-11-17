@@ -109,7 +109,7 @@ extension ExchangeViewController {
                 return
             }
             amountDestination.text = String(format:"%.2f",
-                                            currencyService.calculateConversion(amount: amountDouble,
+                                            currencyService.calculateResult(amount: amountDouble,
                                                                                 base: "EUR"))
             setAlphaView(origin: 0.65, destination: 0.95)
         } else if amountDestination.text != "" && !(amountDestination.text?.contains(".."))! {
@@ -122,7 +122,7 @@ extension ExchangeViewController {
                 amountDestination.text = ""
                 return
             }
-            amountOrigin.text = String(format:"%.2f", currencyService.calculateConversion(amount: amountDouble, base: "USD"))
+            amountOrigin.text = String(format:"%.2f", currencyService.calculateResult(amount: amountDouble, base: "USD"))
             setAlphaView(origin: 0.95, destination: 0.65)
         } else {
             didHappenedError(error: .currencyError)

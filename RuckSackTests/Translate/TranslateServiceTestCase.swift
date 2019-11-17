@@ -17,7 +17,7 @@ class TranslateServiceTestCase: XCTestCase {
         
         //When
         translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
-        translateService.createCall()
+        translateService.askTranslation()
         //Then
         XCTAssertTrue(translateService.sentence == "")
     }
@@ -26,7 +26,7 @@ class TranslateServiceTestCase: XCTestCase {
         let translateService = TranslateService(translateSession: URLSessionTranslateFake(data: nil, response: nil, error: nil))
         //When
         translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
-        translateService.createCall()
+        translateService.askTranslation()
         //Then
         XCTAssertTrue(translateService.sentence == "")
     }
@@ -35,7 +35,7 @@ class TranslateServiceTestCase: XCTestCase {
         let translateService = TranslateService(translateSession: URLSessionTranslateFake(data: TranslateDataResponseFake.translateCorrectData, response: TranslateDataResponseFake.responseIncorrect, error: nil))
         //When
         translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
-        translateService.createCall()
+        translateService.askTranslation()
         //Then
         XCTAssertTrue(translateService.sentence == "")
     }
@@ -45,7 +45,7 @@ class TranslateServiceTestCase: XCTestCase {
                                                                                           response: TranslateDataResponseFake.responseCorrect, error: nil))
         //When
         translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
-        translateService.createCall()
+        translateService.askTranslation()
         //Then
         XCTAssertTrue(translateService.sentence == "")
     }
@@ -66,7 +66,7 @@ class TranslateServiceTestCase: XCTestCase {
             expectation.fulfill()
         }
         translateService.createRequest(sentence: "Hello", targetLanguage: "fr")
-        translateService.createCall()
+        translateService.askTranslation()
         
         wait(for: [expectation], timeout: 3.0)
         

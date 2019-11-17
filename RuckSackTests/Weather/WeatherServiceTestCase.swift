@@ -76,7 +76,7 @@ class WeatherServiceTestCase: XCTestCase, WeatherServiceDelegate {
     func testSetTimeIfFailed() {
         let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: WeatherDataResponseFake.weatherCorrectData, response: WeatherDataResponseFake.responseCorrect, error: nil))
         let timestamp = 1573160400
-        let night = weatherService.setTime(timestamp: Double(timestamp))
+        let night = weatherService.checkDayState(timestamp: Double(timestamp))
         XCTAssertEqual(night, true)
         
         
@@ -84,7 +84,7 @@ class WeatherServiceTestCase: XCTestCase, WeatherServiceDelegate {
     func testSetTimeIfSuccess() {
         let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: WeatherDataResponseFake.weatherCorrectData, response: WeatherDataResponseFake.responseCorrect, error: nil))
         let timestamp = 1573138800
-        let night = weatherService.setTime(timestamp: Double(timestamp))
+        let night = weatherService.checkDayState(timestamp: Double(timestamp))
         XCTAssertEqual(night, false)
         
         
