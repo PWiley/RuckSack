@@ -10,13 +10,12 @@ import UIKit
 
 class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     
-    
-    
     let weatherViewController = WeatherViewController()
     let currencyService = CurrencyService.sharedCurrency
-    
     let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-    var exchangeTown: Bool?
+    
+    // MARK: - Outlets
+    
     @IBOutlet var exchangeViewController: UIView!
     
     @IBOutlet weak var viewOrigin: DesignableView!
@@ -33,14 +32,16 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
     @IBOutlet weak var amountDestination: UITextField!
     @IBOutlet weak var currencyDestination: UILabel!
     
+    // MARK: - Overriden Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         currencyService.delegate = self
         setBackGroundTown()
         currencyService.askCurrencyRate()
         exchangeViewController.insertSubview(backgroundImage, at: 0)
-   }
-
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         amountOrigin.text = ""
@@ -49,23 +50,12 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         addDoneButtonOnKeyboard()
         
     }
-    
-    @IBAction func originDidBegin(_ sender: Any) {
-        setAlphaView(origin: 0.95, destination: 0.65)
-    }
-    @IBAction func destinationDidBegin(_ sender: Any) {
-        setAlphaView(origin: 0.65, destination: 0.95)
-    }
-    
-    @IBAction func originChanged(_ sender: Any) {
-        amountDestination.text = ""
-        amountOrigin.text = amountOrigin.text?.trimmed
-        
-    }
-    @IBAction func destinationChanged(_ sender: Any) {
-        amountOrigin.text = ""
-        amountDestination.text = amountDestination.text?.trimmed
-    }
+}
+extension ExchangeViewController {
+
+    // MARK: - Public Methods
+    // MARK: ** Methods Delegate
+
     func didUpdateCurrencyData(eurRate: String, usdRate: String) {
         currencyOrigin.text = eurRate
         currencyDestination.text = usdRate
@@ -83,8 +73,8 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
                        titleAction: "ok",
                        actionStyle: .default)
         }
-        
     }
+    // MARK: ** Methods Handling User Behavior
     
     func addDoneButtonOnKeyboard()
     {
@@ -104,10 +94,7 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         self.amountOrigin.inputAccessoryView = doneToolbar
         self.amountDestination.inputAccessoryView = doneToolbar
     }
-    
-    
-    @objc func doneButtonAction()
-    {
+    @objc func doneButtonAction() {
         self.amountOrigin.resignFirstResponder()
         self.amountDestination.resignFirstResponder()
         
@@ -120,7 +107,7 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
                            actionStyle: .default)
                 amountOrigin.text = ""
                 return
-                }
+            }
             amountDestination.text = String(format:"%.2f",
                                             currencyService.calculateConversion(amount: amountDouble,
                                                                                 base: "EUR"))
@@ -134,7 +121,7 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
                            actionStyle: .default)
                 amountDestination.text = ""
                 return
-                }
+            }
             amountOrigin.text = String(format:"%.2f", currencyService.calculateConversion(amount: amountDouble, base: "USD"))
             setAlphaView(origin: 0.95, destination: 0.65)
         } else {
@@ -143,22 +130,39 @@ class ExchangeViewController: UIViewController, CurrencyServiceDelegate {
         
     }
     
-    // MARK : Configuration Background
+// MARK: - Action Methods
     
-   fileprivate func setBackGroundTown() {
-        // Do any additional setup after loading the view.
-        //        'let backgroundImage = UIImageView(frame: UIScreen.main.bounds)'
+    @IBAction func originDidBegin(_ sender: Any) {
+        setAlphaView(origin: 0.95, destination: 0.65)
+    }
+    @IBAction func destinationDidBegin(_ sender: Any) {
+        setAlphaView(origin: 0.65, destination: 0.95)
+    }
+    @IBAction func originChanged(_ sender: Any) {
+        amountDestination.text = ""
+        amountOrigin.text = amountOrigin.text?.trimmed
+    }
+    @IBAction func destinationChanged(_ sender: Any) {
+        amountOrigin.text = ""
+        amountDestination.text = amountDestination.text?.trimmed
+    }
+}
+
+extension ExchangeViewController {
+    
+    // MARK: - Private Methods
+    
+    // MARK: ** Configuration Background
+    
+    fileprivate func setBackGroundTown() {
         let town = weatherViewController.backgroundDefault.string(forKey: "town")
         if  town == "Berlin" {
             backgroundImage.image = UIImage(named: "Background_Exchange_Berlin")
-            
         }
         if town == "NewYork" {
             backgroundImage.image = UIImage(named:"Background_Exchange_NewYork")
-            
         }
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
-
     }
     fileprivate func setAlphaView(origin: Float, destination: Float) {
         viewOrigin.alpha = CGFloat(origin)
