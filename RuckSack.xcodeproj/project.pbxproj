@@ -39,7 +39,6 @@
 		DADE8CEB232E7C940057B0BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DADE8CE9232E7C940057B0BB /* Main.storyboard */; };
 		DADE8CEC232E7C940057B0BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DADE8CEA232E7C940057B0BB /* LaunchScreen.storyboard */; };
 		DADE8CF5232E7D1D0057B0BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CEE232E7D1D0057B0BB /* WeatherViewController.swift */; };
-		DADE8CF9232E7D1D0057B0BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CF2232E7D1D0057B0BB /* ViewController.swift */; };
 		DADE8CFA232E7D1D0057B0BB /* TranslatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CF3232E7D1D0057B0BB /* TranslatorViewController.swift */; };
 		DADE8CFC232E7DCD0057B0BB /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CFB232E7DCD0057B0BB /* ExtensionUIView.swift */; };
 		DADE8D00232E7F850057B0BB /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE8CFD232E7F850057B0BB /* WeatherService.swift */; };
@@ -95,7 +94,6 @@
 		DADE8CE9232E7C940057B0BB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DADE8CEA232E7C940057B0BB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DADE8CEE232E7D1D0057B0BB /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
-		DADE8CF2232E7D1D0057B0BB /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DADE8CF3232E7D1D0057B0BB /* TranslatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslatorViewController.swift; sourceTree = "<group>"; };
 		DADE8CFB232E7DCD0057B0BB /* ExtensionUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		DADE8CFD232E7F850057B0BB /* WeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
@@ -264,7 +262,6 @@
 			children = (
 				DA915BAD2368AB4B00215602 /* Custom View Controller */,
 				DADE8CF3232E7D1D0057B0BB /* TranslatorViewController.swift */,
-				DADE8CF2232E7D1D0057B0BB /* ViewController.swift */,
 				DADE8CEE232E7D1D0057B0BB /* WeatherViewController.swift */,
 				DADE8D03232E9F150057B0BB /* ExchangeViewController.swift */,
 			);
@@ -428,7 +425,6 @@
 				DA6BA36F237583D70054DC85 /* ApiKeys.swift in Sources */,
 				DA6C85CD2372CB1900B70BF1 /* ExtensionDouble.swift in Sources */,
 				DADE8D02232E7F850057B0BB /* TranslateService.swift in Sources */,
-				DADE8CF9232E7D1D0057B0BB /* ViewController.swift in Sources */,
 				DA1FEFDF234A67AF007E9E23 /* WeatherStructure.swift in Sources */,
 				DADE8CFC232E7DCD0057B0BB /* ExtensionUIView.swift in Sources */,
 				DA6C85CF2372DAD700B70BF1 /* ExtensionString.swift in Sources */,
