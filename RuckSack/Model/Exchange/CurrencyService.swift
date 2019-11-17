@@ -7,24 +7,29 @@
 //
 
 import Foundation
-//import UIKit
 
 class CurrencyService {
     
     private static let currencyURL = URL(string: "http://data.fixer.io/api/latest?")!
-
     private var task: URLSessionDataTask?
-    static var sharedCurrency = CurrencyService()
-    private init() {}
-    var currency: Currency?
-    var delegate: CurrencyServiceDelegate?
-//    var result: Double?
-    
     private var currencySession = URLSession(configuration: .default)
     
+     // MARK: - Singleton
+    
+    static var sharedCurrency = CurrencyService()
+    private init() {}
+    
+    var currency: Currency?
+    var delegate: CurrencyServiceDelegate?
+
     init(currencySession: URLSession) {
         self.currencySession = currencySession
     }
+}
+extension CurrencyService {
+    
+    // MARK: - Public Methods
+    // MARK: ** Network Calls
     
     func createRequest() -> URLRequest {
         
@@ -39,14 +44,10 @@ class CurrencyService {
         //print(request)
         return request
     }
-    
-    
-    
     func askCurrencyRate(){
         
         task?.cancel()
         let request = createRequest()
-        //var currency: Currency?
         task = currencySession.dataTask(with: request) { data, response, error in
             if error != nil {
                 self.delegate?.didHappenedError(error: .clientError)
@@ -74,40 +75,32 @@ class CurrencyService {
         }
         task?.resume()
     }
+    // MARK: ** Handling Answers
     
-    
-    /// Request for the Currency data
-    /// - Parameter currency: <#currency description#>
     
     func requestCurrencyData(currency: Currency) {
         // the data was received and parsed to String
         guard let euroRate = currency.rates?.usd else {return}
         let usdValue = String(format:"%.3f", 1/euroRate)
         let euroValue = String(format:"%.3f", euroRate)
-        
         self.delegate?.didUpdateCurrencyData(eurRate: euroValue, usdRate: usdValue)
         
     }
     
-    /// <#Description#>
-    /// - Parameters:
-    ///   - amount: <#amount description#>
-    ///   - base: <#base description#>
-    
     func calculateConversion(amount: Double, base: String) -> Double{
-
         var result: Double?
-        guard let rates = currency?.rates?.usd else{return 0.0}
+        guard let rates = currency?.rates?.usd else{self.delegate?.didHappenedError(error: .clientError)
+                                                    return 0 }
         if base == "EUR" {
-        result = amount * rates
+            result = amount * rates
         } else {
-        result = amount / rates
+            result = amount / rates
         }
         return result!
         }
     func setQueryWithApi(query: [String: String]) -> [String: String] {
         var queryApiKey = query
-        queryApiKey["key"] = valueForAPIKey(named:"API_CLIENT_ID_CURRENCY")
+        queryApiKey["access_key"] = valueForAPIKey(named:"API_CLIENT_ID_CURRENCY")
         return queryApiKey
     }
     
@@ -117,7 +110,7 @@ enum CurrencyError: Error {
     case currencyError
     
 }
-
+ // MARK: Protocol
 
 protocol CurrencyServiceDelegate {
     func didUpdateCurrencyData(eurRate: String, usdRate: String)

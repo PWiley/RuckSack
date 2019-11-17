@@ -10,22 +10,30 @@ import Foundation
 
 class TranslateService {
     
-    private var task: URLSessionDataTask?
-    var delegate: TranslateServiceDelegate?
-    static var sharedTranslate = TranslateService()
-    private init() {}
     private static let translateURL = URL(string: "https://translation.googleapis.com/language/translate/v2/")!
-    var translate: Translate?
-    var sentence: String = ""
-    var targetLanguage: String = ""
-    var request: URLRequest?
-    
+    private var task: URLSessionDataTask?
     private var translateSession = URLSession(configuration: .default)
     
+    // MARK: - Singleton
+    
+    static var sharedTranslate = TranslateService()
+    private init() {}
+    var delegate: TranslateServiceDelegate?
+    var translate: Translate?
     init(translateSession: URLSession) {
         self.translateSession = translateSession
     }
-
+    
+    
+    
+    var sentence: String = ""
+    var targetLanguage: String = ""
+    var request: URLRequest?
+}
+extension TranslateService {
+    // MARK: - Public Methods
+    // MARK: ** Network Calls
+    
     func createRequest(sentence: String, targetLanguage: String) {
         
         let query: [String: String] = [
@@ -38,21 +46,9 @@ class TranslateService {
         request = URLRequest(url: TranslateService.translateURL.withQueries(queryRequest)!)
         request?.httpMethod = "POST"
         
-    
-    }
-    func checkLanguageTarget(target: String) {
-        guard let translate = translate else{return}
-          switch target{
-          case "fr":
-            self.delegate?.didUpdateTranslateData(translate: translate, targetLanguage: "en")
-          case "en":
-            self.delegate?.didUpdateTranslateData(translate: translate, targetLanguage: "fr")
-          default:
-            self.delegate?.didHappenedError(error: .wrongLanguage)
-            
-          }
         
-      }
+    }
+    
     func createCall() {
         task?.cancel()
         task = translateSession.dataTask(with: request!) { (data, response, error) in
@@ -81,6 +77,21 @@ class TranslateService {
         }
         task?.resume()
     }
+    // MARK: ** Handling Answers
+    
+    func checkLanguageTarget(target: String) {
+        guard let translate = translate else{return}
+        switch target{
+        case "fr":
+            self.delegate?.didUpdateTranslateData(translate: translate, targetLanguage: "en")
+        case "en":
+            self.delegate?.didUpdateTranslateData(translate: translate, targetLanguage: "fr")
+        default:
+            self.delegate?.didHappenedError(error: .wrongLanguage)
+            
+        }
+        
+    }
     func setQueryWithApi(query: [String: String]) -> [String: String] {
         var queryApiKey = query
         queryApiKey["key"] = valueForAPIKey(named:"API_CLIENT_ID_TRANSLATE")
@@ -95,7 +106,10 @@ enum TranslationError: Error {
     
 }
 
+    // MARK: Protocol
+
 protocol TranslateServiceDelegate{
     func didUpdateTranslateData(translate: Translate, targetLanguage: String)
     func didHappenedError(error: TranslationError)
 }
+

@@ -13,12 +13,16 @@ class WeatherService {
     
     private static let baseURL = URL(string: "https://api.openweathermap.org/data/2.5/forecast?")!
     private var task: URLSessionDataTask?
+    private var weatherSession = URLSession(configuration: .default)
+    
+    // MARK: - Singleton
+    
     static var sharedWeather = WeatherService()
     private init() {}
     var delegate: WeatherServiceDelegate?
     var openWeather: OpenWeather?
     
-    private var weatherSession = URLSession(configuration: .default)
+    
     init(weatherSession: URLSession) {
         self.weatherSession = weatherSession
     }
@@ -32,6 +36,12 @@ class WeatherService {
         "mode": "json",
         "appid": ""
     ]
+    
+}
+extension WeatherService {
+    
+    // MARK: - Public Methods
+    // MARK: ** Network Calls
     
     func createRequest(query: [String: String]) -> URLRequest {
         let queryRequest = setQueryWithApi(query: query)
@@ -75,8 +85,8 @@ class WeatherService {
         task?.resume()
         
     }
-    
-    
+    // MARK: ** Handling Answers
+   
     func setTime(timestamp: Double) -> Bool{
         
         var isNight: Bool?
@@ -117,6 +127,9 @@ enum NetworkError: Error {
     case serverError
     case jsonError
 }
+
+ // MARK: Protocol
+
 protocol WeatherServiceDelegate {
     func didUpdateWeatherData(openWeather: OpenWeather)
     func didHappenedError(error: NetworkError)
