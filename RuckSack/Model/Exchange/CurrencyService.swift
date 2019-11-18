@@ -87,7 +87,7 @@ extension CurrencyService {
         
     }
     
-    func calculateResult(amount: Double, base: String) -> Double{
+    func calculateResult(amount: Double, base: String) -> Double {
         var result: Double?
         guard let rates = currency?.rates?.usd else{self.delegate?.didHappenedError(error: .clientError)
                                                     return 0 }

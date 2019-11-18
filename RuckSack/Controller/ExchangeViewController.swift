@@ -110,7 +110,7 @@ extension ExchangeViewController {
             }
             amountDestination.text = String(format:"%.2f",
                                             currencyService.calculateResult(amount: amountDouble,
-                                                                                base: "EUR"))
+                                                                            base: "EUR"))
             setAlphaView(origin: 0.65, destination: 0.95)
         } else if amountDestination.text != "" && !(amountDestination.text?.contains(".."))! {
             currencyService.askCurrencyRate()
