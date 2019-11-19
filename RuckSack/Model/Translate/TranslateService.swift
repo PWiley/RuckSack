@@ -23,9 +23,7 @@ class TranslateService {
     init(translateSession: URLSession) {
         self.translateSession = translateSession
     }
-    
-    
-    
+   
     var sentence: String = ""
     var targetLanguage: String = ""
     var request: URLRequest?
