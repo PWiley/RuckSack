@@ -80,7 +80,7 @@ extension TranslateService {
     func checkLanguageTarget(target: String) {
         guard let translate = translate else{return}
         switch target{
-        case "fr":
+        case "fr", "ca":
             self.delegate?.didUpdateTranslateData(translate: translate, targetLanguage: "en")
         case "en":
             self.delegate?.didUpdateTranslateData(translate: translate, targetLanguage: "fr")

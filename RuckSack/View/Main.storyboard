@@ -80,10 +80,10 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Français" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRU-R0-pim">
-                                        <rect key="frame" x="169" y="17" width="65" height="46"/>
+                                        <rect key="frame" x="169" y="17" width="79" height="46"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="RRU-R0-pim" secondAttribute="height" multiplier="65:46" id="HoV-Pv-XJ1"/>
-                                            <constraint firstAttribute="width" constant="65" id="wVK-A0-73A"/>
+                                            <constraint firstAttribute="width" secondItem="RRU-R0-pim" secondAttribute="height" multiplier="65:46" constant="14" id="HoV-Pv-XJ1"/>
+                                            <constraint firstAttribute="width" constant="79" id="wVK-A0-73A"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -131,10 +131,10 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q06-Ea-MHA">
-                                        <rect key="frame" x="169" y="17" width="65" height="46"/>
+                                        <rect key="frame" x="169" y="17" width="75" height="46"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="Q06-Ea-MHA" secondAttribute="height" multiplier="65:46" id="GTN-cq-z8S"/>
-                                            <constraint firstAttribute="width" constant="65" id="zcx-2M-rmI"/>
+                                            <constraint firstAttribute="width" secondItem="Q06-Ea-MHA" secondAttribute="height" multiplier="65:46" constant="10" id="GTN-cq-z8S"/>
+                                            <constraint firstAttribute="width" constant="75" id="zcx-2M-rmI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -188,7 +188,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e3H-JT-x3b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="605.60000000000002" y="-410.64467766116945"/>
+            <point key="canvasLocation" x="605.60000000000002" y="-410.83743842364532"/>
         </scene>
         <!--Weather-->
         <scene sceneID="XVz-YO-icT">

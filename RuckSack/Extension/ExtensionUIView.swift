@@ -11,6 +11,12 @@ import UIKit
 
 @IBDesignable
 class DesignableView: UIView {
+    override init(frame: CGRect) { // for using CustomView in code
+        super.init(frame: frame)
+    }
+    required init?(coder aDecoder: NSCoder) { // for using CustomView in IB
+        super.init(coder: aDecoder)
+    }
 }
 
 @IBDesignable
@@ -37,33 +43,33 @@ extension UIView {
         }
     }
     
-        @IBInspectable
-        var borderWidth: CGFloat {
-            get {
-                return layer.borderWidth
+    @IBInspectable
+    var borderWidth: CGFloat {
+        get {
+            return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
+        }
+    }
+    
+    @IBInspectable
+    var borderColor: UIColor? {
+        get {
+            if let color = layer.borderColor {
+                return UIColor(cgColor: color)
             }
-            set {
-                layer.borderWidth = newValue
+            return nil
+        }
+        set {
+            if let color = newValue {
+                layer.borderColor = color.cgColor
+            } else {
+                layer.borderColor = nil
             }
         }
-        
-        @IBInspectable
-        var borderColor: UIColor? {
-            get {
-                if let color = layer.borderColor {
-                    return UIColor(cgColor: color)
-                }
-                return nil
-            }
-            set {
-                if let color = newValue {
-                    layer.borderColor = color.cgColor
-                } else {
-                    layer.borderColor = nil
-                }
-            }
-        }
-        
+    }
+    
     @IBInspectable
     var shadowRadius: CGFloat {
         get {
@@ -73,5 +79,5 @@ extension UIView {
             layer.shadowRadius = newValue
         }
     }
-   
+    
 }

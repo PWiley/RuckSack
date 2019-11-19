@@ -32,15 +32,6 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
         translateService.delegate = self
         
         setBackGroundTown()
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillChange(notification:)),
-                                               name: UIResponder.keyboardWillChangeFrameNotification,
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
         textLanguageOrigin.delegate = self
         textLanguageDestination.delegate = self
         translatorViewController.insertSubview(backgroundImage, at: 0)
@@ -52,6 +43,15 @@ class TranslatorViewController: UIViewController, TranslateServiceDelegate, UITe
         textLanguageDestination.text = ""
         setBackGroundTown()
         addDoneButtonOnKeyboard()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillChange(notification:)),
+                                               name: UIResponder.keyboardWillChangeFrameNotification,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,10 +69,10 @@ extension TranslatorViewController {
     func didUpdateTranslateData(translate: Translate, targetLanguage: String) {
         let translatedAnswer = translate.data.translations[0]
         switch targetLanguage {
-        case "fr":
+        case "fr", "kn":
         if textLanguageOrigin.text != "" {
             textLanguageOrigin.text = ""
-            self.alert(title: "Action impossible", message: "Check your entry", titleAction: "ok", actionStyle: .default)
+            self.alert(title: "Translation impossible", message: "Please check your language entry", titleAction: "ok", actionStyle: .default)
         }
         else {
             textLanguageOrigin.text = translatedAnswer.translatedText
@@ -81,7 +81,7 @@ extension TranslatorViewController {
         case "en": 
         if textLanguageDestination.text != "" {
             textLanguageDestination.text = ""
-            self.alert(title: "Action impossible", message: "Check your entry", titleAction: "ok", actionStyle: .default)
+            self.alert(title: "Translation impossible", message: "Please check your language entry", titleAction: "ok", actionStyle: .default)
         }
         else {
             textLanguageDestination.text = translatedAnswer.translatedText
@@ -106,56 +106,53 @@ extension TranslatorViewController {
         }
         
     }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == textLanguageOrigin {
             textLanguageDestination.text = ""
-            viewOrigin.alpha = 0.85
-            viewDestination.alpha = 0.65
+            setAlphaView(originAlpha: 0.85, destinationAlpha: 0.65)
         }
         if textView == textLanguageDestination {
             textLanguageOrigin.text = ""
-            viewDestination.alpha = 0.85
-            viewOrigin.alpha = 0.65
+            setAlphaView(originAlpha: 0.65, destinationAlpha: 0.85)
+            
         }
     }
     
     // MARK: ** Methods Handling User Behavior
     
-    func addDoneButtonOnKeyboard()
-    {
-        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
-        doneToolbar.barStyle = .default
-        
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
-        
-        let items = [flexSpace, done]
-        doneToolbar.items = items
-        doneToolbar.sizeToFit()
-        
-        self.textLanguageOrigin.inputAccessoryView = doneToolbar
-        self.textLanguageDestination.inputAccessoryView = doneToolbar
+    func addDoneButtonOnKeyboard(){
+    let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+    doneToolbar.barStyle = .default
+    
+    let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
+    
+    let items = [flexSpace, done]
+    doneToolbar.items = items
+    doneToolbar.sizeToFit()
+    
+    self.textLanguageOrigin.inputAccessoryView = doneToolbar
+    self.textLanguageDestination.inputAccessoryView = doneToolbar
+}
+    @objc func doneButtonAction(){
+    self.textLanguageOrigin.resignFirstResponder()
+    self.textLanguageDestination.resignFirstResponder()
+        setAlphaView(originAlpha: 0.65, destinationAlpha: 0.65)
+    if textLanguageOrigin.text != "" {
+        translateService.createRequest(sentence: textLanguageOrigin.text, targetLanguage: "en")
+        translateService.askTranslation()
     }
-    @objc func doneButtonAction()
-    {
-        self.textLanguageOrigin.resignFirstResponder()
-        self.textLanguageDestination.resignFirstResponder()
-        viewOrigin.alpha = 0.65
-        viewDestination.alpha = 0.65
-        if textLanguageOrigin.text != "" {
-            translateService.createRequest(sentence: textLanguageOrigin.text, targetLanguage: "en")
-            translateService.askTranslation()
-        }
-        if textLanguageDestination.text != "" {
-            translateService.createRequest(sentence: textLanguageDestination.text, targetLanguage: "fr")
-            translateService.askTranslation()
-        }
-        if textLanguageOrigin.text == "" && textLanguageDestination.text == ""{
-            self.alert(title: "Action impossible", message: "You didn't enter any text to translate", titleAction: "ok", actionStyle: .default)
-        }
-        
-        
+    if textLanguageDestination.text != "" {
+        translateService.createRequest(sentence: textLanguageDestination.text, targetLanguage: "fr")
+        translateService.askTranslation()
     }
+    if textLanguageOrigin.text == "" && textLanguageDestination.text == ""{
+        self.alert(title: "Action impossible", message: "You didn't enter any text to translate", titleAction: "ok", actionStyle: .default)
+    }
+    
+    
+}
     // MARK: ** Action Methods
     
     @objc func keyboardWillHide() {
@@ -165,7 +162,7 @@ extension TranslatorViewController {
         
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if textLanguageDestination.isFirstResponder {
-                self.view.frame.origin.y = -(keyboardSize.height)/1.5
+                self.view.frame.origin.y = -(keyboardSize.height)/2
             }
         }
     }
@@ -190,4 +187,10 @@ extension TranslatorViewController {
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         
     }
+    fileprivate func setAlphaView(originAlpha: CGFloat, destinationAlpha: CGFloat) {
+        
+        viewOrigin.alpha = originAlpha
+        viewDestination.alpha = destinationAlpha
+    }
+    
 }
