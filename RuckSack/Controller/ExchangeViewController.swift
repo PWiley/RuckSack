@@ -97,10 +97,10 @@ extension ExchangeViewController {
     @objc func doneButtonAction() {
         self.amountOrigin.resignFirstResponder()
         self.amountDestination.resignFirstResponder()
-        
-        if amountOrigin.text != "" && !(amountOrigin.text?.contains(".."))! {
+        var result: Double
+        if amountOrigin.text != "" && !(amountOrigin.text?.contains(",,"))! {
             currencyService.askCurrencyRate()
-            guard let amountDouble = Double(amountOrigin.text!) else {
+            guard let amountDouble = Double(amountOrigin.text!.replacingOccurrences(of: ",", with: ".")) else {
                 self.alert(title: "Action impossible",
                            message: "Check please your entry ",
                            titleAction: "ok",
@@ -108,13 +108,15 @@ extension ExchangeViewController {
                 amountOrigin.text = ""
                 return
             }
-            amountDestination.text = String(format:"%.2f",
-                                            currencyService.calculateResult(amount: amountDouble,
-                                                                            base: "EUR"))
+            result = currencyService.calculateResult(amount: amountDouble,
+                base: "EUR")
+            
+            let resultString = String(format: "%.2f", result).replacingOccurrences(of: ".", with: ",")
+            amountDestination.text = resultString
             setAlphaView(origin: 0.65, destination: 0.95)
-        } else if amountDestination.text != "" && !(amountDestination.text?.contains(".."))! {
+        } else if amountDestination.text != "" && !(amountDestination.text?.contains(",,"))! {
             currencyService.askCurrencyRate()
-            guard let amountDouble = Double(amountDestination.text!)else {
+            guard let amountDouble = Double(amountDestination.text!.replacingOccurrences(of: ",", with: "."))else {
                 self.alert(title: "Action impossible",
                            message: "Check please your entry ",
                            titleAction: "ok",
@@ -122,7 +124,10 @@ extension ExchangeViewController {
                 amountDestination.text = ""
                 return
             }
-            amountOrigin.text = String(format:"%.2f", currencyService.calculateResult(amount: amountDouble, base: "USD"))
+            result = currencyService.calculateResult(amount: amountDouble,
+                base: "EUR")
+            let resultString = String(format: "%.2f", result).replacingOccurrences(of: ".", with: ",")
+            amountOrigin.text = resultString
             setAlphaView(origin: 0.95, destination: 0.65)
         } else {
             didHappenedError(error: .currencyError)

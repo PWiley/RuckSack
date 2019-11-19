@@ -11,6 +11,6 @@ import Foundation
 
 extension String {
    var trimmed: String {
-           return self.starts(with: ".") ? "0\(self)" : self
+           return self.starts(with: ",") ? "0\(self)" : self
        }
 }
