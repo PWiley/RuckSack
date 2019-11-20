@@ -48,6 +48,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tableViewWeather.backgroundView?.alpha = 1
+        print("didAppear")
         repositionCell()
         
     }
@@ -67,9 +68,9 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         // MARK: ** Methods
    
         func didUpdateWeatherData(openWeather: OpenWeather) {
-               setStackViewDaysState()
+               setStackViewDayState()
                createTodayState()
-           }
+            }
         func didHappenedError(error: NetworkError) {
                switch error {
                case .clientError: self.alert(title: "Internet Connection",
@@ -224,7 +225,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
            }
         @objc func handleSwipes(_ sender: Any) {
              DispatchQueue.main.async {
-                 self.tableViewWeather.reloadData()
+                self.tableViewWeather.reloadData()
                  self.refreshControl?.endRefreshing()
          
              }
@@ -237,9 +238,9 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
 
 extension WeatherViewController {
     
-    fileprivate func setStackViewDaysState() {
+    fileprivate func setStackViewDayState() {
     if stackViewState.arrangedSubviews.count != 0 {
-        resetStackViewDaysState()
+        resetStackViewDayState()
     }
     stackViewState.insertArrangedSubview(createDayState(number: 8), at: 0)
     stackViewState.insertArrangedSubview(createDayState(number: 16), at: 1)
@@ -248,7 +249,7 @@ extension WeatherViewController {
     stackViewState.insertArrangedSubview(createDayState(number: 39), at: 4)
 }
     
-    fileprivate func resetStackViewDaysState() {
+    fileprivate func resetStackViewDayState() {
         stackViewState.subviews.forEach { (view) in
             view.removeFromSuperview()
         }

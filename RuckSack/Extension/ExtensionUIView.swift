@@ -21,14 +21,32 @@ class DesignableView: UIView {
 
 @IBDesignable
 class DesignableButton: UIButton {
+    override init(frame: CGRect) { // for using CustomView in code
+        super.init(frame: frame)
+    }
+    required init?(coder aDecoder: NSCoder) { // for using CustomView in IB
+        super.init(coder: aDecoder)
+    }
 }
 
 @IBDesignable
 class DesignableLabel: UILabel {
+    override init(frame: CGRect) { // for using CustomView in code
+        super.init(frame: frame)
+    }
+    required init?(coder aDecoder: NSCoder) { // for using CustomView in IB
+        super.init(coder: aDecoder)
+    }
 }
 
 @IBDesignable
 class DesignableTextField: UITextField {
+    override init(frame: CGRect) { // for using CustomView in code
+        super.init(frame: frame)
+    }
+    required init?(coder aDecoder: NSCoder) { // for using CustomView in IB
+        super.init(coder: aDecoder)
+    }
 }
 
 extension UIView {
