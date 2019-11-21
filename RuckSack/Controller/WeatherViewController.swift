@@ -44,7 +44,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         weatherService.askWeatherState(town: weatherService.berlin)
         repositionCell()
         //self.tableViewWeather.backgroundView?.alpha = 1
-        setRefreshControl()
+        
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -52,6 +52,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         
         print("didAppear")
         repositionCell()
+        setRefreshControl()
         //self.tableViewWeather.backgroundView?.alpha = 1
         
     }
@@ -59,6 +60,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let indexpath = IndexPath(row: 0, section: 0)
         let rowZeroFrame = tableViewWeather.rectForRow(at: indexpath)
+        print(scrollView.contentOffset.y)
         let offset = scrollView.contentOffset.y/(self.tableViewWeather.contentSize.height/2 - rowZeroFrame.height/2)
         self.tableViewWeather.backgroundView?.alpha = 1.5-offset
     }
@@ -209,8 +211,8 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
             default:
                 print("erreur")
            }
-            tableViewWeather.backgroundView?.contentMode = .scaleAspectFill
-            repositionCell()
+            tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
+            //repositionCell()
             self.tableViewWeather.backgroundView?.alpha = 1
         }
 
@@ -230,16 +232,39 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
                
                self.present(changeTownAlert, animated: true, completion: nil)
            }
-        @objc func handleSwipes(_ sender: Any) {
-            self.setTown(town: self.backgroundDefault)
-            //let deadline = DispatchTime.now() + .milliseconds(700)
-            DispatchQueue.main.async {
-                
-                self.tableViewWeather.reloadData()
-                 self.refreshControl?.endRefreshing()
-                }
+        @objc func handleSwipes(_ refreshControl: UIRefreshControl) {
+////            self.setTown(town: self.backgroundDefault)
+////            //let deadline = DispatchTime.now() + .milliseconds(700)
+////            DispatchQueue.main.async {
+////                self.refreshControl?.endRefreshing()
+////
+////                self.tableViewWeather.reloadData()
+////
+////                }
+//            self.setTown(town: backgroundDefault)
+//
+//            self.repositionCell()
+            if !tableViewWeather.isDragging {
+                refreshWeatherViewController()
+            }
+            repositionCell()
          }
-         
+        func refreshWeatherViewController() {
+            self.refreshControl?.endRefreshing()
+            
+            setTown(town: backgroundDefault)
+            let deadline = DispatchTime.now() + .seconds(1)
+            DispatchQueue.main.asyncAfter(deadline: deadline) {
+                self.tableViewWeather.reloadData()
+                //repositionCell()
+            }
+            
+        }
+        override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+            if refreshControl?.isRefreshing == true {
+                refreshWeatherViewController()
+            }
+        }
     }
 // MARK: - Private Methods
 
@@ -265,9 +290,8 @@ extension WeatherViewController {
     }
     
     fileprivate func repositionCell() {
-        let indexPath: IndexPath = IndexPath(row: 0, section: 0)
+        let indexPath: IndexPath = IndexPath(row: 1, section: 0)
         self.tableViewWeather.scrollToRow(at: indexPath, at: .bottom, animated: true)
-        
     }
     
     fileprivate func setRefreshControl() {

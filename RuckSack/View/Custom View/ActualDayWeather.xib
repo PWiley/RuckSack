@@ -3,18 +3,18 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActualDayWeather" customModule="RuckSack" customModuleProvider="target">
             <connections>
-                <outlet property="actualDayWeather" destination="DnX-Ze-ebG" id="TsW-xv-xt2"/>
-                <outlet property="humidyAmount" destination="xfS-ZZ-WRc" id="onR-vk-2GZ"/>
-                <outlet property="imageActualWeather" destination="wDL-xA-cKi" id="UKJ-jl-3my"/>
-                <outlet property="tempActual" destination="VOj-Aq-tQq" id="vgJ-JX-2sf"/>
-                <outlet property="weatherDescription" destination="pDW-8O-st5" id="mnu-F4-BKO"/>
+                <outlet property="actualDayWeather" destination="DnX-Ze-ebG" id="5GA-Tt-f67"/>
+                <outlet property="humidyAmount" destination="xfS-ZZ-WRc" id="aXl-Dp-p4n"/>
+                <outlet property="imageActualWeather" destination="wDL-xA-cKi" id="Hoj-3J-ytr"/>
+                <outlet property="tempActual" destination="VOj-Aq-tQq" id="bJ3-qo-y3t"/>
+                <outlet property="weatherDescription" destination="pDW-8O-st5" id="pPx-86-jQo"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -45,16 +45,6 @@
                             <color key="textColor" red="0.066666666666666666" green="0.1764705882352941" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOj-Aq-tQq" userLabel="Temperature Actual">
-                            <rect key="frame" x="35" y="98" width="179" height="107"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="179" id="6Gr-8h-YTh"/>
-                                <constraint firstAttribute="width" secondItem="VOj-Aq-tQq" secondAttribute="height" multiplier="179:107" id="mCm-lM-A9P"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="80"/>
-                            <color key="textColor" red="0.066666666666666666" green="0.1764705882352941" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="heavy intensity shower rain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDW-8O-st5" userLabel="Weather State Title">
                             <rect key="frame" x="105" y="43.5" width="214" height="19"/>
                             <constraints>
@@ -72,20 +62,30 @@
                                 <constraint firstAttribute="width" constant="60" id="mgM-mC-UE2"/>
                             </constraints>
                         </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOj-Aq-tQq" userLabel="Temperature Actual">
+                            <rect key="frame" x="37" y="105" width="179" height="107"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="179" id="6Gr-8h-YTh"/>
+                                <constraint firstAttribute="width" secondItem="VOj-Aq-tQq" secondAttribute="height" multiplier="179:107" id="mCm-lM-A9P"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="80"/>
+                            <color key="textColor" red="0.066666666666666666" green="0.1764705882352941" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="wDL-xA-cKi" firstAttribute="leading" secondItem="DnX-Ze-ebG" secondAttribute="leading" constant="37" id="5fl-Qg-XWp"/>
                         <constraint firstItem="wDL-xA-cKi" firstAttribute="top" secondItem="DnX-Ze-ebG" secondAttribute="top" constant="19" id="6jD-yV-MIP"/>
-                        <constraint firstAttribute="bottom" secondItem="VOj-Aq-tQq" secondAttribute="bottom" constant="15" id="H3d-9o-MN4"/>
+                        <constraint firstAttribute="bottom" secondItem="VOj-Aq-tQq" secondAttribute="bottom" constant="8" id="H3d-9o-MN4"/>
                         <constraint firstItem="JK1-aH-HhI" firstAttribute="leading" secondItem="pDW-8O-st5" secondAttribute="leading" id="W4M-Jn-X2L"/>
                         <constraint firstAttribute="bottom" secondItem="JK1-aH-HhI" secondAttribute="bottom" constant="121" id="Ydq-Me-RWe"/>
                         <constraint firstItem="xfS-ZZ-WRc" firstAttribute="leading" secondItem="JK1-aH-HhI" secondAttribute="trailing" constant="-0.5" id="Ygm-yQ-y0Y"/>
                         <constraint firstItem="pDW-8O-st5" firstAttribute="top" secondItem="DnX-Ze-ebG" secondAttribute="top" constant="43.5" id="Zdd-w8-z3R"/>
-                        <constraint firstItem="VOj-Aq-tQq" firstAttribute="top" secondItem="pDW-8O-st5" secondAttribute="bottom" constant="35.5" id="uFW-3n-a8F"/>
+                        <constraint firstItem="VOj-Aq-tQq" firstAttribute="top" secondItem="pDW-8O-st5" secondAttribute="bottom" constant="42.5" id="uFW-3n-a8F"/>
                         <constraint firstItem="pDW-8O-st5" firstAttribute="leading" secondItem="wDL-xA-cKi" secondAttribute="trailing" constant="8" id="xnP-QS-Unb"/>
                         <constraint firstItem="xfS-ZZ-WRc" firstAttribute="centerY" secondItem="JK1-aH-HhI" secondAttribute="centerY" id="yHn-oU-Xsr"/>
-                        <constraint firstItem="VOj-Aq-tQq" firstAttribute="leading" secondItem="DnX-Ze-ebG" secondAttribute="leading" constant="35" id="zL1-zr-LAq"/>
+                        <constraint firstItem="VOj-Aq-tQq" firstAttribute="leading" secondItem="DnX-Ze-ebG" secondAttribute="leading" constant="37" id="zL1-zr-LAq"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
