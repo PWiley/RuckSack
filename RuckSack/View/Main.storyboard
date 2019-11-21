@@ -231,23 +231,23 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K8p-1G-iw1" customClass="ActualDayWeather" customModule="RuckSack" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="445" width="375" height="210"/>
+                                                    <rect key="frame" x="0.0" y="436" width="375" height="220"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="K8p-1G-iw1" secondAttribute="height" multiplier="25:14" id="I2J-Y9-gyQ"/>
+                                                        <constraint firstAttribute="width" constant="375" id="U4u-6S-BmM"/>
+                                                        <constraint firstAttribute="width" secondItem="K8p-1G-iw1" secondAttribute="height" multiplier="75:44" id="vK9-I9-14f"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="K8p-1G-iw1" firstAttribute="leading" secondItem="vHo-tt-L9N" secondAttribute="leading" id="K0r-5P-MN0"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="K8p-1G-iw1" secondAttribute="bottom" constant="-10" id="NVh-zF-Dm7"/>
-                                                <constraint firstAttribute="trailing" secondItem="K8p-1G-iw1" secondAttribute="trailing" id="x5S-Rj-XgM"/>
+                                                <constraint firstItem="K8p-1G-iw1" firstAttribute="leading" secondItem="vHo-tt-L9N" secondAttribute="leading" id="VFx-oc-8qp"/>
+                                                <constraint firstItem="K8p-1G-iw1" firstAttribute="top" secondItem="vHo-tt-L9N" secondAttribute="top" constant="436" id="kbu-Hk-v4E"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="178" id="ve2-OF-xJQ" userLabel="WeekCell">
+                                    <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="178" id="ve2-OF-xJQ" userLabel="WeekCell">
                                         <rect key="frame" x="0.0" y="684" width="375" height="178"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ve2-OF-xJQ" id="mTO-bz-Ait">
@@ -261,13 +261,13 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="6pN-r1-txa" secondAttribute="bottom" id="8mJ-fY-bwk"/>
-                                                <constraint firstItem="6pN-r1-txa" firstAttribute="top" secondItem="mTO-bz-Ait" secondAttribute="top" id="IsL-FY-cVJ"/>
-                                                <constraint firstItem="6pN-r1-txa" firstAttribute="leading" secondItem="mTO-bz-Ait" secondAttribute="leading" constant="8" id="Omk-mZ-ga5"/>
-                                                <constraint firstAttribute="trailing" secondItem="6pN-r1-txa" secondAttribute="trailing" constant="8" id="zrg-Ms-cRd"/>
+                                                <constraint firstItem="6pN-r1-txa" firstAttribute="leading" secondItem="mTO-bz-Ait" secondAttribute="leading" constant="8" id="7Xv-Da-8FY"/>
+                                                <constraint firstAttribute="bottom" secondItem="6pN-r1-txa" secondAttribute="bottom" id="iGh-MW-e4p"/>
+                                                <constraint firstAttribute="trailing" secondItem="6pN-r1-txa" secondAttribute="trailing" constant="8" id="ndY-uM-gVG"/>
+                                                <constraint firstItem="6pN-r1-txa" firstAttribute="top" secondItem="mTO-bz-Ait" secondAttribute="top" id="xBq-5C-hvJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -285,13 +285,15 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="hf3-fa-ay1">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Tqb-WM-N5I">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <attributedString key="attributedTitle">
-                            <fragment content="Weather Forecast Update">
+                            <fragment content="Pull down for refreshing">
                                 <attributes>
-                                    <font key="NSFont" metaFont="message" size="11"/>
+                                    <font key="NSFont" metaFont="user"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>

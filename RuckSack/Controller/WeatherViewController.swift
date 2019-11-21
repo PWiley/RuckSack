@@ -43,21 +43,24 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         weatherService.delegate = self
         weatherService.askWeatherState(town: weatherService.berlin)
         repositionCell()
+        //self.tableViewWeather.backgroundView?.alpha = 1
         setRefreshControl()
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        self.tableViewWeather.backgroundView?.alpha = 1
+        
+        
         print("didAppear")
         repositionCell()
+        //self.tableViewWeather.backgroundView?.alpha = 1
         
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let indexpath = IndexPath(row: 1, section: 0)
+        let indexpath = IndexPath(row: 0, section: 0)
         let rowZeroFrame = tableViewWeather.rectForRow(at: indexpath)
         let offset = scrollView.contentOffset.y/(self.tableViewWeather.contentSize.height/2 - rowZeroFrame.height/2)
-        self.tableViewWeather.backgroundView?.alpha = 0.7-offset
+        self.tableViewWeather.backgroundView?.alpha = 1.5-offset
     }
 }
 
@@ -194,18 +197,21 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
                 buttonTown.image = UIImage(named: "tv_tower")
                 tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
                 navigationItem.title = "Berlin"
+                print("Berlin is refresh")
                 self.weatherService.askWeatherState(town: self.weatherService.berlin)
                
             case "NewYork":
                 self.buttonTown.image = UIImage(named: "liberty")
                 tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
                 navigationItem.title = "New-York"
+                print("New-York is refresh")
                 self.weatherService.askWeatherState(town: self.weatherService.newYork)
             default:
                 print("erreur")
            }
-            tableViewWeather.backgroundView?.contentMode = .scaleAspectFit
+            tableViewWeather.backgroundView?.contentMode = .scaleAspectFill
             repositionCell()
+            self.tableViewWeather.backgroundView?.alpha = 1
         }
 
         // MARK: ** Action Methods
@@ -217,6 +223,7 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
                    self.switchTown()
                    self.setTown(town: self.backgroundDefault)
                    self.repositionCell()
+                    self.tableViewWeather.backgroundView?.alpha = 1
                    
                }))
                changeTownAlert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
@@ -224,11 +231,13 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
                self.present(changeTownAlert, animated: true, completion: nil)
            }
         @objc func handleSwipes(_ sender: Any) {
-             DispatchQueue.main.async {
+            self.setTown(town: self.backgroundDefault)
+            //let deadline = DispatchTime.now() + .milliseconds(700)
+            DispatchQueue.main.async {
+                
                 self.tableViewWeather.reloadData()
                  self.refreshControl?.endRefreshing()
-         
-             }
+                }
          }
          
     }
@@ -258,17 +267,17 @@ extension WeatherViewController {
     fileprivate func repositionCell() {
         let indexPath: IndexPath = IndexPath(row: 0, section: 0)
         self.tableViewWeather.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        
     }
     
     fileprivate func setRefreshControl() {
            let titleAttribute = [NSAttributedString.Key.foregroundColor: UIColor.blue,
                                  NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)]
-           self.refreshControl?.tintColor = UIColor.white
-           self.refreshControl?.backgroundColor =  UIColor(displayP3Red: 0.612, green: 0.804, blue: 0.91, alpha: 1)
-           self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: titleAttribute )
-           self.refreshControl?.addTarget(self, action: #selector(handleSwipes(_:)), for: .valueChanged)
-           self.view.addSubview(self.refreshControl!)
-       }
+        self.refreshControl!.tintColor = UIColor.white
+        self.refreshControl!.backgroundColor =  UIColor(displayP3Red: 0.612, green: 0.804, blue: 0.91, alpha: 1)
+        self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull down for reloading", attributes: titleAttribute )
+        self.refreshControl!.addTarget(self, action: #selector(handleSwipes(_:)), for: .valueChanged)
+        self.view.addSubview(refreshControl!)    }
     
 }
 
