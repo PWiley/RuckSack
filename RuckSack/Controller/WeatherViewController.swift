@@ -68,8 +68,8 @@ class WeatherViewController: UITableViewController, WeatherServiceDelegate {
         let rowZeroFrame = tableViewWeather.rectForRow(at: indexpath)
         //print("contentOffsety: \(scrollView.contentOffset.y)")
         let contentZeroPosition = scrollView.contentOffset.y
-//        print("contentSize: \(tableViewWeather.contentSize.height)")
-//        print("height: \(rowZeroFrame.height)")
+        //        print("contentSize: \(tableViewWeather.contentSize.height)")
+        //        print("height: \(rowZeroFrame.height)")
         let offset = (scrollView.contentOffset.y + contentZeroPosition)/(self.tableViewWeather.contentSize.height - rowZeroFrame.height)
         //print("Offset: \(offset)")
         self.tableViewWeather.backgroundView?.alpha = 1-offset
@@ -97,12 +97,7 @@ extension WeatherViewController {
                                       message: "Retry please in a moment",
                                       titleAction: "Ok",
                                       actionStyle: .default)
-        case .jsonError: self.alert(title: "Json problem",
-                                    message: "Retry please in a moment",
-                                    titleAction: "Ok",
-                                    actionStyle: .default)
         }
-        
     }
     
     // MARK: ** Handling Screening Days State
@@ -210,14 +205,12 @@ extension WeatherViewController {
             buttonTown.image = UIImage(named: "tv_tower")
             tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_Berlin"))
             navigationItem.title = "Berlin"
-            print("Berlin is refresh")
             self.weatherService.askWeatherState(town: self.weatherService.berlin)
             
         case "NewYork":
             self.buttonTown.image = UIImage(named: "liberty")
             tableViewWeather.backgroundView = UIImageView(image: UIImage(named: "Background_Weather_NewYork"))
             navigationItem.title = "New-York"
-            print("New-York is refresh")
             self.weatherService.askWeatherState(town: self.weatherService.newYork)
         default:
             print("erreur")
@@ -243,48 +236,15 @@ extension WeatherViewController {
         
         self.present(changeTownAlert, animated: true, completion: nil)
     }
-//    @objc func handleSwipes(_ refreshControl: UIRefreshControl) {
-//        ////            self.setTown(town: self.backgroundDefault)
-//        ////            //let deadline = DispatchTime.now() + .milliseconds(700)
-//        ////            DispatchQueue.main.async {
-//        ////                self.refreshControl?.endRefreshing()
-//        ////
-//        ////                self.tableViewWeather.reloadData()
-//        ////
-//        ////                }
-//        //            self.setTown(town: backgroundDefault)
-//        //
-//        //            self.repositionCell()
-//        if !tableViewWeather.isDragging {
-//            refreshWeatherViewController()
-//        }
-//        repositionCell()
-//    }
+    
     @objc func handleSwipes(_ sender: Any) {
         self.setTown(town: backgroundDefault)
         self.refreshControl?.endRefreshing()
-    DispatchQueue.main.async {
-    self.tableViewWeather.reloadData()
-    //self.refreshControl?.endRefreshing()
-
+        DispatchQueue.main.async {
+            self.tableViewWeather.reloadData()
+        }
     }
-}
-//    func refreshWeatherViewController() {
-//        self.refreshControl?.endRefreshing()
-//
-//        setTown(town: backgroundDefault)
-//        let deadline = DispatchTime.now() + .seconds(1)
-//        DispatchQueue.main.asyncAfter(deadline: deadline) {
-//            self.tableViewWeather.reloadData()
-//            //repositionCell()
-//        }
-//
-//    }
-//    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-//        if refreshControl?.isRefreshing == true {
-//            refreshWeatherViewController()
-//        }
-//    }
+    
 }
 // MARK: - Private Methods
 

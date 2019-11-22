@@ -41,7 +41,6 @@ extension CurrencyService {
         let queryRequest = setQueryWithApiKey(query: query)
         var request = URLRequest(url: CurrencyService.currencyURL.withQueries(queryRequest)!)
         request.httpMethod = "POST"
-        //print(request)
         return request
     }
     func askCurrencyRate() {

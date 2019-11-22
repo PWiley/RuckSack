@@ -98,9 +98,9 @@ extension ExchangeViewController {
         self.amountOrigin.resignFirstResponder()
         self.amountDestination.resignFirstResponder()
         var result: Double
-        if amountOrigin.text != "" && !(amountOrigin.text?.contains(",,"))! {
+        if amountOrigin.text != "" && !(amountOrigin.text?.contains(".."))! {
             currencyService.askCurrencyRate()
-            guard let amountDouble = Double(amountOrigin.text!.replacingOccurrences(of: ",", with: ".")) else {
+            guard let amountDouble = Double(amountOrigin.text!) else {
                 self.alert(title: "Action impossible",
                            message: "Check please your entry ",
                            titleAction: "ok",
@@ -111,12 +111,12 @@ extension ExchangeViewController {
             result = currencyService.calculateResult(amount: amountDouble,
                 base: "EUR")
             
-            let resultString = String(format: "%.2f", result).replacingOccurrences(of: ".", with: ",")
-            amountDestination.text = resultString
+            let resultString = String(format: "%.2f", result)
+            amountDestination.text = resultString.trimmed
             setAlphaView(origin: 0.65, destination: 0.95)
-        } else if amountDestination.text != "" && !(amountDestination.text?.contains(",,"))! {
+        } else if amountDestination.text != "" && !(amountDestination.text?.contains(".."))! {
             currencyService.askCurrencyRate()
-            guard let amountDouble = Double(amountDestination.text!.replacingOccurrences(of: ",", with: "."))else {
+            guard let amountDouble = Double(amountDestination.text!) else {
                 self.alert(title: "Action impossible",
                            message: "Check please your entry ",
                            titleAction: "ok",
@@ -126,8 +126,8 @@ extension ExchangeViewController {
             }
             result = currencyService.calculateResult(amount: amountDouble,
                 base: "EUR")
-            let resultString = String(format: "%.2f", result).replacingOccurrences(of: ".", with: ",")
-            amountOrigin.text = resultString
+            let resultString = String(format: "%.2f", result)
+            amountOrigin.text = resultString.trimmed
             setAlphaView(origin: 0.95, destination: 0.65)
         } else {
             didHappenedError(error: .currencyError)

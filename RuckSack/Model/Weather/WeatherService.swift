@@ -68,7 +68,7 @@ extension WeatherService {
             }
             guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
                 DispatchQueue.main.async {
-                    self.delegate?.didHappenedError(error: .clientError)
+                    self.delegate?.didHappenedError(error: .serverError)
                 }
                 return
             }
@@ -123,7 +123,6 @@ extension WeatherService {
 enum NetworkError: Error {
     case clientError
     case serverError
-    case jsonError
 }
 
  // MARK: Protocol

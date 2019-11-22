@@ -9,56 +9,57 @@
 import XCTest
 @testable import RuckSack
 
-class WeatherServiceTestCase: XCTestCase, WeatherServiceDelegate {
+class WeatherServiceTestCase: XCTestCase {
     
-    var expectation: XCTestExpectation!
-    func didUpdateWeatherData(openWeather: OpenWeather) {
-        expectation.fulfill()
-    }
     
-    func didHappenedError(error: NetworkError) {
-        
-    }
-    
-
     func testGetWeatherShouldPostFailedIfError() {
-        //Given=
-        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: nil, response: nil, error: WeatherDataResponseFake.error))
-        //When
+        
+        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(
+            data: nil,
+            response: nil,
+            error: WeatherDataResponseFake.error))
+        
         weatherService.askWeatherState(town: weatherService.berlin)
-        //Then
         XCTAssertTrue(weatherService.openWeather == nil)
     }
     func testGetWeatherShouldPostFailedNoData() {
-        //Given=
-        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: nil, response: nil, error: nil))
-        //When
+        
+        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(
+            data: nil,
+            response: nil,
+            error: nil))
+        
         weatherService.askWeatherState(town: weatherService.berlin)
-        //Then
         XCTAssertTrue(weatherService.openWeather == nil)
     }
     func testGetWeatherShouldPostFailedIfIncorrectResponse() {
-            //Given=
-        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: WeatherDataResponseFake.weatherCorrectData, response: WeatherDataResponseFake.responseIncorrect, error: nil))
-            //When
-            weatherService.askWeatherState(town: weatherService.berlin)
-            //Then
-            XCTAssertTrue(weatherService.openWeather == nil)
-        }
-    func testGetWeatherShouldPostFailedIfIncorrectData() {
-        //Given=
-    let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: WeatherDataResponseFake.weatherIncorrectData, response: WeatherDataResponseFake.responseCorrect, error: nil))
-        //When
+        
+        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(
+            data: WeatherDataResponseFake.weatherCorrectData,
+            response:WeatherDataResponseFake.responseIncorrect,
+            error: nil))
+        
         weatherService.askWeatherState(town: weatherService.berlin)
-        //Then
+        XCTAssertTrue(weatherService.openWeather == nil)
+    }
+    func testGetWeatherShouldPostFailedIfIncorrectData() {
+        
+        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(
+            data: WeatherDataResponseFake.weatherIncorrectData,
+            response: WeatherDataResponseFake.responseCorrect,
+            error: nil))
+        
+        weatherService.askWeatherState(town: weatherService.berlin)
         XCTAssertTrue(weatherService.openWeather == nil)
     }
     
     func testGetWeatherShouldPostSuccessIfNoErrorCorrectData() {
-        //Given=
-    let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: WeatherDataResponseFake.weatherCorrectData,
-                                                                              response: WeatherDataResponseFake.responseCorrect,
-                                                                              error: nil))
+        
+        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(
+            data: WeatherDataResponseFake.weatherCorrectData,
+            response: WeatherDataResponseFake.responseCorrect,
+            error: nil))
+        
         let tempExpected = 283.8
         let humidityExpected = 73
         let consumer = WeatherConsumerFake()
@@ -71,10 +72,13 @@ class WeatherServiceTestCase: XCTestCase, WeatherServiceDelegate {
         }
         weatherService.askWeatherState(town: weatherService.berlin)
         wait(for: [expectation], timeout: 3.0)
-
+        
     }
     func testSetTimeIfFailed() {
-        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: WeatherDataResponseFake.weatherCorrectData, response: WeatherDataResponseFake.responseCorrect, error: nil))
+        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(
+            data: WeatherDataResponseFake.weatherCorrectData,
+            response: WeatherDataResponseFake.responseCorrect,
+            error: nil))
         let timestamp = 1573160400
         let night = weatherService.checkDayState(timestamp: Double(timestamp))
         XCTAssertEqual(night, true)
@@ -82,7 +86,10 @@ class WeatherServiceTestCase: XCTestCase, WeatherServiceDelegate {
         
     }
     func testSetTimeIfSuccess() {
-        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(data: WeatherDataResponseFake.weatherCorrectData, response: WeatherDataResponseFake.responseCorrect, error: nil))
+        let weatherService = WeatherService(weatherSession: URLSessionWeatherFake(
+            data: WeatherDataResponseFake.weatherCorrectData,
+            response: WeatherDataResponseFake.responseCorrect,
+            error: nil))
         let timestamp = 1573138800
         let night = weatherService.checkDayState(timestamp: Double(timestamp))
         XCTAssertEqual(night, false)
